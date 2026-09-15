@@ -28,7 +28,7 @@
 
     &::before,
     &::after {
-        content: '';
+        /* content: ''; */
         position: absolute;
         z-index: -1;
         top: 0;
@@ -42,7 +42,7 @@
 
     &::after {
         z-index: 0;
-        background: linear-gradient(to bottom left, rgba(var(--darkRgb), 0.25), var(--dark));
+        background: linear-gradient(to top right, rgba(var(--darkRgb), 0.95) 33.33%, rgba(var(--darkRgb), 0.25) 100%);
         opacity: 1;
     }
 }

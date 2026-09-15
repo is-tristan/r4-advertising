@@ -1,5 +1,4 @@
 // Components
-import Eyebrow from "@/components/content/eyebrow";
 import Text from "@/components/content/text";
 import Button from "@/components/handlers/buttons";
 import ImageCol from "./components/image-col";
@@ -45,13 +44,13 @@ export default function ContentSection({
 
                     <div className="content" data-alignment={!image ? "centered" : null}>
 
-                        {eyebrowNumber && (<Eyebrow number={eyebrowNumber} text={eyebrowText} />)}
-
                         <Text
+                            eyebrow={{ number: eyebrowNumber, text: eyebrowText }}
                             title={title}
                             titleClass={`sectionTitle`}
                             titleTag={titleTag}
                             description={description}
+                            alignment={!image ? "centered" : "default"}
                         />
 
                         <div className="buttons">

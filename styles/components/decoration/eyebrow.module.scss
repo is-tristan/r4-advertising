@@ -16,18 +16,31 @@
         font-size: 1rem;
     }
 
+    .separator {
+        letter-spacing: -0.15em;
+    }
+
     &[data-theme="light"] {
 
-        .number {
-            color: var(--light);
+        .number,
+        .text {
+            color: var(--textLight);
         }
 
         .separator {
             color: var(--primary);
         }
+    }
 
+    &[data-theme="dark"] {
+
+        .number,
         .text {
-            color: var(--textLight);
+            color: var(--dark);
+        }
+
+        .separator {
+            color: var(--secondary);
         }
     }
 }

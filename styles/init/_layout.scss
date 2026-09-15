@@ -159,6 +159,14 @@
             }
         }
 
+        @media (width >=1512px) {
+            gap: 5rem;
+
+            >div {
+                flex-basis: calc(50% - 2.5rem);
+            }
+        }
+
         .contentCol {
             display: flex;
             flex-flow: column wrap;
@@ -322,10 +330,14 @@
 .innerContent {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
 
-    @media (width >=1024px) {
+    &.content {
         gap: 2rem;
+
+        @media (width >=1024px) {
+            gap: 2rem;
+        }
     }
 
     &[data-alignment="centered"] {
@@ -343,8 +355,15 @@
                 margin: 0 auto;
 
                 @media (width >=1024px) {
-                    max-width: 75ch;
+                    max-width: 100ch;
                 }
+            }
+
+            .eyebrow {
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                margin: 0 auto;
             }
 
             .buttons {

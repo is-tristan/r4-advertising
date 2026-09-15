@@ -1,5 +1,4 @@
 // Components
-import Eyebrow from "@/components/content/eyebrow";
 import Text from "@/components/content/text";
 
 // Styles
@@ -19,9 +18,8 @@ export default function Banner({
 
                 <div className={`content ${styles.bannerContent}`}>
 
-                    {eyebrow && (<Eyebrow text={eyebrow} />)}
-
                     <Text
+                        eyebrow={{ text: eyebrow }}
                         titleTag="h1"
                         title={title}
                         description={description}

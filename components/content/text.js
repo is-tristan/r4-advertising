@@ -4,10 +4,18 @@
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
 
+// Components
+import Eyebrow from "@/components/content/eyebrow";
+
 export default function Text({
     hasAnimation = true,
     className = undefined,
     alignment = "default",
+    eyebrow: {
+        number = undefined,
+        text = undefined,
+        eyebrowTheme = "light"
+    } = {},
     title,
     titleTag = "h2",
     titleClass = undefined,
@@ -30,6 +38,13 @@ export default function Text({
                     transition={hasAnimation ? { duration: 0.5, delay: 0.15 } : { duration: 0, delay: 0 }}
                     className={`titleContainer`}
                 >
+
+
+                    {text && (
+
+                        <Eyebrow number={number} text={text} hasAnimation={hasAnimation} theme={eyebrowTheme} />
+
+                    )}
 
                     {(() => {
                         switch (titleTag) {

@@ -8,7 +8,7 @@ import { motion, useInView } from "motion/react";
 import styles from "@/styles/components/decoration/eyebrow.module.scss";
 
 export default function Eyebrow({
-    className,
+    className = undefined,
     theme = "light",
     number = "01",
     separator = "//",
@@ -26,7 +26,7 @@ export default function Eyebrow({
             animate={hasAnimation ? (isInView ? { opacity: 1, y: 0, filter: "blur(0)" } : { opacity: 0, y: 16, filter: "blur(0.25rem)" }) : { opacity: 1, y: 0, filter: "blur(0)" }}
             initial={hasAnimation ? { opacity: 0, y: 16, filter: "blur(0.25rem)" } : { opacity: 1, y: 0, filter: "blur(0)" }}
             transition={hasAnimation ? { duration: 0.5, delay: 0.15 } : { duration: 0, delay: 0 }}
-            className={`${styles.eyebrow} ${className}`}
+            className={`${styles.eyebrow} eyebrow ${className || ""}`}
             data-theme={theme}
         >
 

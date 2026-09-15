@@ -1,0 +1,55 @@
+.ctaSection {
+    background: var(--light);
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        z-index: 0;
+        inset: 0;
+        margin: auto;
+        width: 100%;
+        height: 100%;
+        background-image: url("/textures/light-grunge-texture.avif");
+        opacity: 0.23;
+    }
+
+    .ctaSectionContent {
+        position: relative;
+        z-index: 1;
+
+        h2,
+        p {
+            color: var(--dark);
+        }
+
+        h2 {
+            max-width: 100%;
+        }
+        
+        p {
+            max-width: 90ch;
+            margin: 0 auto;
+        }
+    }
+
+    .ctaSectionBackground {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        z-index: -1;
+        inset: 0;
+        margin: auto;
+        width: 75%;
+        height: 75%;
+        z-index: 0;
+        color: var(--dark);
+        opacity: 0.04;
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

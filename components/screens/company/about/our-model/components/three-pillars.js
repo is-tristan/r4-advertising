@@ -1,11 +1,15 @@
 "use client";
 
 // Imports
+import Link from "next/link";
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
 
 // Styles
 import styles from "../styles/our-model-section.module.scss";
+
+// Icons
+import { arrowUpRight } from "@/utils/icons";
 
 // Data
 export const threePillarsData = [
@@ -30,24 +34,28 @@ export default function ThreePillars() {
 
     return (
 
-        <div className={`container flexAuto noPaddingTop333333333333`} ref={ref}>
+        <div className={`container flexAuto noPaddingTop ${styles.threePillars}`} ref={ref}>
 
             {threePillarsData.map((pillar, index) => (
 
                 <motion.div
                     key={index}
                     animate={isInView
-                        ? { opacity: 1, y: 0, filter: "blur(0)" }
+                        ? { opacity: 1, y: 0, filter: "blur(0px)" }
                         : { opacity: 0, y: 24, filter: "blur(0.25rem)" }
                     }
                     initial={{ opacity: 0, y: 24, filter: "blur(0.25rem)" }}
                     transition={{ duration: 0.6, delay: 0.15 * index, ease: "easeOut" }}
-                    className={styles.threePillars}
+                    className={styles.threePillarsItem}
                 >
 
                     <h3 className={styles.threePillarsTitle}>{pillar.title}</h3>
 
                     <p className={styles.threePillarsDescription}>{pillar.description}</p>
+
+                    <span className={styles.threePillarsIcon} aria-hidden="true" dangerouslySetInnerHTML={{ __html: arrowUpRight }} />
+
+                    <Link aria-label="Go to contact page" href="/contact" className={`colLink`} />
 
                 </motion.div>
 

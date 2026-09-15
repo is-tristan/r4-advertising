@@ -66,8 +66,8 @@ small,
 p,
 ul,
 ol {
-    font-size: clamp(0.925rem, 1.05vw, 1.05rem);
-    line-height: 170%;
+    font-size: clamp(0.925rem, 1.1vw, 1.1rem);
+    line-height: 160%;
     text-wrap: pretty;
     font-weight: 400;
 
@@ -78,7 +78,7 @@ ol {
 
 p {
     margin-top: 0;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
     padding: 0;
 
     &:last-child {

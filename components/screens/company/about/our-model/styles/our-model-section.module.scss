@@ -1,0 +1,63 @@
+.threePillars {
+    margin-top: 1.5rem;
+}
+
+.threePillarsItem {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-radius: var(--borderRadius);
+    border: 1px solid rgba(var(--lightRgb), 0.25);
+    background: rgba(var(--lightRgb), 0.05);
+    position: relative;
+    transition: var(--ease);
+
+    @media (width >=768px) {
+        padding: 2rem;
+    }
+
+    @media (width >=1024px) {
+        padding: 3rem;
+
+        h3 {
+            font-size: 3rem;
+        }
+    }
+
+    h3,
+    p {
+        transition: var(--ease);
+    }
+
+    .threePillarsIcon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: 2rem;
+        bottom: 2rem;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 50%;
+        padding: 0.5rem;
+        color: var(--primary);
+        background: var(--dark);
+        transition: var(--ease);
+        scale: 0;
+    }
+
+    &:hover {
+        background: var(--primary);
+        border-color: var(--primary);
+
+        h3,
+        p {
+            color: var(--dark);
+        }
+
+        .threePillarsIcon {
+            scale: 1;
+        }
+    }
+}
