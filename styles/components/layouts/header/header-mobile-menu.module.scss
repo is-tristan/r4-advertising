@@ -1,0 +1,218 @@
+.mobileMenuToggle {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 2.25rem;
+    height: 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    position: relative;
+
+    .mobileMenuToggleItem {
+        display: flex;
+        width: 100%;
+        height: 2px;
+        background: var(--primary);
+    }
+}
+
+.mobileMenu {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 2rem;
+    width: min(90%, 24rem);
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    transition: var(--ease);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(100%);
+    background: var(--dark);
+    color: var(--light);
+    padding: 1.25rem 1.5rem 2rem;
+    
+    * {
+        font-family: var(--text);
+    }
+
+    &[data-toggled="true"] {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0);
+    }
+}
+
+.mobileMenuHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid rgba(var(--lightRgb), 0.1);
+
+    .mobileMenuLogo {
+        display: flex;
+        align-items: center;
+        height: 1.33rem;
+
+        img {
+            width: auto;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    .mobileMenuClose {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        color: var(--light);
+        cursor: pointer;
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+.mobileMenuItems {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1.5rem;
+    text-align: left;
+    overflow: hidden auto;
+    height: 100%;
+}
+
+.mobileMenuItem {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 0;
+}
+
+.mobileMenuItemLink,
+.mobileMenuItemToggle {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.25;
+    color: var(--light);
+    background: none;
+    border: none;
+    padding: 0;
+    text-align: left;
+    cursor: pointer;
+    transition: var(--ease);
+
+    &:hover,
+    &:focus,
+    &:active {
+        color: var(--primary);
+    }
+}
+
+.mobileMenuItemIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1rem;
+    height: 1rem;
+    transition: var(--ease);
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.mobileMenuItemToggle {
+    &[data-submenu-open="true"] {
+        .mobileMenuItemIcon {
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.mobileSubmenu {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1rem;
+    max-height: 0;
+    padding-left: 1rem;
+    border-left: 1px solid rgba(var(--lightRgb), 0.15);
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--ease);
+
+    &[data-submenu-open="true"] {
+        max-height: 40rem;
+        opacity: 1;
+        visibility: visible;
+        margin-top: 1rem;
+    }
+}
+
+.mobileSubmenuItemLink {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    color: rgba(var(--lightRgb), 0.85);
+    transition: var(--ease);
+
+    &:hover,
+    &:focus,
+    &:active,
+    &[data-active="true"] {
+        color: var(--primary);
+    }
+}
+
+.mobileMenuContact {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: auto;
+    padding: 0.875rem 1rem;
+    border-radius: var(--btnRadius);
+    background: var(--btnGradient);
+    color: var(--dark);
+    font-size: 0.9375rem;
+    font-weight: 400;
+    text-align: center;
+    transition: var(--ease);
+
+    &:hover {
+        filter: brightness(1.05);
+    }
+}
+
+.mobileMenuBackdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 998;
+    background: rgba(var(--darkRgb), 0.25);
+    backdrop-filter: blur(0.25rem);
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--ease);
+
+    &[data-toggled="true"] {
+        opacity: 1;
+        visibility: visible;
+    }
+}

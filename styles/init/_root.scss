@@ -1,0 +1,40 @@
+:root {
+    font-size: 1rem;
+
+    // Fonts
+    --heading: var(--font-futura-pt), ui-sans, sans;
+    --text: var(--font-acid-grotesk), ui-sans-serif, sans-serif;
+    --eyebrow: var(--font-corporate-a), ui-serif, serif;
+
+    // Colours
+    --primary: #DBF903;
+    --primaryRgb: 219, 249, 3;
+    --secondary: #0949F0;
+    --secondaryRgb: 9, 73, 240;
+    --dark: #07080c;
+    --darkRgb: 7, 8, 12;
+    --darkAlt: #000;
+    --darkAltRgb: 0, 0, 0;
+    --light: #FFFFFF;
+    --lightRgb: 255, 255, 255;
+    --textLight: #B6B6B6;
+    --textLightRgb: 182, 182, 182;
+
+    // Gradients
+    --btnGradient: linear-gradient(to right, #6D513B, #E5BC9E, #6D513B);
+
+    // Borders & Radius
+    --btnRadius: 0.33rem;
+    --borderRadius: 1rem;
+    --border: #d6d6d6;
+
+    // Animations
+    --ease: all 0.25s ease;
+
+    // Header
+    --headerHeight: 6rem;
+    --mobileHeaderHeight: 4.5rem;
+
+    // Layout
+    --layoutMaxWidth: 1440px;
+}

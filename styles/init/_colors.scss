@@ -1,0 +1,45 @@
+// Colors
+.colorPrimary {
+    color: var(--primary);
+}
+
+.colorSecondary {
+    color: var(--primary);
+}
+
+.colorDark {
+    color: var(--dark);
+}
+
+.colorLight {
+    color: var(--light);
+}
+
+// Backgrounds
+.bgPrimary {
+    background-color: var(--primary);
+}
+
+.bgSecondary {
+    background-color: var(--primary);
+}
+
+.bgSecondaryLight {
+    background-color: var(--secondaryLight) !important;
+}
+
+.bgDark {
+    background-color: var(--dark) !important;
+}
+
+.bgLight {
+    background-color: var(--light);
+}
+
+.bgLightAlt {
+    background-color: var(--lightAlt) !important;
+}
+
+.bgDarkAlt {
+    background-color: var(--darkAlt) !important;
+}

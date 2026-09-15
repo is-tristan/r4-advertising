@@ -1,0 +1,128 @@
+/*
+* =============================================
+* Headings
+* ============================================= 
+*/
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--heading);
+    font-weight: 400;
+    line-height: 90%;
+    margin: 0;
+    padding: 0;
+    text-wrap: balance;
+    text-transform: uppercase;
+    color: var(--light);
+    letter-spacing: -0.025em;
+}
+
+
+.bigHeading h2,
+h1 {
+    font-size: clamp(3.75rem, 7.5dvw, 7.5rem);
+}
+
+.smallHeading h1,
+h2 {
+    font-size: clamp(2.33rem, 3.5dvw, 3.5rem);
+
+    &.sectionTitle {
+        font-size: clamp(2.33rem, 6.5dvw, 6.5rem);
+    }
+}
+
+h3 {
+    font-size: clamp(1.5rem, 2dvw, 2rem);
+    line-height: 125%;
+}
+
+h4 {
+    font-size: clamp(1.125rem, 1.5dvw, 1.5rem);
+    line-height: 120%;
+}
+
+h5 {
+    font-size: clamp(1rem, 1.25dvw, 1.25rem);
+    line-height: 115%;
+}
+
+h6 {
+    font-size: clamp(0.875rem, 1dvw, 1rem);
+    line-height: 110%;
+}
+
+/*
+* =============================================
+* Text, lists, inputs, links
+* ============================================= 
+*/
+
+small,
+p,
+ul,
+ol {
+    font-size: clamp(0.925rem, 1.05vw, 1.05rem);
+    line-height: 170%;
+    text-wrap: pretty;
+    font-weight: 400;
+
+    @media (width < 1024px) {
+        text-align: center;
+    }
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    padding: 0;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    &.large {
+        font-size: clamp(1rem, 1.25vw, 1.25rem);
+        line-height: 150%;
+    }
+
+    &.extraLarge {
+        font-size: clamp(1.25rem, 1.5vw, 1.5rem);
+    }
+}
+
+strong {
+    font-weight: 700;
+}
+
+em {
+    font-size: 0.7rem;
+    line-height: 1;
+}
+
+
+ul:not(.splide__list) {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 0.75rem;
+    padding: 0 0 1rem 1.5rem;
+    list-style: square;
+
+    @media (width < 1024px) {
+        align-items: center;
+    }
+
+    @media (width >=1280px) {
+        padding: 0.5rem 0 1.5rem 2.5rem;
+    }
+
+    li {
+        &::marker {
+            color: var(--primary);
+        }
+    }
+}

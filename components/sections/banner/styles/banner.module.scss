@@ -1,0 +1,48 @@
+.banner {
+    position: relative;
+    padding-top: var(--mobileHeaderHeight);
+    justify-content: flex-end;
+
+    @media (width >=1024px) {
+        padding-top: var(--headerHeight);
+    }
+
+    .bannerContent {
+        gap: 1rem;
+        position: relative;
+        z-index: 1;
+
+        h1 {
+            @media (width >=1024px) {
+                max-width: 15ch;
+            }
+        }
+
+        p {
+            @media (width >=1024px) {
+                font-size: 1.125rem;
+                max-width: 50ch;
+            }
+        }
+    }
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        right: 0;
+        width: 66.66%;
+        height: 100%;
+        background-image: url("/textures/grid-texture.avif");
+        background-position: right top;
+        background-repeat: repeat;
+    }
+
+    &::after {
+        z-index: 0;
+        background: linear-gradient(to bottom left, rgba(var(--darkRgb), 0.25), var(--dark));
+        opacity: 1;
+    }
+}

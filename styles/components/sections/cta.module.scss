@@ -1,0 +1,138 @@
+.cta {
+    background-color: var(--dark);
+
+    @media (width >=1280px) {
+        background-size: 50%;
+    }
+
+    .ctaContainer {
+        padding-right: 0;
+        
+        @media (width < 1280px) {
+            padding-left: 0;
+        }
+
+        @media (width >=1280px) {
+            flex-flow: row nowrap;
+        }
+    }
+
+    .contentCol {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        gap: 1rem;
+        padding-right: 1rem;
+        padding-left: 1rem;
+
+        @media (width >=768px) {
+            padding-right: 3rem;
+            padding-left: 3rem;
+        }
+
+        @media (width >=1024px) {
+            padding-right: 4rem;
+            padding-left: 4rem;
+        }
+
+        @media (width >=1280px) {
+            padding-right: 0;
+            padding-left: 0;
+        }
+    }
+
+    .testimonialsCol {
+        position: relative;
+
+        &::before,
+        &::after {
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            bottom: 0;
+            width: 5rem;
+            height: 100%;
+        }
+
+        &::before {
+            left: 0;
+            background: linear-gradient(to right, var(--dark), transparent);
+        }
+
+        &::after {
+            right: 0;
+            background: linear-gradient(to left, var(--dark), transparent);
+            width: 20rem;
+        }
+
+        @media (width >=1280px) {
+            &::before,
+            &::after {
+                content: "";
+            }
+        }
+    }
+}
+
+.ctaSteps {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    margin: 0 auto;
+    gap: 1rem;
+
+    @media (width >=1280px) {
+        gap: 2rem;
+    }
+
+    .ctaStep {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 0.75rem;
+        align-items: center;
+        width: 100%;
+
+        @media (width < 768px) {
+            max-width: 15rem;
+        }
+
+        @media (width >=1280px) {
+            flex-flow: row nowrap;
+        }
+
+        .ctaStepNumber {
+            flex-shrink: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 2.25rem;
+            height: 2.25rem;
+            border-radius: 50%;
+            background: linear-gradient(to top right, #6D513B, #E5BC9E, #6D513B);
+            border: 1px solid rgba(var(--lightRgb), 0.15);
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 1rem;
+
+            @media (width >=768px) {
+                width: 3rem;
+                height: 3rem;
+            }
+        }
+
+        p {
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0;
+            text-align: center;
+
+            @media (width >=768px) {
+                font-size: 1rem;
+            }
+
+            @media (width >=1280px) {
+                text-align: left;
+            }
+        }
+    }
+}

@@ -1,0 +1,122 @@
+// Hidden Classes
+.hidden {
+    display: none !important;
+}
+
+.hidden-s {
+    @media (width <576px) {
+        display: none !important;
+    }
+}
+
+.hidden-m {
+    @media (width >=576px) and (width <768px) {
+        display: none !important;
+    }
+}
+
+.hidden-l {
+    @media (width >=768px) and (width <1024px) {
+        display: none !important;
+    }
+}
+
+.hidden-xl {
+    @media (width >=1024px) and (width <1200px) {
+        display: none !important;
+    }
+}
+
+.hidden-xxl {
+    @media (width >=1200px) {
+        display: none !important;
+    }
+}
+
+// Gaps
+.gapXs {
+    gap: 0.5rem !important;
+}
+
+.gapSm {
+    gap: 1rem !important;
+}
+
+.gapMd {
+    gap: 1.5rem !important;
+}
+
+.gapLg {
+    gap: 2rem !important;
+}
+
+.gapXl {
+    gap: 3rem !important;
+}
+
+// Relative
+.relative {
+    position: relative;
+    z-index: 1;
+}
+
+// Has Radius
+.hasRadius {
+    border-radius: 1rem;
+
+    @media (width >=1024px) {
+        border-radius: var(--borderRadius);
+    }
+}
+
+// Has Border
+.hasBorder {
+    border: 1px solid var(--border);
+}
+
+// Has Link
+.hasLink a {
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+// Has Full Stop
+.hasFullStop {
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        &::after {
+            content: '.';
+            color: var(--primary);
+            -webkit-text-fill-color: var(--primary);
+            text-fill-color: var(--primary);
+        }
+    }
+}
+
+
+// Font Weights
+.fw300 {
+    font-weight: 300 !important;
+}
+
+.fw400 {
+    font-weight: 400 !important;
+}
+
+.fw500 {
+    font-weight: 500 !important;
+}
+
+.fw600 {
+    font-weight: 600 !important;
+}
+
+.fw700 {
+    font-weight: 700 !important;
+}
