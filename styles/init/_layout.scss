@@ -15,7 +15,7 @@
         gap: 3rem;
     }
 
-    &.headerPadding {
+    &.headerOffset {
         padding-top: var(--mobileHeaderHeight);
 
         @media (width >=1024px) {

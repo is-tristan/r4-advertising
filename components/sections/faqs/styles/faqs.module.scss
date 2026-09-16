@@ -1,0 +1,158 @@
+@use "@/styles/init/mixins" as *;
+
+// Container
+.faqsSectionContainer {
+    @media all {
+        gap: 0;
+    }
+}
+
+// Items
+.faqsSectionContent {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 100%;
+    position: relative;
+}
+
+// Item
+.faqContentItem {
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+    width: 100%;
+    cursor: pointer;
+
+    @media (width >=768px) {
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        padding: 2rem 0;
+    }
+
+    @media (width >=1024px) {
+        padding: 3rem 0;
+    }
+
+    &:first-child {
+        border-top: 1px solid var(--border);
+    }
+
+    .faqItemLeft {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 0.75rem;
+
+        @media (width >=1024px) {
+            flex-flow: row nowrap;
+            gap: 2rem;
+        }
+
+        .faqItemTitle {
+            display: flex;
+            flex-flow: row nowrap;
+            gap: 0.25rem;
+            position: relative;
+
+            @media (width >=1024px) {
+                width: 25rem;
+            }
+
+            span {
+                color: rgba(var(--primaryRgb), 0.75);
+                position: absolute;
+                top: 0.5rem;
+                left: 0;
+                letter-spacing: 0.1em;
+            }
+
+            h3 {
+                font-size: clamp(3rem, 4dvw, 4rem);
+                line-height: 90%;
+                padding-left: 1.5rem;
+
+                @media (width >=768px) {
+                    padding-left: 1.75rem;
+                }
+
+                @media (width >=1024px) {
+                    white-space: nowrap;
+                }
+            }
+        }
+
+        .faqItemDescription {
+            width: 100%;
+            padding-left: 1.5rem;
+
+            @media (width >=768px) {
+                padding-left: 0;
+            }
+
+            @media (width >=1024px) {
+                width: 40rem;
+                margin: auto;
+            }
+
+            .faqLongDescription {
+                display: flex;
+                flex-flow: column nowrap;
+                gap: 1rem;
+                height: 0;
+                overflow: hidden;
+                transition: height 0.2s ease-in-out;
+            }
+        }
+    }
+
+    .faqItemRight {
+        display: flex;
+        justify-content: flex-end;
+
+        .faqItemButton {
+            @include btnIconOnly();
+            position: relative;
+            border: none;
+            cursor: pointer;
+
+            &::before,
+            &::after {
+                content: "";
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 0.75rem;
+                height: 2px;
+                background: rgba(var(--primaryRgb), 0.75);
+                position: absolute;
+                inset: 0;
+                margin: auto;
+                transition: rotate 0.2s ease-in-out;
+
+                @media (width >=768px) {
+                    width: 1rem;
+                }
+            }
+
+            &::after {
+                rotate: 90deg;
+            }
+        }
+    }
+
+    &.faqItemActive {
+
+        .faqItemButton {
+            background: rgba(var(--primaryRgb), 0.875);
+
+            &::before,
+            &::after {
+                background: var(--dark);
+            }
+
+            &::after {
+                rotate: 0deg;
+            }
+        }
+    }
+}

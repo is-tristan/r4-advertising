@@ -1,13 +1,11 @@
 // Next
 import Image from "next/image";
 
-// Components
-import Eyebrow from "@/components/content/eyebrow";
-
 // Styles
 import styles from "./styles/disciplines.module.scss";
 
 // Components
+import DisciplineSectionHeading from "./components/discipline-section-heading";
 import DisciplineSectionContentItem from "./components/discipline-section-content-item";
 
 export default function Disciplines({
@@ -43,33 +41,10 @@ export default function Disciplines({
 
             <div className={`container ${styles.disciplinesSectionContainer}`}>
 
-                <div className={styles.disciplinesSectionHeading}>
-
-                    <div className={styles.disciplinesSectionLeft}>
-
-                        <Eyebrow
-                            number={eyebrowNumber}
-                            text={eyebrowText}
-                            type="heading"
-                        />
-
-                    </div>
-
-                    <div className={styles.disciplinesSectionRight}>
-
-                        <span>Trade</span>
-
-                        <span className={styles.separator}>//</span>
-
-                        <span>Plan</span>
-
-                        <span className={styles.separator}>//</span>
-
-                        <span>Activate</span>
-
-                    </div>
-
-                </div>
+                <DisciplineSectionHeading
+                    eyebrowNumber={eyebrowNumber}
+                    eyebrowText={eyebrowText}
+                />
 
                 <div className={styles.disciplinesSectionContent}>
 

@@ -109,6 +109,7 @@
         @media (width >=1024px) {
             flex-flow: row nowrap;
             justify-content: space-between;
+            align-items: center;
             gap: 2rem;
         }
 

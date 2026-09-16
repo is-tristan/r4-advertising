@@ -30,7 +30,7 @@ export default function ContactTopSection({
 
     return (
 
-        <section ref={ref} className={`row bgDark headerPadding ${styles.contactTopSection}`}>
+        <section ref={ref} className={`row bgDark headerOffset ${styles.contactTopSection}`}>
 
             <div className={`container colorLight noPaddingBottom ${styles.container}`}>
 

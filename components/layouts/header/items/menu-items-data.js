@@ -9,15 +9,15 @@ export const menuItemsData = [
         submenu: [
             {
                 label: "About",
-                href: "/about",
+                href: "/company/about",
             },
             {
                 label: "Careers",
-                href: "/careers",
+                href: "/company/careers",
             },
             {
                 label: "Team",
-                href: "/team",
+                href: "/company/team",
             },
         ],
     },

@@ -12,6 +12,7 @@ import { logo } from "@/utils/icons";
 export default function ContentSection({
     sectionName = undefined,
     sectionClassName = undefined,
+    containerClassName = undefined,
     eyebrowNumber = "01",
     eyebrowText = "Lorem Ipsum",
     titleTag = "h2",
@@ -32,7 +33,7 @@ export default function ContentSection({
 
         <section className={`row ${styles.contentSection} ${sectionClassName}`} data-section-name={sectionName}>
 
-            <div className={`container ${image ? "dualCols" : "centered"} ${imagePosition === "right" ? "rowReverse" : "row"} ${styles.contentContainer}`}>
+            <div className={`container ${image ? "dualCols" : "centered"} ${imagePosition === "right" ? "rowReverse" : "row"} ${containerClassName ? containerClassName : undefined} ${styles.contentContainer}`}>
 
                 {image && (
 
