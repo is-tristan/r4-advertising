@@ -1,12 +1,15 @@
+import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list"
 import { defineArrayMember, defineField, defineType } from "sanity"
 import { PlayIcon } from "@sanity/icons/Play"
 
-export const work = defineType({
+export const work = (context) => defineType({
   name: "work",
   title: "Work",
   type: "document",
   icon: PlayIcon,
+  orderings: [orderRankOrdering],
   fields: [
+    orderRankField({ type: "work", context }),
     defineField({
       name: "title",
       title: "Title",

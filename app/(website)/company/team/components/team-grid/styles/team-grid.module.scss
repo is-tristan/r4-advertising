@@ -1,0 +1,103 @@
+.teamItem {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 0.75rem;
+    width: 100%;
+
+    * {
+        text-align: left;
+    }
+
+    .teamItemImage {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        aspect-ratio: 1 / 1;
+        border-radius: var(--borderRadius);
+        position: relative;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .teamItemContent {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .teamItemLeft {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 0.5rem;
+
+        .teamItemCategory {
+            color: var(--primary);
+            text-transform: uppercase;
+            font-size: 0.875rem;
+        }
+
+        .teamItemName,
+        .teamItemPosition {
+            font-family: var(--text);
+            line-height: 1;
+
+            &.teamItemName {
+                font-size: 0.875rem;
+                font-weight: 700;
+                letter-spacing: 0.05em;
+
+                @media (width >=768px) {
+                    font-size: 1rem;
+                }
+            }
+
+            &.teamItemPosition {
+                font-size: 0.875rem;
+            }
+        }
+    }
+
+    .teamItemRight {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 0.25rem;
+
+        @media (width >=768px) {
+            gap: 0.5rem;
+        }
+
+        .teamItemSocial {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 1.75rem;
+            height: 1.75rem;
+            padding: 0.25rem;
+            border-radius: var(--borderRadius);
+            background: rgba(var(--lightRgb), 0.125);
+            border: 1px solid rgba(var(--lightRgb), 0.25);
+            color: rgba(var(--lightRgb), 0.875);
+            transition: var(--ease);
+
+            svg {
+                width: 100%;
+                height: 100%;
+            }
+
+            &:hover {
+                background: rgba(var(--primaryRgb), 0.25);
+                border-color: rgba(var(--primaryRgb), 0.33);
+                color: rgba(var(--primaryRgb), 0.875);
+            }
+        }
+    }
+}

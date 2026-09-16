@@ -10,7 +10,7 @@ import styles from "@/styles/components/layouts/header/header-mobile-menu.module
 
 import { menuItemsData as data } from "@/components/layouts/header/items/menu-items-data";
 
-import { closeIcon, chevronDown } from "@/utils/icons";
+import { xClose, chevronDown } from "@/utils/icons";
 
 export default function HeaderMobileMenu({ isOpen = false, onClose, contactUrl = "/contact" }) {
 
@@ -66,7 +66,7 @@ export default function HeaderMobileMenu({ isOpen = false, onClose, contactUrl =
 
                     </Link>
 
-                    <span className={`${styles.mobileMenuToggle} ${styles.mobileMenuClose}`} onClick={onClose} dangerouslySetInnerHTML={{ __html: closeIcon }} />
+                    <span className={`${styles.mobileMenuToggle} ${styles.mobileMenuClose}`} onClick={onClose} dangerouslySetInnerHTML={{ __html: xClose }} />
 
                 </div>
 

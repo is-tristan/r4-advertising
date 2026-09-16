@@ -20,6 +20,18 @@
         letter-spacing: -0.15em;
     }
 
+    &[data-type="heading"] {
+        margin: 0 0 1.5rem;
+        font-size: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+        text-transform: inherit;
+
+        @media (width >=768px) {
+            margin: 0 0 2rem;
+        }
+    }
+
     &[data-theme="light"] {
 
         .number,

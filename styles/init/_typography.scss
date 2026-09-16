@@ -70,10 +70,6 @@ ol {
     line-height: 160%;
     text-wrap: pretty;
     font-weight: 400;
-
-    @media (width < 1024px) {
-        text-align: center;
-    }
 }
 
 p {

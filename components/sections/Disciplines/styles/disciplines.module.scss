@@ -1,0 +1,199 @@
+@use "@/styles/init/mixins" as *;
+
+// Container
+.disciplinesSectionContainer {
+    @media all {
+        gap: 0;
+    }
+}
+
+// Image
+.disciplinesSectionImage {
+    display: none;
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    z-index: -1;
+    width: 30rem;
+    height: 20rem;
+    border-radius: var(--borderRadius);
+    overflow: hidden;
+    opacity: 0.25;
+}
+
+// Heading
+.disciplinesSectionHeading {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.5rem;
+
+    @media (width >=768px) {
+        flex-flow: row nowrap;
+        gap: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    @media (width >=1024px) {
+        gap: 3rem;
+    }
+
+    .disciplinesSectionLeft {
+        h2 {
+            @media all {
+                margin: 0;
+            }
+        }
+    }
+
+    .disciplinesSectionRight {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: var(--eyebrow);
+        font-size: 0.75rem;
+        font-weight: 400;
+
+        @media (width >=768px) {
+            gap: 0.75rem;
+            font-size: 0.875rem;
+        }
+
+        @media (width >=1024px) {
+            font-size: 1rem;
+        }
+
+        .separator {
+            letter-spacing: -0.15em;
+            color: var(--primary);
+        }
+    }
+}
+
+// Items
+.disciplinesSectionContent {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 100%;
+    position: relative;
+}
+
+// Item
+.disciplinesContentItem {
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+    width: 100%;
+
+    @media (width >=768px) {
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        padding: 2rem 0;
+    }
+
+    @media (width >=1024px) {
+        padding: 3rem 0;
+    }
+
+    .disciplinesContentItemLeft {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 0.75rem;
+
+        @media (width >=1024px) {
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .disciplinesContentItemTitle {
+            display: flex;
+            flex-flow: row nowrap;
+            gap: 0.25rem;
+            position: relative;
+
+            @media (width >=1024px) {
+                width: 30rem;
+            }
+
+            @media (width >=1280px) {
+                width: 45rem;
+            }
+
+            @media (width >=1440px) {
+                width: 50rem;
+            }
+
+            span {
+                color: rgba(var(--primaryRgb), 0.75);
+                position: absolute;
+                top: 0.5rem;
+                left: 0;
+                letter-spacing: 0.1em;
+            }
+
+            h3 {
+                font-size: clamp(3rem, 4dvw, 4rem);
+                line-height: 90%;
+                padding-left: 1.5rem;
+
+                @media (width >=768px) {
+                    padding-left: 1.75rem;
+                }
+
+                @media (width >=1024px) {
+                    white-space: nowrap;
+                }
+            }
+        }
+
+        p {
+            width: 100%;
+            padding-left: 1.5rem;
+
+            @media (width >=768px) {
+                padding-left: 0;
+            }
+
+            @media (width >=1024px) {
+                width: 15rem;
+                margin: auto;
+            }
+
+            @media (width >=1440px) {
+                width: 20rem;
+            }
+        }
+    }
+
+    &[data-heading-type="largeHeading"] {
+        .disciplinesContentItemTitle {
+            span {
+                top: 0.4rem;
+
+                @media (width >=768px) {
+                    top: 1rem;
+                }
+            }
+
+            h3 {
+                font-size: clamp(2rem, 7.5dvw, 7.5rem);
+            }
+        }
+    }
+
+    .disciplinesContentItemRight {
+        display: flex;
+        justify-content: flex-end;
+
+        .disciplinesContentItemLink {
+            @include btnIconOnly();
+        }
+    }
+}

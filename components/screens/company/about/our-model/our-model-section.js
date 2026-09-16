@@ -10,7 +10,7 @@ export default function OurModelSection() {
 
             <div className="container noPaddingBottom">
 
-                <Eyebrow number="04" text="Our Model" />
+                <Eyebrow number="04" text="Our Model" type="heading" />
 
             </div>
 

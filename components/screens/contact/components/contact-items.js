@@ -11,7 +11,7 @@ import ContactItem from "./contact-item";
 import styles from "@/styles/components/screens/contact-us/contact-us.module.scss";
 
 // Icons
-import { phoneIconFilled, emailIconFilled } from "@/utils/icons";
+import { phoneIconFilled, emailFilled } from "@/utils/icons";
 
 
 export default function ContactItems({
@@ -21,7 +21,7 @@ export default function ContactItems({
 
     const contactItems = [
         {
-            icon: emailIconFilled,
+            icon: emailFilled,
             topText: "General Inquiries",
             label: email,
             href: `mailto:${email}`,
