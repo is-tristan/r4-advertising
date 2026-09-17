@@ -65,6 +65,34 @@ export const careerBySlugQuery = defineQuery(`
       contractType
     ),
     salary,
+    content
+  }
+`)
+
+export const newsGridQuery = defineQuery(`
+  *[_type == "news"] | order(orderRank) {
+    _id,
+    title,
+    "slug": slug.current,
+    "image": image.asset->url,
+    excerpt,
+    "category": category->title,
+    "author": author->name
+  }
+`)
+
+export const newsBySlugQuery = defineQuery(`
+  *[_type == "news" && slug.current == $slug][0] {
+    _id,
+    title,
+    "slug": slug.current,
+    "image": image.asset->url,
+    excerpt,
+    "category": category->title,
+    author->{
+      name,
+      "image": image.asset->url
+    },
     content[]{
       ...,
       _type == "video" => {
@@ -76,8 +104,11 @@ export const careerBySlugQuery = defineQuery(`
   }
 `)
 
-export const newsGridQuery = defineQuery(`
-  *[_type == "news"] | order(orderRank) {
+export const relatedNewsQuery = defineQuery(`
+  *[_type == "news" && slug.current != $slug] | order(
+    select(category->title == $category => 0, 1) asc,
+    orderRank
+  )[0...3] {
     _id,
     title,
     "slug": slug.current,

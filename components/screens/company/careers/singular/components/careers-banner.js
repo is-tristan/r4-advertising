@@ -6,8 +6,7 @@ import CareerMetaItem from "@/components/screens/company/careers/components/care
 import styles from "@/components/sections/banner/styles/banner.module.scss";
 
 export default function CareersBanner({
-    eyebrow = "Lorem Ipsum",
-    title = "Lorem Ipsum dolor sit amet",
+    title,
     contractType,
     location,
     salary,
@@ -22,7 +21,7 @@ export default function CareersBanner({
                 <div className={`content gapXl ${styles.bannerContent}`}>
 
                     <Text
-                        eyebrow={{ text: eyebrow }}
+                        eyebrow="Apply now"
                         titleTag="h1"
                         title={title}
                     />

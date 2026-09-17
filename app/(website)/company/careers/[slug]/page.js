@@ -1,3 +1,4 @@
+// Next
 import { notFound } from "next/navigation"
 
 // Sanity
@@ -25,7 +26,6 @@ export default async function CareerDetailsPage({ params }) {
         <>
 
             <CareersBanner
-                eyebrow="Apply now"
                 title={career.title}
                 contractType={career.contractType}
                 location={career.location}

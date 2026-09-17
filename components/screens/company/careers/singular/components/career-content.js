@@ -18,33 +18,6 @@ import { motion, useInView } from "motion/react";
 import styles from "../styles/career-singular.module.scss";
 
 const portableTextComponents = {
-    types: {
-        video: ({ value }) => {
-
-            if (!value?.url) {
-
-                return null;
-
-            }
-
-            return (
-
-                <div className={styles.careerContentVideo}>
-
-                    <video
-                        src={value.url}
-                        poster={value.poster || undefined}
-                        controls
-                        playsInline
-                        preload="metadata"
-                    />
-
-                </div>
-
-            );
-
-        },
-    },
     marks: {
         link: ({ children, value }) => (
 
