@@ -1,7 +1,7 @@
 // Components
 import Banner from "@/components/sections/banner/banner"
 import CtaSection from "@/components/sections/cta/cta-section"
-import TeamGrid from "./components/team-grid/team-grid"
+import TeamGrid from "@/components/screens/company/team/components/team-grid/team-grid"
 import DisciplinesSection from "@/components/sections/disciplines/disciplines-section"
 
 export default function TeamPage() {

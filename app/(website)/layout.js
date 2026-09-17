@@ -5,13 +5,15 @@ import "@/styles/main.scss"
 import { ReactLenis } from "lenis/react"
 import "lenis/dist/lenis.css"
 
+// Components
 import Header from "@/components/layouts/header/header"
+import LenisScrollToTop from "@/components/handlers/lenis-scroll-to-top"
 
 export default function WebsiteLayout({ children }) {
 
   return (
 
-    <>
+    <ReactLenis root options={{ stopInertiaOnNavigate: true }}>
 
       <div id="app" className="app">
 
@@ -25,9 +27,9 @@ export default function WebsiteLayout({ children }) {
 
       </div>
 
-      <ReactLenis root />
+      <LenisScrollToTop />
 
-    </>
+    </ReactLenis>
 
   )
 

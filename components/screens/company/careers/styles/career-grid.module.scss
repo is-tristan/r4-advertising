@@ -1,0 +1,62 @@
+@use "@/styles/init/mixins" as *;
+
+.careerItemAnimationContainer {
+    width: 100%;
+}
+
+.careerItem {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1rem;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--borderRadius);
+    cursor: pointer;
+    transition: var(--ease);
+
+    &:hover {
+        background: rgba(var(--primaryRgb), 0.1);
+        border-color: rgba(var(--primaryRgb), 0.2);
+        transform: translateY(-0.25rem);
+    }
+
+    .careerItemImage {
+        flex-shrink: 0;
+        aspect-ratio: 16 / 9;
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        border-radius: var(--borderRadius);
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .careerItemInner,
+    .careerItemContent {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 0.875rem;
+        height: 100%;
+
+        .careerItemInner {
+            justify-content: space-between;
+        }
+    }
+
+    .careerItemContent {
+        .careerItemContentExcerpt {
+            line-height: 140%;
+            color: var(--light);
+
+            @media (width >=768px) {
+                font-size: 0.9375rem;
+            }
+        }
+    }
+}

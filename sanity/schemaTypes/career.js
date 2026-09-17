@@ -1,6 +1,7 @@
 import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list"
 import { defineArrayMember, defineField, defineType } from "sanity"
 import { CaseIcon } from "@sanity/icons/Case"
+import { contentVideoMember } from "./contentVideo"
 
 export const career = (context) => defineType({
   name: "career",
@@ -117,6 +118,7 @@ export const career = (context) => defineType({
             ],
           },
         }),
+        contentVideoMember,
       ],
     }),
   ],

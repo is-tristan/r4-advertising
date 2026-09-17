@@ -1,5 +1,6 @@
 // Components
 import Banner from "@/components/sections/banner/banner"
+import CareersGrid from "@/components/screens/company/careers/careers-grid"
 import CtaSection from "@/components/sections/cta/cta-section"
 import DisciplinesSection from "@/components/sections/disciplines/disciplines-section"
 
@@ -15,8 +16,10 @@ export default function CareersPage() {
                 description="<p>Join a team that values creativity, strategy, and results. We're always looking for talented people who share our passion for creating impactful media experiences.</p>"
             />
 
+            <CareersGrid />
+
             <DisciplinesSection
-                eyebrowNumber="02"
+                eyebrowNumber="03"
                 eyebrowText="Why R4"
                 data={[
                     {
@@ -40,7 +43,7 @@ export default function CareersPage() {
                 ]}
             />
 
-            <CtaSection eyebrowNumber="03" />
+            <CtaSection eyebrowNumber="04" />
 
         </>
 

@@ -1,0 +1,64 @@
+.careerContentInner {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1rem;
+
+    h2 {
+        position: relative;
+        padding-bottom: 1rem;
+
+        &::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 5rem;
+            height: 1px;
+            background: var(--primary);
+            z-index: -1;
+        }
+    }
+
+    p {
+        margin-bottom: 0;
+    }
+
+    ul,
+    ol {
+        margin: 0;
+    }
+
+    .careerContentVideo {
+        width: 100%;
+        overflow: hidden;
+        border-radius: var(--borderRadius);
+
+        video {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+    }
+}
+
+.careerContentFooter {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    padding: 2rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+
+    .careerContentFooterText {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 0.5rem;
+
+        span {
+            font-size: 0.875rem;
+        }
+    }
+}

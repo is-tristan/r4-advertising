@@ -34,7 +34,7 @@ export default function ThreePillars() {
 
     return (
 
-        <div className={`container flexAuto noPaddingTop ${styles.threePillars}`} ref={ref}>
+        <div className={`container flexAuto flexAutoConstrained noPaddingTop ${styles.threePillars}`} ref={ref}>
 
             {threePillarsData.map((pillar, index) => (
 

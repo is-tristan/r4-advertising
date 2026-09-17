@@ -9,6 +9,7 @@ export default function AboutPage() {
     return (
 
         <>
+        
             <Banner
                 eyebrow="About Us"
                 title="Built for the Real World"

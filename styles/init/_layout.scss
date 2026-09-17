@@ -59,6 +59,14 @@
         padding: 5rem;
     }
 
+    // Condendsed
+    &.condensed {
+        @media (width >60rem) {
+            max-width: 60rem;
+            margin: 0 auto;
+        }
+    }
+
     // Centered
     &.centered {
         @media (width >=1024px) {

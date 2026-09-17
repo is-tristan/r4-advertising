@@ -26,3 +26,64 @@ export const teamGridQuery = defineQuery(`
     "linkedIn": linkedin
   }
 `)
+
+export const careersGridQuery = defineQuery(`
+  *[_type == "career"] | order(orderRank) {
+    _id,
+    title,
+    "slug": slug.current,
+    "image": image.asset->url,
+    "category": category->title,
+    location,
+    "contractType": select(
+      contractType == "full-time" => "Full-time",
+      contractType == "part-time" => "Part-time",
+      contractType == "contract" => "Contract",
+      contractType == "internship" => "Internship",
+      contractType == "freelance" => "Freelance",
+      contractType
+    ),
+    salary,
+    "excerpt": array::join(string::split(pt::text(content), "")[0...120], "")
+  }
+`)
+
+export const careerBySlugQuery = defineQuery(`
+  *[_type == "career" && slug.current == $slug][0] {
+    _id,
+    title,
+    "slug": slug.current,
+    "image": image.asset->url,
+    "category": category->title,
+    location,
+    "contractType": select(
+      contractType == "full-time" => "Full-time",
+      contractType == "part-time" => "Part-time",
+      contractType == "contract" => "Contract",
+      contractType == "internship" => "Internship",
+      contractType == "freelance" => "Freelance",
+      contractType
+    ),
+    salary,
+    content[]{
+      ...,
+      _type == "video" => {
+        ...,
+        "url": file.asset->url,
+        "poster": poster.asset->url
+      }
+    }
+  }
+`)
+
+export const newsGridQuery = defineQuery(`
+  *[_type == "news"] | order(orderRank) {
+    _id,
+    title,
+    "slug": slug.current,
+    "image": image.asset->url,
+    excerpt,
+    "category": category->title,
+    "author": author->name
+  }
+`)

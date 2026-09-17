@@ -1,17 +1,17 @@
 // Sanity
 import { client } from "@/sanity/lib/client"
-import { teamGridQuery } from "@/sanity/lib/queries"
+import { newsGridQuery } from "@/sanity/lib/queries"
 
 // Components
 import Eyebrow from "@/components/content/eyebrow"
-import TeamItem from "./components/team-item"
+import NewsItem from "./components/news-item"
 
 // Styles
-import styles from "./styles/team-grid.module.scss"
+import styles from "./styles/news-grid.module.scss"
 
-export default async function TeamGrid() {
+export default async function NewsGrid() {
 
-    const items = await client.fetch(teamGridQuery, {}, {
+    const items = await client.fetch(newsGridQuery, {}, {
         next: { revalidate: 30 },
     })
 
@@ -21,30 +21,30 @@ export default async function TeamGrid() {
 
     return (
 
-        <section className={styles.teamGrid}>
+        <section className={styles.newsGrid}>
 
             <div className={`container noPaddingBottom`}>
 
                 <Eyebrow
                     number="02"
-                    text="Meet the team"
+                    text="Latest news"
                     type="heading"
                 />
 
             </div>
 
-            <div className={`container noPaddingTop flexAuto`}>
+            <div className={`container noPaddingTop ${styles.newsGridItems}`}>
 
                 {items.map((item, index) => (
 
-                    <TeamItem
+                    <NewsItem
                         key={item._id}
-                        name={item.name}
-                        category={item.category}
-                        position={item.position}
+                        title={item.title}
+                        slug={item.slug}
                         image={item.image}
-                        email={item.email}
-                        linkedIn={item.linkedIn}
+                        excerpt={item.excerpt}
+                        category={item.category}
+                        author={item.author}
                         index={index}
                     />
 

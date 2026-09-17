@@ -49,4 +49,20 @@ export const structure = (S, context) =>
               S.documentTypeListItem("careerCategory").title("Career Categories"),
             ])
         ),
+      S.listItem()
+        .title("News")
+        .child(
+          S.list()
+            .title("News")
+            .items([
+              orderableDocumentListDeskItem({
+                type: "news",
+                title: "Articles",
+                S,
+                context,
+              }),
+              S.documentTypeListItem("newsCategory").title("Categories"),
+              S.documentTypeListItem("newsAuthor").title("Authors"),
+            ])
+        ),
     ])
