@@ -4,6 +4,9 @@ import Text from "@/components/content/text";
 import CategoryTags from "@/components/content/category-tags";
 import Button from "@/components/handlers/buttons";
 
+// Sanity
+import { getSanityImageUrl } from "@/sanity/lib/image";
+
 // Styles
 import styles from "../styles/work-carousel-section.module.scss";
 
@@ -15,6 +18,8 @@ export default function WorkCarouselItem({
     videoPoster,
     workHref = "/work",
 }) {
+
+    const posterUrl = getSanityImageUrl(videoPoster, "videoPoster");
 
     return (
 
@@ -65,7 +70,7 @@ export default function WorkCarouselItem({
 
                     <video
                         src={video}
-                        poster={videoPoster}
+                        poster={posterUrl || undefined}
                         muted
                         loop
                         playsInline

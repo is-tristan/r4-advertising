@@ -3,7 +3,10 @@
 // Imports
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
-import Image from "next/image";
+import { Image } from "next-sanity/image";
+
+// Sanity
+import { getSanityImageUrl } from "@/sanity/lib/image";
 
 // Styles
 import styles from "../styles/team-grid.module.scss";
@@ -23,6 +26,7 @@ export default function TeamItem({
 
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, amount: 0.33 });
+    const imageUrl = getSanityImageUrl(image, "teamCard");
 
     return (
 
@@ -34,12 +38,12 @@ export default function TeamItem({
             transition={{ duration: 0.5, delay: 0.15 + (index * 0.075), ease: "easeOut" }}
         >
 
-            {image && (
+            {imageUrl && (
 
                 <div className={styles.teamItemImage}>
 
                     <Image
-                        src={image}
+                        src={imageUrl}
                         alt={name}
                         fill
                         loading="lazy"

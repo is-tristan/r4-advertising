@@ -10,8 +10,11 @@ import { useRef } from "react";
 import { motion, useInView } from "motion/react";
 
 // Next
-import Image from "next/image";
 import Link from "next/link";
+import { Image } from "next-sanity/image";
+
+// Sanity
+import { getSanityImageUrl } from "@/sanity/lib/image";
 
 // Styles
 import styles from "../styles/career-grid.module.scss";
@@ -53,6 +56,7 @@ export default function CareerItem({
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, amount: 0.33 });
     const excerptText = getExcerpt(excerpt);
+    const imageUrl = getSanityImageUrl(image, "careerCard");
 
     return (
 
@@ -66,12 +70,12 @@ export default function CareerItem({
 
             <div className={styles.careerItem}>
 
-                {image && (
+                {imageUrl && (
 
                     <div className={styles.careerItemImage}>
 
                         <Image
-                            src={image}
+                            src={imageUrl}
                             alt={title}
                             fill
                             loading="lazy"

@@ -1,6 +1,9 @@
 // Next
-import Image from "next/image";
 import Link from "next/link";
+import { Image } from "next-sanity/image";
+
+// Sanity
+import { getSanityImageUrl } from "@/sanity/lib/image";
 
 // Styles
 import styles from "../styles/news-singular.module.scss";
@@ -16,6 +19,7 @@ export default function NewsMeta({
 
     const encodedUrl = shareUrl ? encodeURIComponent(shareUrl) : "";
     const encodedTitle = title ? encodeURIComponent(title) : "";
+    const authorImageUrl = getSanityImageUrl(author?.image, "authorAvatar");
 
     const shareLinks = [
         {
@@ -46,12 +50,12 @@ export default function NewsMeta({
 
                 <div className={styles.authorMetaItem}>
 
-                    {author.image && (
+                    {authorImageUrl && (
 
                         <Image
                             width={80}
                             height={80}
-                            src={author.image}
+                            src={authorImageUrl}
                             alt={author.name}
                             loading="lazy"
                             sizes="80px"

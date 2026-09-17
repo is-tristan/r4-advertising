@@ -10,6 +10,9 @@ import { PortableText } from "@portabletext/react";
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
 
+// Sanity
+import { getSanityImageUrl } from "@/sanity/lib/image";
+
 // Styles
 import styles from "../styles/news-singular.module.scss";
 
@@ -26,13 +29,15 @@ const portableTextComponents = {
 
             }
 
+            const posterUrl = getSanityImageUrl(value.poster, "videoPoster");
+
             return (
 
                 <div className={styles.newsContentVideo}>
 
                     <video
                         src={value.url}
-                        poster={value.poster || undefined}
+                        poster={posterUrl || undefined}
                         controls
                         playsInline
                         preload="metadata"

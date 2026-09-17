@@ -11,7 +11,7 @@ export const workCarouselQuery = defineQuery(`
       "slug": slug.current
     },
     "video": video.asset->url,
-    "videoPoster": videoPoster.asset->url
+    videoPoster
   }
 `)
 
@@ -21,7 +21,7 @@ export const teamGridQuery = defineQuery(`
     name,
     "category": category->title,
     position,
-    "image": image.asset->url,
+    image,
     email,
     "linkedIn": linkedin
   }
@@ -32,7 +32,7 @@ export const careersGridQuery = defineQuery(`
     _id,
     title,
     "slug": slug.current,
-    "image": image.asset->url,
+    image,
     "category": category->title,
     location,
     "contractType": select(
@@ -53,7 +53,7 @@ export const careerBySlugQuery = defineQuery(`
     _id,
     title,
     "slug": slug.current,
-    "image": image.asset->url,
+    image,
     "category": category->title,
     location,
     "contractType": select(
@@ -74,7 +74,7 @@ export const newsGridQuery = defineQuery(`
     _id,
     title,
     "slug": slug.current,
-    "image": image.asset->url,
+    image,
     excerpt,
     "category": category->title,
     "author": author->name
@@ -86,19 +86,19 @@ export const newsBySlugQuery = defineQuery(`
     _id,
     title,
     "slug": slug.current,
-    "image": image.asset->url,
+    image,
     excerpt,
     "category": category->title,
     author->{
       name,
-      "image": image.asset->url
+      image
     },
     content[]{
       ...,
       _type == "video" => {
         ...,
         "url": file.asset->url,
-        "poster": poster.asset->url
+        poster
       }
     }
   }
@@ -112,7 +112,7 @@ export const relatedNewsQuery = defineQuery(`
     _id,
     title,
     "slug": slug.current,
-    "image": image.asset->url,
+    image,
     excerpt,
     "category": category->title,
     "author": author->name

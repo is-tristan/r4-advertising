@@ -1,11 +1,14 @@
 // Next
-import Image from "next/image";
 import Link from "next/link";
+import { Image } from "next-sanity/image";
 
 // Components
 import Text from "@/components/content/text";
 import NewsMeta from "@/components/screens/news/singular/components/news-meta";
 import NewsBannerReveal from "@/components/screens/news/singular/components/news-banner-reveal";
+
+// Sanity
+import { getSanityImageUrl } from "@/sanity/lib/image";
 
 // Styles
 import styles from "../styles/news-singular.module.scss";
@@ -21,6 +24,8 @@ export default function NewsBanner({
     excerpt,
     shareUrl,
 }) {
+
+    const imageUrl = getSanityImageUrl(image, "newsBanner");
 
     return (
 
@@ -63,7 +68,7 @@ export default function NewsBanner({
 
                 </NewsBannerReveal>
 
-                {image && (
+                {imageUrl && (
 
                     <NewsBannerReveal
                         className={styles.newsBannerImage}
@@ -71,7 +76,7 @@ export default function NewsBanner({
                     >
 
                         <Image
-                            src={image}
+                            src={imageUrl}
                             alt={title}
                             fill
                             sizes="(max-width: 768px) 100vw, 960px"

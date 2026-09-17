@@ -1,12 +1,15 @@
 "use client";
 
 // Next
-import Image from "next/image";
 import Link from "next/link";
+import { Image } from "next-sanity/image";
 
 // Imports
 import { useRef } from "react";
 import { motion, useInView } from "motion/react";
+
+// Sanity
+import { getSanityImageUrl } from "@/sanity/lib/image";
 
 // Icons
 import { arrowUpRight } from "@/utils/icons";
@@ -50,6 +53,7 @@ export default function NewsItem({
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, amount: 0.15 });
     const excerptText = getExcerpt(excerpt);
+    const imageUrl = getSanityImageUrl(image, "newsCard");
 
     return (
 
@@ -65,12 +69,12 @@ export default function NewsItem({
 
                 <div className={styles.newsItemContent}>
 
-                    {image && (
+                    {imageUrl && (
 
                         <div className={styles.newsItemImage}>
 
                             <Image
-                                src={image}
+                                src={imageUrl}
                                 alt={title}
                                 fill
                                 loading="lazy"
