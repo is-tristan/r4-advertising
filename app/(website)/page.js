@@ -2,6 +2,7 @@
 import WorkCarouselSection from "@/components/screens/home/work-carousel/work-carousel-section";
 import CompanyCarouselSection from "@/components/sections/company-carousel/company-carousel";
 import ContentSection from "@/components/sections/content/content";
+import WorkGrid from "@/components/sections/work-grid/work-grid";
 import DisciplinesSection from "@/components/sections/disciplines/disciplines-section";
 import CtaSection from "@/components/sections/cta/cta-section";
 
@@ -25,8 +26,7 @@ export default function Home() {
         hasBrandMark={true}
       />
 
-
-      <DisciplinesSection headingType="largeHeading" />
+      <WorkGrid hasButton={true} />
 
       <ContentSection
         containerClassName={`noPaddingTop`}
@@ -34,9 +34,9 @@ export default function Home() {
         eyebrowText={null}
         title="Ready to be our next case study? <small class='colorPrimary'>Send us your brief.</small>"
         titleClass={`sectionTitle`}
-        hasBrandMark={true}
       />
 
+      <DisciplinesSection headingType="largeHeading" />
 
       <CtaSection
         eyebrowNumber="05"

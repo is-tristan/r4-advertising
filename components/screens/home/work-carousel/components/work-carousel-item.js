@@ -11,6 +11,7 @@ import { getSanityImageUrl } from "@/sanity/lib/image";
 import styles from "../styles/work-carousel-section.module.scss";
 
 export default function WorkCarouselItem({
+    index,
     title,
     description,
     categories = [],
@@ -33,11 +34,8 @@ export default function WorkCarouselItem({
 
                         <Eyebrow text="Featured Showreel" className={styles.workCarouselItemEyebrow} />
 
-
                         {categories.length > 0 && (
-
                             <CategoryTags categories={categories} />
-
                         )}
 
                         <Text
@@ -75,7 +73,7 @@ export default function WorkCarouselItem({
                         muted
                         loop
                         playsInline
-                        preload="metadata"
+                        preload={index === 0 ? "metadata" : "none"}
                     />
 
                 </div>

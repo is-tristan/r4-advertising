@@ -1,9 +1,5 @@
 export const menuItemsData = [
     {
-        label: "Home",
-        href: "/",
-    },
-    {
         label: "Company",
         href: "#",
         submenu: [

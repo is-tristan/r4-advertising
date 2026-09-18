@@ -3,6 +3,9 @@
 // React
 import { useState } from "react"
 
+// Next
+import Link from "next/link"
+
 // Components
 import Button from "@/components/handlers/button"
 import HeaderMobileMenu from "./header-mobile-menu"
@@ -10,6 +13,9 @@ import HeaderMobileMenu from "./header-mobile-menu"
 // Styles
 import styles from "../styles/header.module.scss"
 import stylesMobileMenu from "../styles/header-mobile-menu.module.scss"
+
+// Icon
+import { costCalulatorIcon } from "@/utils/icons"
 
 export default function HeaderActions() {
 
@@ -27,7 +33,16 @@ export default function HeaderActions() {
 
                 <div className={`${styles.headerButtons}`}>
 
-                    <Button text="Contact Us" href="/contact" className={`primary ${styles.primaryBtn}`} icon={null} hasAnimation={false} />
+                    <Link href="/contact">Sign In</Link>
+
+                    <Button text="Brief Us" href="/contact" className={`primary small ${styles.contactBtn}`} hasAnimation={false} />
+
+                    <Link
+                        href="#"
+                        className={`${styles.costCalculatorBtn}`}
+                        dangerouslySetInnerHTML={{ __html: costCalulatorIcon }}
+                        title="Cost Calculator"
+                    />
 
                 </div>
 

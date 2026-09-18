@@ -74,13 +74,17 @@ export default function ContentSection({
 
                 </div>
 
+                {hasBrandMark && (
+
+                    <div
+                        aria-hidden="true"
+                        className={styles.brandMark}
+                        dangerouslySetInnerHTML={{ __html: logo }}
+                    />
+
+                )}
+
             </div>
-
-            {hasBrandMark && (
-
-                <div aria-hidden="true" className={styles.brandMark} dangerouslySetInnerHTML={{ __html: logo }} />
-
-            )}
 
         </section>
 

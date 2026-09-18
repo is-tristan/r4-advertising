@@ -2,12 +2,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
+    gap: 3rem;
     height: 3.5rem;
     width: max-content;
-    position: absolute;
-    inset: 0;
-    margin: auto;
 
     @media (width < 1366px) {
         flex: 1 1 auto;

@@ -46,14 +46,17 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    height: 1.5rem;
+    height: 1.75rem;
     position: relative;
     color: var(--primary);
     transition: var(--ease);
 
+    @media (width >=768px) {
+        height: 2rem;
+    }
+
     @media (width >=1024px) {
-        min-width: 8rem;
-        height: 1.75rem;
+        height: 2.5rem;
     }
 
     .logoImage {
@@ -68,11 +71,13 @@
 
     &:hover {
         opacity: 0.875;
+        color: var(--primary);
     }
 
     &:focus,
     &:active {
         opacity: 1;
+        color: var(--primary);
     }
 }
 
@@ -86,23 +91,26 @@
     gap: 1rem;
 
     .headerButtons {
-        display: none;
+        display: flex;
         flex-flow: row nowrap;
         justify-content: flex-end;
         align-items: center;
-        gap: 0.75rem;
+        gap: 1rem;
 
-        @media (width >=1024px) {
-            display: flex;
-            gap: 1rem;
+        @media (width >=768px) {
+            gap: 1.5rem;
         }
 
-        .primaryBtn {
-            padding: 0.5rem 0.875rem;
+        >div {
+            display: none;
 
             @media (width >=1024px) {
-                padding: 0.66rem 1rem;
+                display: flex;
             }
+        }
+
+        a {
+            width: max-content;
         }
     }
 }

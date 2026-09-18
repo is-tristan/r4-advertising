@@ -24,7 +24,7 @@
 // Heading
 .disciplinesSectionHeading {
     display: flex;
-    flex-flow: column nowrap;
+    flex-flow: row nowrap;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
@@ -33,7 +33,6 @@
     padding-bottom: 1.5rem;
 
     @media (width >=768px) {
-        flex-flow: row nowrap;
         gap: 2rem;
         padding-bottom: 2rem;
     }
@@ -106,6 +105,7 @@
         flex-flow: column nowrap;
         gap: 0.75rem;
 
+
         @media (width >=1024px) {
             flex-flow: row nowrap;
             justify-content: space-between;
@@ -155,11 +155,12 @@
         }
 
         p {
-            width: 100%;
+            width: calc(100% - 1.5rem);
             padding-left: 1.5rem;
 
             @media (width >=768px) {
-                padding-left: 0;
+                padding-left: 1.75rem;
+    
             }
 
             @media (width >=1024px) {
@@ -192,6 +193,7 @@
     .disciplinesContentItemRight {
         display: flex;
         justify-content: flex-end;
+        align-items: center;
 
         .disciplinesContentItemLink {
             @include btnIconOnly();

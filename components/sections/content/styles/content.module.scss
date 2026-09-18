@@ -1,0 +1,19 @@
+.brandMark {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    padding: 2dvw;
+    opacity: 0.07;
+
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+}

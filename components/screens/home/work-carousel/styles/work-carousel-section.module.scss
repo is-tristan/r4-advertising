@@ -1,6 +1,19 @@
 .workCarousel {
     width: 100%;
 
+    &::before {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
+        height: var(--headerHeight);
+        background: linear-gradient(to bottom, var(--dark), transparent);
+        backdrop-filter: blur(0.25rem);
+    }
+
     ul,
     li {
         width: 100%;
@@ -16,7 +29,6 @@
     position: relative;
     width: 100%;
 
-    
     @media (width >=1024px) {
         height: calc(100dvh - 10rem);
     }
@@ -25,6 +37,10 @@
         @media (width >=1024px) {
             p {
                 max-width: 80ch;
+            }
+
+            h2 {
+                max-width: 25ch;
             }
         }
     }

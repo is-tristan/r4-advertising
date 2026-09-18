@@ -9,15 +9,41 @@
         .splide__pagination {
             display: flex;
             flex-flow: row nowrap;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
-            gap: 0.5rem;
-            position: unset;
-            margin: 3rem auto 0;
+            gap: 0.75rem;
+            position: absolute;
+            z-index: 10;
+            right: 0;
+            bottom: 3dvh;
+            left: 0;
+            width: 100%;
+            padding: 1rem;
+            margin: 0 auto;
+
+            @media (width >=768px) {
+                padding-left: 10dvw;
+            }
+
+            @media (width >=1024px) {
+                padding-left: 7.5dvw;
+            }
+
+            @media (width >=1280px) {
+                padding-left: 5dvw;
+            }
+
+            @media (width >=1440px) {
+                max-width: var(--layoutMaxWidth);
+            }
+
+            li {
+                width: max-content;
+            }
 
             .splide__pagination__page {
-                width: 1.5rem;
-                height: 0.5rem;
+                width: 3rem;
+                height: 0.33rem;
                 background: rgba(var(--lightRgb), 0.3);
                 border: none;
                 box-shadow: none;
@@ -27,18 +53,12 @@
                 cursor: pointer;
                 transition: var(--ease);
 
-                @media (width >=1024px) {
-                    width: 3.75rem;
-                    height: 0.25rem;
-                }
-
                 &:hover {
                     background: var(--primary);
                     border-color: var(--primary);
                 }
 
                 &.is-active {
-                    transform: scale(1.1);
                     background: var(--primary);
                 }
             }
@@ -55,21 +75,14 @@
     }
 
     &.hasArrows {
-        display: flex;
-        flex-flow: column-reverse nowrap;
-
         .splide__arrows {
-            display: flex;
-            flex-flow: row nowrap;
-            justify-content: center;
-            align-items: center;
+            position: absolute;
+            z-index: 10;
+            inset: 0;
             gap: 0.5rem;
             width: 100%;
-            padding-top: 1.5rem;
-
-            @media (width >= 1024px) {
-                padding-top: 2rem;
-            }
+            height: max-content;
+            margin: auto;
         }
 
         .splide__arrow {
@@ -85,12 +98,20 @@
             transition: var(--ease);
             z-index: 100;
             outline: none;
-            position: relative;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin: auto;
             cursor: pointer;
-        
-            @media (width >= 1024px) {
-                width: 3rem;
-                height: 3rem;
+
+            @media (width >=1024px) {
+                width: 5dvw;
+                height: 5dvw;
+            }
+
+            @media (width >=1440px) {
+                width: 4dvw;
+                height: 4dvw;
             }
 
             svg {
@@ -108,16 +129,26 @@
                 background-size: 50%;
                 background-repeat: no-repeat;
                 background-position: center;
+                filter: brightness(0) invert(1);
             }
 
             &:focus,
             &:active,
             &:hover {
                 background: var(--primary);
+
+                &::after {
+                    filter: brightness(0) invert(0);
+                }
             }
 
             &.splide__arrow--prev {
                 transform: scale(-1);
+                left: 0;
+            }
+
+            &.splide__arrow--next {
+                right: 0;
             }
         }
     }

@@ -21,7 +21,7 @@ function playSlideVideo(splide, slide) {
         return;
     }
 
-    video.play().catch(() => {});
+    video.play().catch(() => { });
 }
 
 function pauseSlideVideo(splide, slide) {
@@ -43,16 +43,15 @@ export default function WorkCarousel({ works = [] }) {
     return (
 
         <Splide
-            className={styles.workCarousel}
+            className={`${styles.workCarousel} hasPagination hasArrows`}
             options={{
                 type: "slide",
                 perPage: 1,
                 perMove: 1,
                 gap: "0",
-                autoplay: true,
-                interval: 5500,
-                pagination: false,
-                arrows: false,
+                pagination: true,
+                arrows: true,
+                rewind: true,
                 breakpoints: {
                     1023: {
                         arrows: false,
@@ -63,17 +62,18 @@ export default function WorkCarousel({ works = [] }) {
             onInactive={pauseSlideVideo}
         >
 
-            {works.map((work) => (
+            {works.map((work, index) => (
 
                 <SplideSlide key={work._id}>
 
                     <WorkCarouselItem
+                        index={index}
                         title={work.title}
                         description={work.description}
                         categories={work.categories}
                         video={work.video}
                         videoPoster={work.videoPoster}
-                        workHref="/work"
+                        workHref={work.slug ? `/work/${work.slug}` : "/work"}
                     />
 
                 </SplideSlide>

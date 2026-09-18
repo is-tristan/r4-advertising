@@ -4,6 +4,7 @@ export const workCarouselQuery = defineQuery(`
   *[_type == "work" && featured == true] | order(orderRank) {
     _id,
     title,
+    "slug": slug.current,
     description,
     categories[]->{
       _id,
@@ -12,6 +13,29 @@ export const workCarouselQuery = defineQuery(`
     },
     "video": video.asset->url,
     videoPoster
+  }
+`)
+
+export const workGridQuery = defineQuery(`
+  *[_type == "work"] | order(orderRank) {
+    _id,
+    title,
+    "slug": slug.current,
+    "category": categories[0]->title,
+    "image": coalesce(gallery[0], videoPoster),
+    categories[]->{
+      _id,
+      title,
+      "slug": slug.current
+    }
+  }
+`)
+
+export const workCategoriesQuery = defineQuery(`
+  *[_type == "workCategory"] | order(title asc) {
+    _id,
+    "label": title,
+    "slug": slug.current
   }
 `)
 

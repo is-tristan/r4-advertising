@@ -4,7 +4,6 @@
 import { useEffect, useState } from "react";
 
 // Next
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -15,7 +14,7 @@ import styles from "../styles/header-mobile-menu.module.scss";
 import { menuItemsData as data } from "@/data/menu-items-data";
 
 // Icons
-import { xClose, chevronDown } from "@/utils/icons";
+import { logo, xClose, chevronDown } from "@/utils/icons";
 
 export default function HeaderMobileMenu({ isOpen = false, onClose }) {
 
@@ -66,11 +65,7 @@ export default function HeaderMobileMenu({ isOpen = false, onClose }) {
 
                 <div className={styles.mobileMenuHeader}>
 
-                    <Link href="/" className={styles.mobileMenuLogo} aria-label="Home" onClick={handleLinkClick}>
-
-                        <Image src="/logos/logo-light.svg" alt="Dakota London" width={160} height={22} />
-
-                    </Link>
+                    <Link href="/" className={styles.mobileMenuLogo} aria-label="Home" onClick={handleLinkClick} dangerouslySetInnerHTML={{ __html: logo }} />
 
                     <span className={`${styles.mobileMenuToggle} ${styles.mobileMenuClose}`} onClick={onClose} dangerouslySetInnerHTML={{ __html: xClose }} />
 
