@@ -5,7 +5,7 @@
 "use client";
 
 // Components
-import Button from "@/components/handlers/buttons";
+import Button from "@/components/handlers/button";
 
 // React
 import { PortableText } from "@portabletext/react";

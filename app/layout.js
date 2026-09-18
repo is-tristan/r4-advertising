@@ -1,3 +1,4 @@
+// Fonts
 import localFont from "next/font/local"
 
 const acidGrotesk = localFont({

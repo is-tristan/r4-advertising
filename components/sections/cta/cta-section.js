@@ -1,6 +1,7 @@
 // Components
-import Text from "@/components/content/text";
-import Button from "@/components/handlers/buttons";
+import Text from "@/components/content/text/text";
+import Button from "@/components/handlers/button";
+import Spinner from "@/components/decoration/spinner/spinner";
 
 // Styles
 import styles from "./styles/cta-section.module.scss";
@@ -15,11 +16,14 @@ export default function CtaSection({
     description = "<p>We work with ambitious brands and organisations that value clarity, pace and measurable commercial outcomes. We combine senior leadership, hands-on delivery and deep market knowledge to make media perform under real-world conditions. No bias. No lock-in. Just disciplined media, built to grow brands.</p>",
     btnTextPrimary = "Get started",
     btnLinkPrimary = "/contact",
+    hasSpinner = false,
+    spinnerBackground = "/decoration/cta-spinner/cta-spinner-background.svg",
+    spinnerText = "/decoration/cta-spinner/cta-spinner-text.svg"
 }) {
 
     return (
 
-        <section className={`row ${styles.ctaSection}`}>
+        <section className={`row ${styles.ctaSection}`} style={{ overflow: hasSpinner ? "visible" : "hidden" }}>
 
             <div className="container">
 
@@ -47,6 +51,8 @@ export default function CtaSection({
                 <div className={styles.ctaSectionBackground} aria-hidden="true" dangerouslySetInnerHTML={{ __html: logo }} />
 
             </div>
+
+            {hasSpinner && (<Spinner type="cta" background={spinnerBackground} text={spinnerText} />)}
 
         </section>
 

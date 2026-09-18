@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Image } from "next-sanity/image";
 
 // Components
-import Text from "@/components/content/text";
+import Text from "@/components/content/text/text";
 import NewsMeta from "@/components/screens/news/singular/components/news-meta";
 import NewsBannerReveal from "@/components/screens/news/singular/components/news-banner-reveal";
 

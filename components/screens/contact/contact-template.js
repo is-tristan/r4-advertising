@@ -5,7 +5,7 @@ import { useRef } from "react";
 import { useInView } from "motion/react";
 
 // Components
-import Heading from "@/components/content/text";
+import Heading from "@/components/content/text/text";
 import ContactCol from "./components/contact-col";
 import ContactItems from "./components/contact-items";
 

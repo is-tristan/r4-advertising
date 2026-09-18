@@ -34,6 +34,11 @@ h2 {
     &.sectionTitle {
         font-size: clamp(2.33rem, 6.5dvw, 6.5rem);
     }
+
+    small {
+        display: block;
+        font-size: clamp(2.33rem, 3.5dvw, 3.5rem);
+    }
 }
 
 h3 {
@@ -88,6 +93,10 @@ p {
 
     &.extraLarge {
         font-size: clamp(1.25rem, 1.5vw, 1.5rem);
+    }
+
+    &.ch50 {
+        max-width: 50ch;
     }
 }
 

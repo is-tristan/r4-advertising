@@ -1,8 +1,8 @@
 "use client";
 
 // Components
-import CategoryTags from "@/components/content/category-tags";
-import Button from "@/components/handlers/buttons";
+import CategoryTags from "@/components/content/category-tags/category-tags";
+import Button from "@/components/handlers/button";
 import CareerMetaItem from "./career-meta-item";
 
 // Imports

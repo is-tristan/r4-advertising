@@ -1,5 +1,5 @@
 // Components
-import Text from "@/components/content/text";
+import Text from "@/components/content/text/text";
 
 // Styles
 import styles from "./styles/banner.module.scss";

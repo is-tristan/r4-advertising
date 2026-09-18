@@ -1,5 +1,5 @@
 // Components
-import Eyebrow from "@/components/content/eyebrow";
+import Eyebrow from "@/components/content/eyebrow/eyebrow";
 import ThreePillars from "./components/three-pillars";
 
 export default function OurModelSection() {

@@ -1,7 +1,7 @@
 import { defineQuery } from "next-sanity"
 
 export const workCarouselQuery = defineQuery(`
-  *[_type == "work"] | order(orderRank) {
+  *[_type == "work" && featured == true] | order(orderRank) {
     _id,
     title,
     description,

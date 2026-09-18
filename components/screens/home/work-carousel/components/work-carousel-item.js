@@ -1,8 +1,8 @@
 // Components
-import Eyebrow from "@/components/content/eyebrow";
-import Text from "@/components/content/text";
-import CategoryTags from "@/components/content/category-tags";
-import Button from "@/components/handlers/buttons";
+import Eyebrow from "@/components/content/eyebrow/eyebrow";
+import Text from "@/components/content/text/text";
+import CategoryTags from "@/components/content/category-tags/category-tags";
+import Button from "@/components/handlers/button";
 
 // Sanity
 import { getSanityImageUrl } from "@/sanity/lib/image";
@@ -33,16 +33,17 @@ export default function WorkCarouselItem({
 
                         <Eyebrow text="Featured Showreel" className={styles.workCarouselItemEyebrow} />
 
-                        <Text
-                            title={title}
-                            titleClass="sectionTitle"
-                        />
 
                         {categories.length > 0 && (
 
                             <CategoryTags categories={categories} />
 
                         )}
+
+                        <Text
+                            title={title}
+                            titleClass="sectionTitle"
+                        />
 
                     </div>
 

@@ -1,6 +1,6 @@
 // Components
-import Text from "@/components/content/text";
-import Button from "@/components/handlers/buttons";
+import Text from "@/components/content/text/text";
+import Button from "@/components/handlers/button";
 import ImageCol from "./components/image-col";
 
 // Styles
@@ -46,7 +46,7 @@ export default function ContentSection({
                     <div className="content" data-alignment={!image ? "centered" : null}>
 
                         <Text
-                            eyebrow={{ number: eyebrowNumber, text: eyebrowText }}
+                            eyebrow={{ number: eyebrowNumber, text: eyebrowText ? eyebrowText : null }}
                             title={title}
                             titleClass={`sectionTitle`}
                             titleTag={titleTag}

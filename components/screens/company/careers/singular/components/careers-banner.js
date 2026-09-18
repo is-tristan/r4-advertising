@@ -1,5 +1,5 @@
 // Components
-import Text from "@/components/content/text";
+import Text from "@/components/content/text/text";
 import CareerMetaItem from "@/components/screens/company/careers/components/career-meta-item";
 
 // Styles

@@ -1,6 +1,7 @@
 import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list"
 import { defineArrayMember, defineField, defineType } from "sanity"
 import { PlayIcon } from "@sanity/icons/Play"
+import { portableTextField } from "./portableText"
 
 export const work = (context) => defineType({
   name: "work",
@@ -21,6 +22,13 @@ export const work = (context) => defineType({
       title: "Description",
       type: "text",
       rows: 4,
+    }),
+    defineField({
+      name: "featured",
+      title: "Featured",
+      type: "boolean",
+      description: "Show this work in the home carousel",
+      initialValue: false,
     }),
     defineField({
       name: "categories",
@@ -49,12 +57,41 @@ export const work = (context) => defineType({
         hotspot: true,
       },
     }),
+    defineField({
+      name: "gallery",
+      title: "Gallery",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "image",
+          options: {
+            hotspot: true,
+          },
+        }),
+      ],
+      options: {
+        layout: "grid",
+      },
+    }),
+    portableTextField("tradeContent", "Trade Content"),
+    portableTextField("planContent", "Plan Content"),
+    portableTextField("activateContent", "Activate Content"),
+    portableTextField("resultContent", "Result Content"),
+    portableTextField("testimonialContent", "Testimonial Content"),
   ],
   preview: {
     select: {
       title: "title",
       media: "videoPoster",
       subtitle: "description",
+      featured: "featured",
+    },
+    prepare({ title, media, subtitle, featured }) {
+      return {
+        title: featured ? `★ ${title}` : title,
+        subtitle,
+        media,
+      }
     },
   },
 })

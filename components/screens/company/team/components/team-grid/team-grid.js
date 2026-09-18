@@ -3,7 +3,7 @@ import { client } from "@/sanity/lib/client"
 import { teamGridQuery } from "@/sanity/lib/queries"
 
 // Components
-import Eyebrow from "@/components/content/eyebrow"
+import Eyebrow from "@/components/content/eyebrow/eyebrow"
 import TeamItem from "./components/team-item"
 
 // Styles

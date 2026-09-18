@@ -3,7 +3,7 @@ import { client } from "@/sanity/lib/client"
 import { relatedNewsQuery } from "@/sanity/lib/queries"
 
 // Components
-import Eyebrow from "@/components/content/eyebrow"
+import Eyebrow from "@/components/content/eyebrow/eyebrow"
 import NewsItem from "@/components/screens/news/components/news-item"
 
 // Styles

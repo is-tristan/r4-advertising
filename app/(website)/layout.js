@@ -6,7 +6,8 @@ import { ReactLenis } from "lenis/react"
 import "lenis/dist/lenis.css"
 
 // Components
-import Header from "@/components/layouts/header/header"
+import Header from "@/components/navigation/header/header"
+import Footer from "@/components/navigation/footer/footer"
 import LenisScrollToTop from "@/components/handlers/lenis-scroll-to-top"
 
 export default function WebsiteLayout({ children }) {
@@ -19,11 +20,13 @@ export default function WebsiteLayout({ children }) {
 
         <Header />
 
-        <main id="appContent" className="appContent" aria-label="Main content">
+        <main id="appContent" className="appContent" aria-label="Main content" role="main">
 
           {children}
 
         </main>
+
+        <Footer />
 
       </div>
 

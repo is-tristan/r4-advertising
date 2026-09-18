@@ -3,7 +3,7 @@ import { client } from "@/sanity/lib/client"
 import { careersGridQuery } from "@/sanity/lib/queries"
 
 // Components
-import Eyebrow from "@/components/content/eyebrow"
+import Eyebrow from "@/components/content/eyebrow/eyebrow"
 import CareerItem from "./components/career-item"
 
 // Styles

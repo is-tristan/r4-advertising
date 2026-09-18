@@ -5,7 +5,7 @@ import { useRef } from "react";
 import { motion, useInView } from "motion/react";
 
 // Components
-import Eyebrow from "@/components/content/eyebrow";
+import Eyebrow from "@/components/content/eyebrow/eyebrow";
 
 // Styles
 import styles from "../styles/disciplines.module.scss";

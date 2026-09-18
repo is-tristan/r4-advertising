@@ -7,11 +7,12 @@ import { workCarouselQuery } from "@/sanity/lib/queries";
 
 // Components
 import WorkCarousel from "./components/work-carousel";
+import Spinner from "@/components/decoration/spinner/spinner";
 
 export default async function WorkCarouselSection() {
 
     const works = await client.fetch(workCarouselQuery, {}, {
-        next: { revalidate: 30 },
+        next: { revalidate: 1 },
     });
 
     return (
@@ -19,6 +20,8 @@ export default async function WorkCarouselSection() {
         <section className={`row bgDark ${styles.workCarouselSection}`}>
 
             <WorkCarousel works={works} />
+
+            <Spinner className={`bannerSpinner`} />
 
         </section>
 
