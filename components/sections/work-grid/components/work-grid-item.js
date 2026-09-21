@@ -27,7 +27,7 @@ export default function WorkGridItem({
 
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, amount: 0.15 });
-    const imageUrl = getSanityImageUrl(item.image, "videoPoster");
+    const imageUrl = getSanityImageUrl(item.image, "workGrid");
     const href = item.slug ? `/work/${item.slug}` : "/work";
 
     return (

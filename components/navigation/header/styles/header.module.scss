@@ -60,7 +60,8 @@
     }
 
     .logoImage {
-        width: auto;
+        display: flex;
+        width: max-content;
         height: 100%;
 
         svg {

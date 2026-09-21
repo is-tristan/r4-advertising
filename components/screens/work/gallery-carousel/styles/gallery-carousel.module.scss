@@ -1,0 +1,63 @@
+.galleryCarouselContainer {
+    max-width: 100%;
+}
+
+.galleryCarousel {
+    margin-top: 1.5rem;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--borderRadius);
+    border: 1px solid var(--border);
+
+    @media (width >=768px) {
+        margin-top: 2rem;
+    }
+
+    @media (width >=1024px) {
+        margin-top: 3rem;
+    }
+
+    .galleryCarouselSlide {
+        aspect-ratio: 16 / 9;
+        width: 100%;
+        overflow: hidden;
+
+        @media (height >=980px) {
+            max-height: calc(90dvh - 10rem);
+        }
+    }
+
+    .galleryPagination {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        gap: 0.5rem;
+        position: absolute;
+        z-index: 10;
+        bottom: 7.5%;
+        right: 0;
+        left: 0;
+        margin: 0 auto;
+
+        button {
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background: rgba(var(--lightRgb), 0.05);
+            border: 2px solid var(--light);
+            cursor: pointer;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background-color: var(--primary);
+            }
+
+            &:global(.is-active) {
+                background: var(--light);
+                border: 2px solid var(--light);
+            }
+        }
+    }
+
+}

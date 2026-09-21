@@ -1,13 +1,17 @@
 // Sanity
 import { client } from "@/sanity/lib/client";
-import { workGridQuery, workCategoriesQuery } from "@/sanity/lib/queries";
+import {
+    workGridQuery,
+    workGridCountQuery,
+    workCategoriesQuery,
+} from "@/sanity/lib/queries";
 
 // Components
 import Text from "@/components/content/text/text";
 import Eyebrow from "@/components/content/eyebrow/eyebrow";
 import Button from "@/components/handlers/button";
 import WorkGridItem from "./components/work-grid-item";
-import WorkGridItemNav from "./components/work-grid-item-nav";
+import WorkGridList from "./components/work-grid-list";
 
 // Styles
 import styles from "./styles/work-grid.module.scss";
@@ -16,11 +20,14 @@ export default async function WorkGrid({
     titleContainerClass = undefined,
     workGridContainerClass = undefined,
     hasNav = false,
-    hasHeading = false,
-    hasButton = false
+    hasTitle = false,
+    hasButton = false,
+    hasPagination = false,
 }) {
 
-    const [items, categories] = await Promise.all([
+    const isInteractive = hasNav || hasPagination;
+
+    const [items, categories, total] = await Promise.all([
         client.fetch(workGridQuery, {}, {
             next: { revalidate: 1 },
         }),
@@ -29,6 +36,11 @@ export default async function WorkGrid({
                 next: { revalidate: 1 },
             })
             : Promise.resolve([]),
+        hasPagination
+            ? client.fetch(workGridCountQuery, { categoryId: "" }, {
+                next: { revalidate: 1 },
+            })
+            : Promise.resolve(0),
     ]);
 
     if (!items?.length) {
@@ -45,7 +57,7 @@ export default async function WorkGrid({
 
             <div className={`container noPaddingBottom ${styles.workGridTitleContainer} ${titleContainerClass}`}>
 
-                {hasHeading ? (
+                {hasTitle ? (
 
                     <Text
                         eyebrow={{
@@ -53,46 +65,63 @@ export default async function WorkGrid({
                             text: "Our Work",
                         }}
                         title={"Case studies from campaigns that moved the needle"}
-                        descriptionClass={"A selection of work across sectors — each with its own brief, challenge, and outcome."}
+                        titleTag="h1"
+                        titleClass={"sectionTitle"}
+                        description={"<p class='large'>A selection of work across sectors — each with its own brief, challenge, and outcome.</p>"}
                     />
 
                 ) : (
+
                     <Eyebrow
                         number={"03"}
                         text={"Featured Work"}
                         type={"heading"}
                     />
+
                 )}
 
             </div>
 
-            <div className={`container noPaddingTop ${hasButton ? "noPaddingBottom" : undefined} gapMd ${styles.workGridContainer} ${workGridContainerClass}`}>
+            {isInteractive ? (
 
-                {hasNav && categories?.length > 0 && (
+                <WorkGridList
+                    initialItems={items}
+                    initialTotal={total}
+                    categories={categories}
+                    hasNav={hasNav}
+                    hasPagination={hasPagination}
+                    workGridContainerClass={workGridContainerClass}
+                />
 
-                    <WorkGridItemNav items={categories} />
+            ) : (
 
-                )}
+                <>
 
-                <div className={styles.workGridItems}>
+                    <div className={`container noPaddingTop ${hasButton ? "noPaddingBottom" : undefined} gapMd ${styles.workGridContainer} ${workGridContainerClass}`}>
 
-                    {items.map((item, index) => (
+                        <div className={styles.workGridItems}>
 
-                        <WorkGridItem key={item._id} item={item} index={index} />
+                            {items.map((item, index) => (
 
-                    ))}
+                                <WorkGridItem key={item._id} item={item} index={index} />
 
-                </div>
+                            ))}
 
-            </div>
+                        </div>
 
-            {hasButton && (
+                    </div>
 
-                <div className={`container centered noPaddingTop ${styles.workGridButtonContainer}`}>
+                    {hasButton && (
 
-                    <Button href="/work" text="View All Work" />
+                        <div className={`container centered noPaddingTop ${styles.workGridButtonContainer}`}>
 
-                </div>
+                            <Button href="/work" text="View All Work" />
+
+                        </div>
+
+                    )}
+
+                </>
 
             )}
 

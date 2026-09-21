@@ -29,8 +29,20 @@ export const sanityImagePresets = {
     width: 1024,
     aspectRatio: 16 / 9,
   },
+  workGrid: {
+    width: 1536,
+    aspectRatio: 1,
+  },
+  workGallery: {
+    width: 1920,
+    aspectRatio: 16 / 9,
+  },
   videoPoster: {
     width: 1920,
+    aspectRatio: 16 / 9,
+  },
+  contentVideoPoster: {
+    width: 1280,
     aspectRatio: 16 / 9,
   },
 }

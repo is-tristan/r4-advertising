@@ -1,5 +1,22 @@
 import { defineQuery } from "next-sanity"
 
+const imageFields = /* groq */ `
+  asset,
+  hotspot,
+  crop
+`
+
+const portableTextMediaExpansion = /* groq */ `
+  ...,
+  _type == "video" => {
+    ...,
+    "url": file.asset->url,
+    poster {
+      ${imageFields}
+    }
+  }
+`
+
 export const workCarouselQuery = defineQuery(`
   *[_type == "work" && featured == true] | order(orderRank) {
     _id,
@@ -12,24 +29,55 @@ export const workCarouselQuery = defineQuery(`
       "slug": slug.current
     },
     "video": video.asset->url,
-    videoPoster
-  }
-`)
-
-export const workGridQuery = defineQuery(`
-  *[_type == "work"] | order(orderRank) {
-    _id,
-    title,
-    "slug": slug.current,
-    "category": categories[0]->title,
-    "image": coalesce(gallery[0], videoPoster),
-    categories[]->{
-      _id,
-      title,
-      "slug": slug.current
+    videoPoster {
+      ${imageFields}
     }
   }
 `)
+
+export const featuredVideoQuery = defineQuery(`
+  *[_type == "work"] | order(orderRank)[0] {
+    _id,
+    "video": video.asset->url,
+    videoPoster {
+      ${imageFields}
+    }
+  }
+`)
+
+const workGridFields = /* groq */ `
+  _id,
+  title,
+  "slug": slug.current,
+  "category": categories[0]->title,
+  "image": coalesce(gallery[0], videoPoster) {
+    ${imageFields}
+  },
+  categories[]->{
+    _id,
+    title,
+    "slug": slug.current
+  }
+`
+
+export const workGridQuery = defineQuery(`
+  *[_type == "work"] | order(orderRank)[0...6] {
+    ${workGridFields}
+  }
+`)
+
+export const workGridCountQuery = defineQuery(`
+  count(*[_type == "work" && ($categoryId == "" || $categoryId in categories[]._ref)])
+`)
+
+export function workGridPageQuery(start, end) {
+  return defineQuery(`
+    *[_type == "work" && ($categoryId == "" || $categoryId in categories[]._ref)]
+    | order(orderRank)[${start}...${end}] {
+      ${workGridFields}
+    }
+  `)
+}
 
 export const workCategoriesQuery = defineQuery(`
   *[_type == "workCategory"] | order(title asc) {
@@ -39,13 +87,54 @@ export const workCategoriesQuery = defineQuery(`
   }
 `)
 
+export const workBySlugQuery = defineQuery(`
+  *[_type == "work" && slug.current == $slug][0] {
+    _id,
+    title,
+    "slug": slug.current,
+    description,
+    year,
+    featured,
+    categories[]->{
+      _id,
+      title,
+      "slug": slug.current
+    },
+    "video": video.asset->url,
+    videoPoster {
+      ${imageFields}
+    },
+    gallery[]{
+      _key,
+      ${imageFields}
+    },
+    tradeContent[]{
+      ${portableTextMediaExpansion}
+    },
+    planContent[]{
+      ${portableTextMediaExpansion}
+    },
+    activateContent[]{
+      ${portableTextMediaExpansion}
+    },
+    resultContent[]{
+      ${portableTextMediaExpansion}
+    },
+    testimonialContent[]{
+      ${portableTextMediaExpansion}
+    }
+  }
+`)
+
 export const teamGridQuery = defineQuery(`
   *[_type == "team"] | order(orderRank) {
     _id,
     name,
     "category": category->title,
     position,
-    image,
+    image {
+      ${imageFields}
+    },
     email,
     "linkedIn": linkedin
   }
@@ -56,7 +145,9 @@ export const careersGridQuery = defineQuery(`
     _id,
     title,
     "slug": slug.current,
-    image,
+    image {
+      ${imageFields}
+    },
     "category": category->title,
     location,
     "contractType": select(
@@ -77,7 +168,9 @@ export const careerBySlugQuery = defineQuery(`
     _id,
     title,
     "slug": slug.current,
-    image,
+    image {
+      ${imageFields}
+    },
     "category": category->title,
     location,
     "contractType": select(
@@ -107,7 +200,9 @@ export const newsGridQuery = defineQuery(`
     _id,
     title,
     "slug": slug.current,
-    image,
+    image {
+      ${imageFields}
+    },
     excerpt,
     "category": category->title,
     "author": author->name
@@ -119,20 +214,19 @@ export const newsBySlugQuery = defineQuery(`
     _id,
     title,
     "slug": slug.current,
-    image,
+    image {
+      ${imageFields}
+    },
     excerpt,
     "category": category->title,
     author->{
       name,
-      image
+      image {
+        ${imageFields}
+      }
     },
     content[]{
-      ...,
-      _type == "video" => {
-        ...,
-        "url": file.asset->url,
-        poster
-      }
+      ${portableTextMediaExpansion}
     }
   }
 `)
@@ -145,7 +239,9 @@ export const relatedNewsQuery = defineQuery(`
     _id,
     title,
     "slug": slug.current,
-    image,
+    image {
+      ${imageFields}
+    },
     excerpt,
     "category": category->title,
     "author": author->name

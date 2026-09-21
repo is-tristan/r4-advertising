@@ -34,6 +34,16 @@ export const work = (context) => defineType({
       rows: 4,
     }),
     defineField({
+      name: "year",
+      title: "Year",
+      type: "number",
+      validation: (rule) =>
+        rule
+          .integer()
+          .min(1900)
+          .max(2100),
+    }),
+    defineField({
       name: "featured",
       title: "Featured",
       type: "boolean",
@@ -94,12 +104,13 @@ export const work = (context) => defineType({
       title: "title",
       media: "videoPoster",
       subtitle: "description",
+      year: "year",
       featured: "featured",
     },
-    prepare({ title, media, subtitle, featured }) {
+    prepare({ title, media, subtitle, year, featured }) {
       return {
         title: featured ? `★ ${title}` : title,
-        subtitle,
+        subtitle: [year, subtitle].filter(Boolean).join(" — "),
         media,
       }
     },

@@ -83,6 +83,18 @@
             width: 100%;
             height: max-content;
             margin: auto;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-100%);
+            transition: var(--ease);
+        }
+
+        &:hover {
+            .splide__arrows {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
         }
 
         .splide__arrow {

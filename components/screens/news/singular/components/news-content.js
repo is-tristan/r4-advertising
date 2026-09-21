@@ -29,7 +29,7 @@ const portableTextComponents = {
 
             }
 
-            const posterUrl = getSanityImageUrl(value.poster, "videoPoster");
+            const posterUrl = getSanityImageUrl(value.poster, "contentVideoPoster");
 
             return (
 

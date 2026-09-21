@@ -1,0 +1,20 @@
+.contentSection {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1.5rem;
+    padding: 2rem 0;
+
+    @media (width >=768px) {
+        gap: 2rem;
+        padding: 2.5rem 0;
+    }
+
+    @media (width >=1024px) {
+        gap: 3rem;
+        padding: 3rem 0;
+    }
+
+    :global(.contentInner) {
+        padding-top: 0;
+    }
+}

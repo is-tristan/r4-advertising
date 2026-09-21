@@ -37,7 +37,7 @@ export default function ContactTopSection({
                 <Heading
                     eyebrow={eyebrow}
                     title={title}
-                    titleClass="smallHeading"
+                    titleClass="smallTitle"
                     titleTag="h1"
                     description={description}
                     seperatorType={"centered"}

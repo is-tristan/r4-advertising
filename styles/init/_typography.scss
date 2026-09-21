@@ -22,13 +22,17 @@ h6 {
 }
 
 
-.bigHeading h2,
-h1 {
+h1,
+.bigHeading h2 {
     font-size: clamp(3.75rem, 7.5dvw, 7.5rem);
+
+    &.sectionTitle {
+        font-size: clamp(2.33rem, 6.5dvw, 6.5rem);
+    }
 }
 
-.smallHeading h1,
-h2 {
+h2,
+.smallTitle h1 {
     font-size: clamp(2.33rem, 3.5dvw, 3.5rem);
 
     &.sectionTitle {
@@ -110,24 +114,38 @@ em {
 }
 
 
-ul:not(.splide__list) {
+ul:not(.splide__list):not(.splide__pagination) {
     display: flex;
     flex-flow: column nowrap;
     gap: 0.75rem;
     padding: 0 0 1rem 1.5rem;
     list-style: square;
+    position: relative;
 
-    @media (width < 1024px) {
-        align-items: center;
-    }
-
-    @media (width >=1280px) {
+    @media (width >=1024px) {
         padding: 0.5rem 0 1.5rem 2.5rem;
     }
 
     li {
         &::marker {
             color: var(--primary);
+        }
+    }
+
+    &.contentList {
+        color: var(--light);
+        padding: 0.5rem 0 0.5rem 2.5rem;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: var(--primary);
+            opacity: 0.75;
+            z-index: -1;
         }
     }
 }

@@ -1,5 +1,65 @@
 @use "@/styles/init/mixins" as *;
 
+.workGridItemNav {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 0.5rem;
+    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    overflow-x: auto;
+
+    @media (width >=768px) {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+
+    @media (width >=1024px) {
+        flex-flow: row wrap;
+        gap: 0.875rem;
+        padding-top: 3rem;
+        padding-bottom: 1.5rem;
+        overflow: hidden;
+    }
+
+    button {
+        all: unset;
+        width: max-content;
+
+        .workGridItemButton {
+            @include btn();
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--textLight);
+            width: max-content;
+
+            &:hover {
+                color: var(--light);
+                border-color: var(--primary);
+            }
+
+        }
+
+        &:hover .workGridItemButton {
+            color: var(--light);
+            border-color: var(--primary);
+        }
+
+        &[data-active="true"] .workGridItemButton {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+    }
+}
+
+.workGridEmpty {
+    width: 100%;
+    margin: 0;
+    padding: 2rem 0;
+    color: var(--textLight);
+    font-size: clamp(1.125rem, 1.5vw, 1.25rem);
+}
+
 .workGridItems {
     display: flex;
     flex-flow: column nowrap;
@@ -10,14 +70,16 @@
         flex-flow: row wrap;
         justify-content: space-between;
         gap: 2rem;
+        min-height: 75dvh;
 
         >article {
             flex: 0 0 calc(50% - 1rem);
         }
     }
-    
+
     @media (width >=1024px) {
         gap: 3rem;
+        min-height: 100vh;
 
         >article {
             flex: 0 0 calc(50% - 1.5rem);

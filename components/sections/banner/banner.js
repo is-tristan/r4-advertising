@@ -8,6 +8,7 @@ export default function Banner({
     sectionClass,
     containerClass,
     eyebrow = "Lorem Ipsum",
+    eyebrowNumber = "01",
     title = "Lorem Ipsum dolor sit amet",
     description = "Lorem Ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 }) {
@@ -21,7 +22,7 @@ export default function Banner({
                 <div className={`content ${styles.bannerContent}`}>
 
                     <Text
-                        eyebrow={{ text: eyebrow }}
+                        eyebrow={{ text: eyebrow, number: eyebrowNumber }}
                         titleTag="h1"
                         title={title}
                         description={description}
