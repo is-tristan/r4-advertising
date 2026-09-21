@@ -1,8 +1,17 @@
+// SEO
+import { buildPageMetadata } from "@/lib/seo"
+
 // Components
 import Content from "@/components/sections/content/content";
 import OurModel from "@/components/screens/company/about/our-model/our-model-section";
 import CtaSection from "@/components/sections/cta/cta-section";
 import FaqsSection from "@/components/sections/faqs/faqs-section";
+
+export const metadata = buildPageMetadata({
+    title: "Services",
+    description: "Trade. Plan. Activate. Three connected disciplines designed to operate together — giving clients control over margins, clarity in decision-making, and outcomes that stand up to scrutiny.",
+    path: "/services",
+})
 
 export default function ServicesPage() {
 

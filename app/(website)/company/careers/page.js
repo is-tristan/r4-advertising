@@ -1,8 +1,17 @@
+// SEO
+import { buildPageMetadata } from "@/lib/seo"
+
 // Components
 import Banner from "@/components/sections/banner/banner"
 import CareersGrid from "@/components/screens/company/careers/careers-grid"
 import CtaSection from "@/components/sections/cta/cta-section"
 import DisciplinesSection from "@/components/sections/disciplines/disciplines-section"
+
+export const metadata = buildPageMetadata({
+    title: "Careers",
+    description: "Join a team that values creativity, strategy, and results. We're always looking for talented people who share our passion for creating impactful media experiences.",
+    path: "/company/careers",
+})
 
 export default function CareersPage() {
 

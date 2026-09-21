@@ -182,7 +182,8 @@ export const careerBySlugQuery = defineQuery(`
       contractType
     ),
     salary,
-    content
+    content,
+    "description": array::join(string::split(pt::text(content), "")[0...160], "")
   }
 `)
 
@@ -191,7 +192,8 @@ export const legalBySlugQuery = defineQuery(`
     _id,
     title,
     "slug": slug.current,
-    content
+    content,
+    "description": array::join(string::split(pt::text(content), "")[0...160], "")
   }
 `)
 
@@ -245,5 +247,26 @@ export const relatedNewsQuery = defineQuery(`
     excerpt,
     "category": category->title,
     "author": author->name
+  }
+`)
+
+export const sitemapQuery = defineQuery(`
+  {
+    "work": *[_type == "work" && defined(slug.current)] | order(orderRank) {
+      "slug": slug.current,
+      _updatedAt
+    },
+    "news": *[_type == "news" && defined(slug.current)] | order(orderRank) {
+      "slug": slug.current,
+      _updatedAt
+    },
+    "careers": *[_type == "career" && defined(slug.current)] | order(orderRank) {
+      "slug": slug.current,
+      _updatedAt
+    },
+    "legal": *[_type == "legal" && defined(slug.current)] | order(title asc) {
+      "slug": slug.current,
+      _updatedAt
+    }
   }
 `)

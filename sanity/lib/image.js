@@ -45,6 +45,10 @@ export const sanityImagePresets = {
     width: 1280,
     aspectRatio: 16 / 9,
   },
+  openGraph: {
+    width: 1200,
+    aspectRatio: 1200 / 630,
+  },
 }
 
 export function getSanityImageUrl(source, preset) {

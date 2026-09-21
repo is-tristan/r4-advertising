@@ -9,7 +9,10 @@
         inset: 0;
         margin: auto;
         padding: 1rem;
-        animation: spin 15s linear infinite;
+
+        @media (width >=1024px) {
+            animation: spin 15s linear infinite;
+        }
 
         @keyframes spin {
             from {

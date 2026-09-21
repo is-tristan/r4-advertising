@@ -1,5 +1,9 @@
 "use client";
 
+// Imports
+import { useEffect, useRef } from "react";
+import { useInView } from "motion/react";
+
 // Splide
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css/core";
@@ -34,7 +38,45 @@ function pauseSlideVideo(splide, slide) {
     video.pause();
 }
 
+function pauseAllVideos(root) {
+    root?.querySelectorAll("video").forEach((video) => {
+        video.pause();
+    });
+}
+
+function playActiveVideo(root) {
+    const activeVideo = root?.querySelector(".splide__slide.is-active video")
+        || root?.querySelector("video");
+
+    if (!activeVideo) {
+        return;
+    }
+
+    activeVideo.play().catch(() => { });
+}
+
 export default function WorkCarousel({ works = [] }) {
+
+    const containerRef = useRef(null);
+    const isVisibleRef = useRef(false);
+    const isInView = useInView(containerRef, { amount: 0.25 });
+
+    useEffect(() => {
+
+        isVisibleRef.current = isInView;
+
+        if (!containerRef.current) {
+            return;
+        }
+
+        if (isInView) {
+            playActiveVideo(containerRef.current);
+            return;
+        }
+
+        pauseAllVideos(containerRef.current);
+
+    }, [isInView]);
 
     if (!works.length) {
         return null;
@@ -42,45 +84,58 @@ export default function WorkCarousel({ works = [] }) {
 
     return (
 
-        <Splide
-            className={`${styles.workCarousel} hasPagination hasArrows`}
-            options={{
-                type: "slide",
-                perPage: 1,
-                perMove: 1,
-                gap: "0",
-                pagination: true,
-                arrows: true,
-                rewind: true,
-                breakpoints: {
-                    1023: {
-                        arrows: false,
+        <div ref={containerRef}>
+
+            <Splide
+                className={`${styles.workCarousel} hasPagination hasArrows`}
+                options={{
+                    type: "slide",
+                    perPage: 1,
+                    perMove: 1,
+                    gap: "0",
+                    pagination: true,
+                    arrows: true,
+                    rewind: true,
+                    breakpoints: {
+                        1023: {
+                            arrows: false,
+                        }
                     }
-                }
-            }}
-            onActive={playSlideVideo}
-            onInactive={pauseSlideVideo}
-        >
+                }}
+                onActive={(splide, slide) => {
 
-            {works.map((work, index) => (
+                    if (!isVisibleRef.current) {
+                        pauseSlideVideo(splide, slide);
+                        return;
+                    }
 
-                <SplideSlide key={work._id}>
+                    playSlideVideo(splide, slide);
 
-                    <WorkCarouselItem
-                        index={index}
-                        title={work.title}
-                        description={work.description}
-                        categories={work.categories}
-                        video={work.video}
-                        videoPoster={work.videoPoster}
-                        workHref={work.slug ? `/work/${work.slug}` : "/work"}
-                    />
+                }}
+                onInactive={pauseSlideVideo}
+            >
 
-                </SplideSlide>
+                {works.map((work, index) => (
 
-            ))}
+                    <SplideSlide key={work._id}>
 
-        </Splide>
+                        <WorkCarouselItem
+                            index={index}
+                            title={work.title}
+                            description={work.description}
+                            categories={work.categories}
+                            video={work.video}
+                            videoPoster={work.videoPoster}
+                            workHref={work.slug ? `/work/${work.slug}` : "/work"}
+                        />
+
+                    </SplideSlide>
+
+                ))}
+
+            </Splide>
+
+        </div>
 
     )
 

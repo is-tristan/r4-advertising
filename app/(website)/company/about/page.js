@@ -1,8 +1,17 @@
+// SEO
+import { buildPageMetadata } from "@/lib/seo"
+
 // Components
 import Banner from "@/components/sections/banner/banner";
 import Content from "@/components/sections/content/content";
 import OurModel from "@/components/screens/company/about/our-model/our-model-section";
 import CtaSection from "@/components/sections/cta/cta-section";
+
+export const metadata = buildPageMetadata({
+    title: "About",
+    description: "R4 is a media trading, planning and activation agency built around how media actually works in the real world.",
+    path: "/company/about",
+})
 
 export default function AboutPage() {
 

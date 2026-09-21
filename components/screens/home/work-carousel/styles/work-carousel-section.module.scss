@@ -9,9 +9,13 @@
         right: 0;
         left: 0;
         width: 100%;
-        height: var(--headerHeight);
+        height: var(--mobileHeaderHeight);
         background: linear-gradient(to bottom, var(--dark), transparent);
         backdrop-filter: blur(0.25rem);
+
+        @media (width >=1024px) {
+            height: var(--headerHeight);
+        }
     }
 
     ul,
@@ -28,12 +32,15 @@
     align-items: flex-end;
     position: relative;
     width: 100%;
+    min-height: calc(100dvh - var(--mobileHeaderHeight));
 
     @media (width >=1024px) {
         height: calc(100dvh - 10rem);
     }
 
     .workCarouselItemContent {
+        padding-bottom: 3rem;
+
         @media (width >=1024px) {
             p {
                 max-width: 80ch;

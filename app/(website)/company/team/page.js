@@ -1,8 +1,17 @@
+// SEO
+import { buildPageMetadata } from "@/lib/seo"
+
 // Components
 import Banner from "@/components/sections/banner/banner"
 import CtaSection from "@/components/sections/cta/cta-section"
 import TeamGrid from "@/components/screens/company/team/components/team-grid/team-grid"
 import DisciplinesSection from "@/components/sections/disciplines/disciplines-section"
+
+export const metadata = buildPageMetadata({
+    title: "Team",
+    description: "A collective of strategists, traders, and creatives united by a shared passion for delivering exceptional media experiences.",
+    path: "/company/team",
+})
 
 export default function TeamPage() {
 

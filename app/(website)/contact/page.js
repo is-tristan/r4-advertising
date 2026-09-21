@@ -1,6 +1,15 @@
+// SEO
+import { buildPageMetadata } from "@/lib/seo"
+
 // Components
 import Text from "@/components/content/text/text";
 import FormClient from "@/components/handlers/forms/form-client";
+
+export const metadata = buildPageMetadata({
+    title: "Contact",
+    description: "Have a campaign, a media budget, or want to understand what your media could be doing differently? Get in touch with R4.",
+    path: "/contact",
+})
 
 export default function ContactPage() {
 

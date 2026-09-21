@@ -28,6 +28,10 @@
             animation-duration: 30s;
         }
 
+        &[data-paused="true"] {
+            animation-play-state: paused;
+        }
+
         @keyframes companyCarouselTrack {
             0% {
                 transform: translateX(0) translateZ(0);

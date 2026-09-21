@@ -1,6 +1,9 @@
 // Fonts
 import localFont from "next/font/local"
 
+// SEO
+import { siteDescription, siteName, getSiteUrl } from "@/lib/seo"
+
 const acidGrotesk = localFont({
   display: "swap",
   variable: "--font-acid-grotesk",
@@ -41,6 +44,27 @@ const corporateABq = localFont({
     },
   ],
 })
+
+export const metadata = {
+  metadataBase: new URL(getSiteUrl()),
+  title: {
+    default: siteName,
+    template: `%s | ${siteName}`,
+  },
+  description: siteDescription,
+  applicationName: siteName,
+  openGraph: {
+    type: "website",
+    siteName,
+    title: siteName,
+    description: siteDescription,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteName,
+    description: siteDescription,
+  },
+}
 
 export default function RootLayout({ children }) {
 

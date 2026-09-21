@@ -38,9 +38,9 @@ export default function Spinner({
             transition={{ duration: 0.5, delay: 0.33, ease: "easeOut" }}
         >
 
-            <Image src={background} alt="" width={256} height={256} className={styles.spinnerBackground} />
+            <Image src={background} alt="" width={256} height={256} loading="lazy" className={styles.spinnerBackground} />
 
-            <Image src={text} alt="" width={256} height={256} className={styles.spinnerText} />
+            <Image src={text} alt="" width={256} height={256} loading="lazy" className={styles.spinnerText} />
 
         </MotionLink>
 

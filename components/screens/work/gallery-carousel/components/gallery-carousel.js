@@ -1,7 +1,7 @@
 "use client";
 
 // Imports
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { motion, useInView } from "motion/react";
 
 // Next
@@ -41,6 +41,23 @@ function pauseSlideVideo(splide, slide) {
     video.pause();
 }
 
+function pauseAllVideos(root) {
+    root?.querySelectorAll("video").forEach((video) => {
+        video.pause();
+    });
+}
+
+function playActiveVideo(root) {
+    const activeVideo = root?.querySelector(".splide__slide.is-active video")
+        || root?.querySelector("video");
+
+    if (!activeVideo) {
+        return;
+    }
+
+    activeVideo.play().catch(() => { });
+}
+
 export default function GalleryCarousel({
     video,
     videoPoster,
@@ -48,7 +65,9 @@ export default function GalleryCarousel({
 }) {
 
     const ref = useRef(null);
+    const isVisibleRef = useRef(false);
     const isInView = useInView(ref, { once: true, amount: 0.15 });
+    const isVisible = useInView(ref, { amount: 0.25 });
     const posterUrl = getSanityImageUrl(videoPoster, "videoPoster");
 
     const gallerySlides = (gallery ?? [])
@@ -78,6 +97,23 @@ export default function GalleryCarousel({
             : []),
         ...gallerySlides,
     ];
+
+    useEffect(() => {
+
+        isVisibleRef.current = isVisible;
+
+        if (!ref.current) {
+            return;
+        }
+
+        if (isVisible) {
+            playActiveVideo(ref.current);
+            return;
+        }
+
+        pauseAllVideos(ref.current);
+
+    }, [isVisible]);
 
     if (!slides.length) {
         return null;
@@ -112,7 +148,16 @@ export default function GalleryCarousel({
                         }
                     }
                 }}
-                onActive={playSlideVideo}
+                onActive={(splide, slide) => {
+
+                    if (!isVisibleRef.current) {
+                        pauseSlideVideo(splide, slide);
+                        return;
+                    }
+
+                    playSlideVideo(splide, slide);
+
+                }}
                 onInactive={pauseSlideVideo}
             >
 
@@ -129,6 +174,7 @@ export default function GalleryCarousel({
                                 loop
                                 playsInline
                                 controls
+                                preload="metadata"
                                 style={{
                                     width: "100%",
                                     height: "100%",
@@ -144,6 +190,7 @@ export default function GalleryCarousel({
                                 alt={`Gallery image ${index + 1}`}
                                 fill
                                 sizes="100%"
+                                loading="lazy"
                                 style={{
                                     width: "100%",
                                     height: "100%",

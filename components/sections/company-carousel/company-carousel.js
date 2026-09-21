@@ -1,6 +1,7 @@
 "use client";
 
 import { Fragment, useEffect, useRef, useState } from "react";
+import { useInView } from "motion/react";
 
 // Styles
 import styles from "./styles/company-carousel.module.scss";
@@ -13,7 +14,9 @@ import { brandMark } from "@/utils/icons";
 
 export default function CompanyCarousel() {
 
+    const sectionRef = useRef(null);
     const trackRef = useRef(null);
+    const isInView = useInView(sectionRef, { amount: 0.2 });
 
     const [trackWidth, setTrackWidth] = useState(0);
 
@@ -49,11 +52,12 @@ export default function CompanyCarousel() {
 
     return (
 
-        <section className={`${styles.companyCarousel}`}>
+        <section ref={sectionRef} className={`${styles.companyCarousel}`}>
 
             <div
                 ref={trackRef}
                 className={`${styles.companyCarouselTrack}`}
+                data-paused={!isInView}
                 style={{
                     minWidth: trackWidth ? `${trackWidth}px` : undefined,
                     "--companyCarouselTrackWidth": trackWidth ? `${trackWidth}px` : undefined
