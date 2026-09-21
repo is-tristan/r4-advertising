@@ -31,7 +31,7 @@ export default function LegalContent({
 }) {
 
     const ref = useRef(null);
-    const isInView = useInView(ref, { once: true, amount: 0.1 });
+    const isInView = useInView(ref, { once: true, amount: 0.05 });
 
     if (!content?.length) {
 
