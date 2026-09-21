@@ -1,5 +1,6 @@
 import { career } from "./career"
 import { careerCategory } from "./careerCategory"
+import { legal } from "./legal"
 import { news } from "./news"
 import { newsAuthor } from "./newsAuthor"
 import { newsCategory } from "./newsCategory"
@@ -18,4 +19,5 @@ export const schemaTypes = (context) => [
   news(context),
   newsCategory,
   newsAuthor,
+  legal,
 ]

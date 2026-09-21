@@ -93,6 +93,15 @@ export const careerBySlugQuery = defineQuery(`
   }
 `)
 
+export const legalBySlugQuery = defineQuery(`
+  *[_type == "legal" && slug.current == $slug][0] {
+    _id,
+    title,
+    "slug": slug.current,
+    content
+  }
+`)
+
 export const newsGridQuery = defineQuery(`
   *[_type == "news"] | order(orderRank) {
     _id,

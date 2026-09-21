@@ -65,4 +65,5 @@ export const structure = (S, context) =>
               S.documentTypeListItem("newsAuthor").title("Authors"),
             ])
         ),
+      S.documentTypeListItem("legal").title("Legal"),
     ])
