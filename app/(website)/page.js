@@ -55,7 +55,7 @@ export default function Home() {
         description="<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
         btnTextPrimary="Calculate your Discount"
         btnLinkPrimary="#"
-        hasSpinner={true}
+        hasSpinner={false}
       />
 
     </>
