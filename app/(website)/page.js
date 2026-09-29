@@ -43,7 +43,7 @@ export default function Home() {
         containerClassName={`noPaddingTop`}
         eyebrowNumber={null}
         eyebrowText={null}
-        title="Ready to be our next case study? <small class='colorPrimary'>Send us your brief.</small>"
+        title="Ready to be our next case study?"
         titleClass={`sectionTitle`}
       />
 

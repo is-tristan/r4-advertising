@@ -48,7 +48,7 @@
     justify-content: flex-start;
     height: 1.75rem;
     position: relative;
-    color: var(--primary);
+    color: var(--light);
     transition: var(--ease);
 
     @media (width >=768px) {
@@ -71,7 +71,6 @@
     }
 
     &:hover {
-        opacity: 0.875;
         color: var(--primary);
     }
 

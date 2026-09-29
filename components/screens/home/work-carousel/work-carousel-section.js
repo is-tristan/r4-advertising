@@ -7,7 +7,7 @@ import { workCarouselQuery } from "@/sanity/lib/queries";
 
 // Components
 import WorkCarousel from "./components/work-carousel";
-import Spinner from "@/components/decoration/spinner/spinner";
+// import Spinner from "@/components/decoration/spinner/spinner";
 
 export default async function WorkCarouselSection() {
 
@@ -21,7 +21,7 @@ export default async function WorkCarouselSection() {
 
             <WorkCarousel works={works} />
 
-            <Spinner className={`bannerSpinner`} />
+            {/* <Spinner className={`bannerSpinner`} /> */}
 
         </section>
 

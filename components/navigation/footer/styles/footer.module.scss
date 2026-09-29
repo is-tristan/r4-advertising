@@ -1,8 +1,27 @@
+// Footer Decoration$
+$offset: 15dvw;
+$copyrightOffset: 7.5rem;
+
 .footer {
     gap: 2rem;
+    position: relative;
 
     @media (width >=768px) {
         gap: 3rem;
+    }
+
+    &::before {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        width: 7.5%;
+        background: linear-gradient(to right, transparent, var(--dark));
+
+        @media (width >=1024px) {
+            content: '';
+        }
     }
 }
 
@@ -21,6 +40,27 @@
     display: flex;
     flex-flow: column nowrap;
     gap: 2rem;
+    position: relative;
+
+    >div {
+        position: relative;
+        z-index: 1;
+    }
+
+    &::before {
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        right: -25%;
+        bottom: 0;
+        height: calc(100% + 7.5rem);
+        width: 50%;
+        background: linear-gradient(to right, var(--dark), transparent);
+
+        @media (width >=1024px) {
+            content: '';
+        }
+    }
 
     @media (width >=768px) {
         gap: 3rem;
@@ -106,9 +146,9 @@
     gap: 1rem;
     width: 100%;
 
-    @media (width > 45rem) {
+    @media (width > 37.5rem) {
         gap: 2rem;
-        max-width: 45rem;
+        max-width: 37.5rem;
     }
 
     .contactItem {
@@ -161,6 +201,7 @@
 
         .contactItemAddress {
             line-height: 125%;
+            max-width: 11rem;
         }
 
         .contactItemPhone {
@@ -169,18 +210,22 @@
     }
 }
 
-// Footer Decoration$
-$offset: 15dvw;
-$copyrightOffset: 7.5rem;
-
 .footerDecoration {
     display: none;
     position: absolute;
     z-index: -1;
     right: -$offset;
     bottom: $copyrightOffset;
-    width: 50%;
+    width: calc(45% + 1rem);
     height: auto;
+
+    @media (width >=1400px) {
+        width: calc(50% + 1rem);
+    }
+
+    @media (width >=1920px) {
+        width: 47.5%;
+    }
 
     svg {
         width: 100%;
@@ -190,23 +235,14 @@ $copyrightOffset: 7.5rem;
     @media (width >=1024px) {
         display: block;
     }
-
-    &::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: $offset;
-        bottom: 0;
-        height: 100%;
-        width: 25%;
-        background: linear-gradient(to right, transparent, var(--dark));
-    }
 }
 
 // Footer Container
 .footerCopyRightContainer {
     padding-top: 2rem;
     padding-bottom: 2rem;
+    position: relative;
+    z-index: 1;
 
     @media (width >=1024px) {
         padding-top: 0;
