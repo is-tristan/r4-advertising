@@ -71,18 +71,35 @@ export default function GalleryCarousel({
     const posterUrl = getSanityImageUrl(videoPoster, "videoPoster");
 
     const gallerySlides = (gallery ?? [])
-        .map((image, index) => {
-            const imageUrl = getSanityImageUrl(image, "workGallery");
+        .map((item, index) => {
+
+            if (item?._type === "file") {
+
+                if (!item.video) {
+                    return null;
+                }
+
+                return {
+                    key: item._key || `gallery-${index}`,
+                    type: "video",
+                    video: item.video,
+                    posterUrl: getSanityImageUrl(item.videoPoster, "videoPoster"),
+                };
+
+            }
+
+            const imageUrl = getSanityImageUrl(item, "workGallery");
 
             if (!imageUrl) {
                 return null;
             }
 
             return {
-                key: image?._key || `gallery-${index}`,
+                key: item?._key || `gallery-${index}`,
                 type: "image",
                 imageUrl,
             };
+
         })
         .filter(Boolean);
 

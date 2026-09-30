@@ -1,7 +1,26 @@
 import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list"
 import { defineArrayMember, defineField, defineType } from "sanity"
+import { ImageIcon } from "@sanity/icons/Image"
 import { PlayIcon } from "@sanity/icons/Play"
 import { portableTextField } from "./portableText"
+
+const contentSectionFields = (name, title, eyebrow, sectionTitle) => [
+  defineField({
+    name: `${name}Eyebrow`,
+    title: "Eyebrow",
+    type: "string",
+    fieldset: name,
+    initialValue: eyebrow,
+  }),
+  defineField({
+    name: `${name}Title`,
+    title: "Title",
+    type: "string",
+    fieldset: name,
+    initialValue: sectionTitle,
+  }),
+  portableTextField(`${name}Content`, `${title} Content`, name),
+]
 
 export const work = (context) => defineType({
   name: "work",
@@ -9,6 +28,12 @@ export const work = (context) => defineType({
   type: "document",
   icon: PlayIcon,
   orderings: [orderRankOrdering],
+  fieldsets: [
+    { name: "trade", title: "Section 1 / Trade", options: { collapsible: true } },
+    { name: "plan", title: "Section 2 / Plan", options: { collapsible: true } },
+    { name: "activate", title: "Section 3 / Activate", options: { collapsible: true } },
+    { name: "result", title: "Section 4 / Result", options: { collapsible: true } },
+  ],
   fields: [
     orderRankField({ type: "work", context }),
     defineField({
@@ -63,7 +88,7 @@ export const work = (context) => defineType({
     }),
     defineField({
       name: "video",
-      title: "Video",
+      title: "Featured Video",
       type: "file",
       options: {
         accept: "video/*",
@@ -71,7 +96,7 @@ export const work = (context) => defineType({
     }),
     defineField({
       name: "videoPoster",
-      title: "Video Poster",
+      title: "Featured Video Poster",
       type: "image",
       options: {
         hotspot: true,
@@ -84,8 +109,40 @@ export const work = (context) => defineType({
       of: [
         defineArrayMember({
           type: "image",
+          title: "Image",
+          icon: ImageIcon,
           options: {
             hotspot: true,
+          },
+        }),
+        defineArrayMember({
+          type: "file",
+          title: "Video",
+          icon: PlayIcon,
+          options: {
+            accept: "video/*",
+          },
+          fields: [
+            defineField({
+              name: "videoPoster",
+              title: "Video Poster",
+              type: "image",
+              options: {
+                hotspot: true,
+              },
+            }),
+          ],
+          preview: {
+            select: {
+              title: "asset.originalFilename",
+              media: "videoPoster",
+            },
+            prepare({ title, media }) {
+              return {
+                title: title || "Video",
+                media,
+              }
+            },
           },
         }),
       ],
@@ -93,10 +150,10 @@ export const work = (context) => defineType({
         layout: "grid",
       },
     }),
-    portableTextField("tradeContent", "Trade Content"),
-    portableTextField("planContent", "Plan Content"),
-    portableTextField("activateContent", "Activate Content"),
-    portableTextField("resultContent", "Result Content"),
+    ...contentSectionFields("trade", "Trade", "Negotiation & Value Creation", "Trade"),
+    ...contentSectionFields("plan", "Plan", "Strategic Media Planning", "Plan"),
+    ...contentSectionFields("activate", "Activate", "Campaign Execution", "Activate"),
+    ...contentSectionFields("result", "Result", "Measurable Outcomes", "Result"),
     portableTextField("testimonialContent", "Testimonial Content"),
   ],
   preview: {

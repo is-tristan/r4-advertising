@@ -28,8 +28,16 @@ export const workCarouselQuery = defineQuery(`
       title,
       "slug": slug.current
     },
-    "video": video.asset->url,
-    videoPoster {
+    "hasFeaturedVideo": defined(video.asset),
+    "video": coalesce(
+      video.asset->url,
+      select(gallery[0]._type == "file" => gallery[0].asset->url)
+    ),
+    "image": coalesce(
+      select(defined(video.asset) => videoPoster),
+      select(gallery[0]._type == "file" => gallery[0].videoPoster),
+      select(gallery[0]._type == "image" => gallery[0])
+    ) {
       ${imageFields}
     }
   }
@@ -50,7 +58,11 @@ const workGridFields = /* groq */ `
   title,
   "slug": slug.current,
   "category": categories[0]->title,
-  "image": coalesce(gallery[0], videoPoster) {
+  "image": coalesce(
+    gallery[_type == "image"][0],
+    gallery[_type == "file"][0].videoPoster,
+    videoPoster
+  ) {
     ${imageFields}
   },
   categories[]->{
@@ -106,17 +118,34 @@ export const workBySlugQuery = defineQuery(`
     },
     gallery[]{
       _key,
-      ${imageFields}
+      _type,
+      _type == "image" => {
+        ${imageFields}
+      },
+      _type == "file" => {
+        "video": asset->url,
+        videoPoster {
+          ${imageFields}
+        }
+      }
     },
+    tradeEyebrow,
+    tradeTitle,
     tradeContent[]{
       ${portableTextMediaExpansion}
     },
+    planEyebrow,
+    planTitle,
     planContent[]{
       ${portableTextMediaExpansion}
     },
+    activateEyebrow,
+    activateTitle,
     activateContent[]{
       ${portableTextMediaExpansion}
     },
+    resultEyebrow,
+    resultTitle,
     resultContent[]{
       ${portableTextMediaExpansion}
     },

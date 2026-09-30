@@ -124,8 +124,9 @@ export default function WorkCarousel({ works = [] }) {
                             title={work.title}
                             description={work.description}
                             categories={work.categories}
+                            hasFeaturedVideo={work.hasFeaturedVideo}
                             video={work.video}
-                            videoPoster={work.videoPoster}
+                            image={work.image}
                             workHref={work.slug ? `/work/${work.slug}` : "/work"}
                         />
 

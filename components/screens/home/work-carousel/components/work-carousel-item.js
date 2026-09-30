@@ -1,3 +1,6 @@
+// Next
+import { Image } from "next-sanity/image";
+
 // Components
 import Eyebrow from "@/components/content/eyebrow/eyebrow";
 import Text from "@/components/content/text/text";
@@ -15,16 +18,20 @@ export default function WorkCarouselItem({
     title,
     description,
     categories = [],
+    hasFeaturedVideo = false,
     video,
-    videoPoster,
+    image,
     workHref = "/work",
 }) {
 
-    const posterUrl = getSanityImageUrl(videoPoster, "videoPoster");
+    const imageUrl = getSanityImageUrl(image, "videoPoster");
 
     return (
 
-        <div className={styles.workCarouselItem}>
+        <div
+            className={styles.workCarouselItem}
+            data-has-featured-video={hasFeaturedVideo ? "true" : "false"}
+        >
 
             <div className={`container`}>
 
@@ -63,18 +70,33 @@ export default function WorkCarouselItem({
 
             </div>
 
-            {video && (
+            {(video || imageUrl) && (
 
                 <div className={styles.workCarouselItemVideo}>
 
-                    <video
-                        src={video}
-                        poster={posterUrl || undefined}
-                        muted
-                        loop
-                        playsInline
-                        preload={index === 0 ? "metadata" : "none"}
-                    />
+                    {video ? (
+
+                        <video
+                            src={video}
+                            poster={imageUrl || undefined}
+                            muted
+                            loop
+                            playsInline
+                            preload={index === 0 ? "metadata" : "none"}
+                        />
+
+                    ) : (
+
+                        <Image
+                            src={imageUrl}
+                            alt={title}
+                            fill
+                            sizes="100vw"
+                            priority={index === 0}
+                            style={{ objectFit: "cover" }}
+                        />
+
+                    )}
 
                 </div>
 

@@ -50,10 +50,11 @@ export const portableTextMembers = [
   contentVideoMember,
 ]
 
-export const portableTextField = (name, title) =>
+export const portableTextField = (name, title, fieldset) =>
   defineField({
     name,
     title,
     type: "array",
     of: portableTextMembers,
+    ...(fieldset ? { fieldset } : {}),
   })

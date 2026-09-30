@@ -9,29 +9,41 @@ const contentBlocks = [
         key: "trade",
         id: "tradeContent",
         contentKey: "tradeContent",
-        eyebrow: { text: "Negotiation & Value Creation", number: null },
-        title: "<span class='colorPrimary'>1.</span> Trade",
+        eyebrowKey: "tradeEyebrow",
+        titleKey: "tradeTitle",
+        number: "1.",
+        eyebrow: "Negotiation & Value Creation",
+        title: "Trade",
     },
     {
         key: "plan",
         id: "planContent",
         contentKey: "planContent",
-        eyebrow: { text: "Strategic Media Planning", number: null },
-        title: "<span class='colorPrimary'>2.</span> Plan",
+        eyebrowKey: "planEyebrow",
+        titleKey: "planTitle",
+        number: "2.",
+        eyebrow: "Strategic Media Planning",
+        title: "Plan",
     },
     {
         key: "activate",
         id: "activateContent",
         contentKey: "activateContent",
-        eyebrow: { text: "Campaign Execution", number: null },
-        title: "<span class='colorPrimary'>3.</span> Activate",
+        eyebrowKey: "activateEyebrow",
+        titleKey: "activateTitle",
+        number: "3.",
+        eyebrow: "Campaign Execution",
+        title: "Activate",
     },
     {
         key: "result",
         id: "resultContent",
         contentKey: "resultContent",
-        eyebrow: { text: "Measurable Outcomes", number: null },
-        title: "<span class='colorPrimary'>4.</span> Result",
+        eyebrowKey: "resultEyebrow",
+        titleKey: "resultTitle",
+        number: "4.",
+        eyebrow: "Measurable Outcomes",
+        title: "Result",
     },
     {
         key: "testimonial",
@@ -41,18 +53,42 @@ const contentBlocks = [
     },
 ];
 
+function escapeHtml(value) {
+    return value
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll("\"", "&quot;");
+}
+
 export default function ContentSection({
+    tradeEyebrow,
+    tradeTitle,
     tradeContent,
+    planEyebrow,
+    planTitle,
     planContent,
+    activateEyebrow,
+    activateTitle,
     activateContent,
+    resultEyebrow,
+    resultTitle,
     resultContent,
     testimonialContent,
 }) {
 
     const contentByKey = {
+        tradeEyebrow,
+        tradeTitle,
         tradeContent,
+        planEyebrow,
+        planTitle,
         planContent,
+        activateEyebrow,
+        activateTitle,
         activateContent,
+        resultEyebrow,
+        resultTitle,
         resultContent,
         testimonialContent,
     };
@@ -74,8 +110,11 @@ export default function ContentSection({
                     id={block.id}
                     content={contentByKey[block.contentKey]}
                     dataType={block.dataType}
-                    eyebrow={block.eyebrow}
-                    title={block.title}
+                    eyebrow={block.eyebrow ? {
+                        text: contentByKey[block.eyebrowKey] || block.eyebrow,
+                        number: null,
+                    } : undefined}
+                    title={block.title ? `<span class="colorPrimary">${block.number}</span> ${escapeHtml(contentByKey[block.titleKey] || block.title)}` : undefined}
                     containerClass={block.containerClass}
                 />
 

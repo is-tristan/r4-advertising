@@ -66,9 +66,17 @@ export default async function WorkDetailsPage({ params }) {
       />
 
       <ContentSection
+        tradeEyebrow={work.tradeEyebrow}
+        tradeTitle={work.tradeTitle}
         tradeContent={work.tradeContent}
+        planEyebrow={work.planEyebrow}
+        planTitle={work.planTitle}
         planContent={work.planContent}
+        activateEyebrow={work.activateEyebrow}
+        activateTitle={work.activateTitle}
         activateContent={work.activateContent}
+        resultEyebrow={work.resultEyebrow}
+        resultTitle={work.resultTitle}
         resultContent={work.resultContent}
         testimonialContent={work.testimonialContent}
       />
