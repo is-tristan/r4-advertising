@@ -51,6 +51,7 @@ export default function FaqsSectionContentItem({
 
         <motion.div
             ref={ref}
+            id={item.id}
             className={`${styles.faqContentItem} ${isOpen ? styles.faqItemActive : undefined}`}
             animate={isInView ? { opacity: 1, y: 0, filter: "blur(0)" } : { opacity: 0, y: 16, filter: "blur(0.25rem)" }}
             initial={{ opacity: 0, y: 16, filter: "blur(0.25rem)" }}

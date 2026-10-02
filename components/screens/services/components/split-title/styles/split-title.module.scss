@@ -1,0 +1,53 @@
+.splitTitle {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+    padding: 7.5dvh 0;
+    border-bottom: 1px solid var(--border);
+
+    @media (width >=768px) {
+        gap: 2rem;
+    }
+
+    .splitTitleContainer {
+        @media (width >=768px) {
+            flex: 1 0 50%;
+        }
+
+        .splitTitleHeading {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            gap: 0.5rem;
+
+            strong {
+                color: var(--primary);
+            }
+
+        }
+    }
+
+    .description {
+        display: flex;
+        font-family: var(--heading);
+        font-weight: 700;
+        font-size: clamp(1rem, 3dvw, 3rem);
+        text-transform: uppercase;
+        line-height: 105%;
+
+        @media (width >=768px) {
+            flex: 0 1 50%;
+            justify-content: flex-end;
+        }
+
+        p {
+            font-size: inherit;
+            line-height: inherit;
+            text-transform: inherit;
+            color: inherit;
+        }
+    }
+}

@@ -39,11 +39,11 @@ export default function DisciplineSectionContentItem({
 
                     <span>{item.number}</span>
 
-                    <h3>{item.title}</h3>
+                    <h3 className={item.titleColor ? item.titleColor : "colorLight"}>{item.title}</h3>
 
                 </div>
 
-                <p>{item.description}</p>
+                <div dangerouslySetInnerHTML={{ __html: `<p>${item.description}</p>` }} />
 
             </div>
 

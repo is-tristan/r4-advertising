@@ -26,6 +26,11 @@ const futuraPtCondensed = localFont({
   variable: "--font-futura-pt",
   src: [
     {
+      path: "../public/fonts/futura-pt-condensed-bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+    {
       path: "../public/fonts/futura-pt-condensed-extra-bold.woff2",
       weight: "800",
       style: "normal",

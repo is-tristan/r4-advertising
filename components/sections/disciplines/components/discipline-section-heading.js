@@ -28,16 +28,21 @@ export default function DisciplineSectionHeading({
             transition={{ duration: 0.5, delay: 0.15, ease: "easeOut" }}
         >
 
-            <div className={styles.disciplinesSectionLeft}>
+            {(eyebrowNumber || eyebrowText) && (
 
-                <Eyebrow
-                    number={eyebrowNumber}
-                    text={eyebrowText}
-                    type="heading"
-                    hasAnimation={false}
-                />
+                <div className={styles.disciplinesSectionLeft}>
 
-            </div>
+                    <Eyebrow
+                        number={eyebrowNumber}
+                        text={eyebrowText}
+                        separator={eyebrowNumber && eyebrowText ? "//" : null}
+                        type="heading"
+                        hasAnimation={false}
+                    />
+
+                </div>
+
+            )}
 
             <div className={styles.disciplinesSectionRight}>
 

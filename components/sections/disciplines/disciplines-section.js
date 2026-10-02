@@ -9,6 +9,8 @@ import DisciplineSectionHeading from "./components/discipline-section-heading";
 import DisciplineSectionContentItem from "./components/discipline-section-content-item";
 
 export default function Disciplines({
+    sectionClass,
+    containerClass,
     eyebrowNumber = "04",
     eyebrowText = "Our Disciplines",
     image = null,
@@ -17,18 +19,21 @@ export default function Disciplines({
         {
             number: "01",
             title: "Trade",
+            titleColor,
             description: "Media bought without hidden margins. All volume-based value returned to you, declared up front.",
             href: "/services#trade"
         },
         {
             number: "02",
             title: "Plan",
+            titleColor,
             description: "Decisions built around real behaviour, validated with Experian, TGI and CACI. Not assumptions.",
             href: "/services#plan"
         },
         {
             number: "03",
             title: "Activate",
+            titleColor,
             description: "Delivery overseen, verified and audited. We travel to sites; assumption replaced with proof.",
             href: "/services#activate"
         }
@@ -37,14 +42,18 @@ export default function Disciplines({
 
     return (
 
-        <section className={`row ${styles.disciplinesSection}`}>
+        <section className={`row ${styles.disciplinesSection} ${sectionClass ? sectionClass : undefined}`}>
 
-            <div className={`container ${styles.disciplinesSectionContainer}`}>
+            <div className={`container ${styles.disciplinesSectionContainer} ${containerClass ? containerClass : undefined}`}>
 
-                <DisciplineSectionHeading
-                    eyebrowNumber={eyebrowNumber}
-                    eyebrowText={eyebrowText}
-                />
+                {eyebrowText && (
+
+                    <DisciplineSectionHeading
+                        eyebrowNumber={eyebrowNumber}
+                        eyebrowText={eyebrowText}
+                    />
+
+                )}
 
                 <div className={styles.disciplinesSectionContent}>
 
@@ -69,7 +78,7 @@ export default function Disciplines({
 
                     <Image
                         src={image}
-                        alt={eyebrowText}
+                        alt={eyebrowText || ""}
                         fill
                         sizes="512px"
                         loading="lazy"

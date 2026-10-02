@@ -124,12 +124,12 @@
             }
 
             @media (width >=1280px) {
-                width: 45rem;
+                width: 35rem;
             }
 
-            @media (width >=1440px) {
-                width: 50rem;
-            }
+            // @media (width >=1440px) {
+            //     width: 50rem;
+            // }
 
             span {
                 color: rgba(var(--primaryRgb), 0.75);
@@ -140,7 +140,7 @@
             }
 
             h3 {
-                font-size: clamp(3rem, 4dvw, 4rem);
+                font-size: clamp(2.5rem, 4dvw, 4rem);
                 line-height: 90%;
                 padding-left: 1.5rem;
 
@@ -148,9 +148,9 @@
                     padding-left: 1.75rem;
                 }
 
-                @media (width >=1024px) {
-                    white-space: nowrap;
-                }
+                // @media (width >=1024px) {
+                //     white-space: nowrap;
+                // }
             }
         }
 
@@ -168,9 +168,13 @@
                 margin: auto;
             }
 
-            @media (width >=1440px) {
-                width: 20rem;
+            @media (width >=1280px) {
+                width: 30rem;
             }
+
+            // @media (width >=1440px) {
+            //     width: 20rem;
+            // }
         }
     }
 

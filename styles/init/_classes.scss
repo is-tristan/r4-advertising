@@ -34,6 +34,10 @@
 }
 
 // Gaps
+.noGap {
+    gap: 0 !important;
+}
+
 .gapXs {
     gap: 0.5rem !important;
 }
@@ -69,9 +73,25 @@
     }
 }
 
-// Has Border
+// Borders
 .hasBorder {
     border: 1px solid var(--border);
+}
+
+.borderTop {
+    border-top: 1px solid var(--border);
+}
+
+.borderRight {
+    border-right: 1px solid var(--border);
+}
+
+.borderBottom {
+    border-bottom: 1px solid var(--border);
+}
+
+.borderLeft {
+    border-left: 1px solid var(--border);
 }
 
 // Has Link

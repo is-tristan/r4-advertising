@@ -1,0 +1,7 @@
+.introBanner {
+    :global(.contentCol) {
+        @media (width >=1024px) {
+            padding: 6dvh 0;
+        }
+    }
+}
