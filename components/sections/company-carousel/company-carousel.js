@@ -12,7 +12,11 @@ import { companyData } from "@/data/company-carousel-data";
 // Icons
 import { brandMark } from "@/utils/icons";
 
-export default function CompanyCarousel() {
+export default function CompanyCarousel({
+    data = companyData,
+    className = undefined,
+    hasBorders = true,
+}) {
 
     const sectionRef = useRef(null);
     const trackRef = useRef(null);
@@ -52,7 +56,11 @@ export default function CompanyCarousel() {
 
     return (
 
-        <section ref={sectionRef} className={`${styles.companyCarousel}`}>
+        <section
+            ref={sectionRef}
+            className={`${styles.companyCarousel} ${className ? className : undefined}`}
+            data-has-borders={hasBorders}
+        >
 
             <div
                 ref={trackRef}
@@ -64,7 +72,7 @@ export default function CompanyCarousel() {
                 }}
             >
 
-                {companyData.map((company, index) => (
+                {data.map((company, index) => (
 
                     <Fragment key={index}>
 

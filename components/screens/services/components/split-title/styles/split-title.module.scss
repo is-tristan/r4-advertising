@@ -5,11 +5,23 @@
     align-items: center;
     gap: 1.5rem;
     width: 100%;
-    padding: 7.5dvh 0;
+    padding: 5dvh 0;
     border-bottom: 1px solid var(--border);
 
     @media (width >=768px) {
         gap: 2rem;
+    }
+
+    &[data-position="right"] {
+        @media (width >=768px) {
+            flex-flow: row-reverse nowrap;
+
+            .splitTitleContainer {
+                h2 {
+                    justify-content: flex-end;
+                }
+            }
+        }
     }
 
     .splitTitleContainer {
@@ -48,6 +60,7 @@
             line-height: inherit;
             text-transform: inherit;
             color: inherit;
+            max-width: 20ch;
         }
     }
 }

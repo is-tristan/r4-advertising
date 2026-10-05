@@ -5,10 +5,13 @@
     width: 100%;
     max-width: 100%;
     overflow: hidden;
-    padding: 2rem 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
     position: relative;
+    padding: 2rem 0;
+    
+    &[data-has-borders="true"] {
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+    }
 
     @media (width >=1024px) {
         padding: 3rem;

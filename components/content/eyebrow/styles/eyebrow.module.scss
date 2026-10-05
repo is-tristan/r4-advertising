@@ -55,4 +55,12 @@
             color: var(--secondary);
         }
     }
+
+    &[data-size="large"] {
+        font-size: clamp(1.25rem, 1.75vw, 1.75rem);
+
+        * {
+            color: var(--light) !important;
+        }
+    }
 }

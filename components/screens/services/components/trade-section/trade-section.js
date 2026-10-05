@@ -1,34 +1,11 @@
 // Components
 import SplitTitle from "../split-title/split-title";
 import DisciplinesSection from "@/components/sections/disciplines/disciplines-section";
+import ProjectedIncome from "@/components/screens/services/components/projected-income/projected-income";
+import FaqsSection from "@/components/sections/faqs/faqs-section";
 
-const tradeSectionData = [
-    {
-        number: "01",
-        title: "Media Investment",
-        description: "Media investment creates <strong>buying power</strong>.",
-        href: "/services#trade"
-    },
-    {
-        number: "02",
-        title: "Buying power",
-        description: "<strong>Buying power</strong> creates commercial value.",
-        href: "/services#trade"
-    },
-    {
-        number: "03",
-        title: "commercial value",
-        description: "R4 makes that position <strong>visible</strong> & <strong>accountable</strong>.",
-        href: "/services#trade"
-    },
-    {
-        number: "04",
-        title: "Client value",
-        titleColor: "colorPrimary",
-        description: "And that's how we build <strong>client value</strong>.",
-        href: "/services#trade"
-    },
-]
+// Data
+import { tradeSectionData, tradingCapabilitiesFaqs } from "@/app/(website)/services/data/services-data";
 
 export default function TradeSection() {
 
@@ -36,17 +13,22 @@ export default function TradeSection() {
 
         <section id="trade" className={`row noGap`}>
 
-            <div className={`container noPaddingTop noPaddingBottom`}>
-
-                <SplitTitle />
-
-            </div>
+            <SplitTitle />
 
             <DisciplinesSection
                 containerClass="noPaddingTop"
                 eyebrowNumber={null}
                 eyebrowText={null}
                 data={tradeSectionData}
+            />
+
+            <ProjectedIncome />
+
+            <FaqsSection
+                containerClass="noPaddingBottom"
+                type="stacked"
+                eyebrow={{ text: "Trading capabilities" }}
+                data={tradingCapabilitiesFaqs}
             />
 
         </section>

@@ -11,6 +11,11 @@ import styles from "./styles/sticky-nav.module.scss";
 
 const sectionIds = ["trade", "plan", "activate"];
 
+const separatorRanges = [
+    ["trade", "plan"],
+    ["plan", "activate"],
+];
+
 function getHeaderOffset() {
 
     const header = document.getElementById("header");
@@ -23,10 +28,38 @@ function getHeaderOffset() {
 
 }
 
+function getRangeProgress(fromId, toId, marker) {
+
+    const fromSection = document.getElementById(fromId);
+    const toSection = document.getElementById(toId);
+
+    if (!fromSection || !toSection) {
+
+        return 0;
+
+    }
+
+    const scrollY = window.scrollY;
+    const fromY = fromSection.getBoundingClientRect().top + scrollY;
+    const toY = toSection.getBoundingClientRect().top + scrollY;
+    const current = scrollY + marker;
+    const distance = toY - fromY;
+
+    if (distance <= 0) {
+
+        return current >= toY ? 1 : 0;
+
+    }
+
+    return Math.min(1, Math.max(0, (current - fromY) / distance));
+
+}
+
 export default function StickyNav() {
 
     const sentinelRef = useRef(null);
     const navRef = useRef(null);
+    const separatorRefs = useRef([]);
     const [isSticky, setIsSticky] = useState(false);
     const [activeId, setActiveId] = useState("");
     const [navHeight, setNavHeight] = useState(0);
@@ -82,19 +115,7 @@ export default function StickyNav() {
 
                 section.style.scrollMarginTop = `${marker}px`;
 
-                const rect = section.getBoundingClientRect();
-                const containsMarker = rect.top <= marker && rect.bottom > marker;
-                const isVisible = rect.bottom > marker && rect.top < window.innerHeight;
-
-                if (containsMarker) {
-
-                    nextActiveId = id;
-
-                    return;
-
-                }
-
-                if (!nextActiveId && isVisible) {
+                if (section.getBoundingClientRect().top <= marker) {
 
                     nextActiveId = id;
 
@@ -103,6 +124,21 @@ export default function StickyNav() {
             });
 
             setActiveId(nextActiveId);
+
+            separatorRefs.current.forEach((separator, index) => {
+
+                if (!separator) {
+
+                    return;
+
+                }
+
+                const [fromId, toId] = separatorRanges[index];
+                const progress = getRangeProgress(fromId, toId, marker);
+
+                separator.style.transform = `scaleX(${progress})`;
+
+            });
 
         };
 
@@ -133,7 +169,7 @@ export default function StickyNav() {
 
             <div
                 ref={navRef}
-                className={`${styles.stickyNav} borderTop borderBottom`}
+                className={`${styles.stickyNav} borderBottom`}
                 data-sticky={isSticky}
                 style={isSticky ? { top: headerOffset } : undefined}
             >
@@ -142,11 +178,19 @@ export default function StickyNav() {
 
                     <Link className={styles.stickyNavLink} href="#trade" data-active={isActive("trade")}>Trade</Link>
 
-                    <span className={styles.stickyNavSeperator}><span style={{ width: "0" }}></span></span>
+                    <span className={styles.stickyNavSeperator}>
+
+                        <span ref={(element) => { separatorRefs.current[0] = element; }} />
+
+                    </span>
 
                     <Link className={styles.stickyNavLink} href="#plan" data-active={isActive("plan")}>Plan</Link>
 
-                    <span className={styles.stickyNavSeperator}><span style={{ width: "0" }}></span></span>
+                    <span className={styles.stickyNavSeperator}>
+
+                        <span ref={(element) => { separatorRefs.current[1] = element; }} />
+
+                    </span>
 
                     <Link className={styles.stickyNavLink} href="#activate" data-active={isActive("activate")}>Activate</Link>
 

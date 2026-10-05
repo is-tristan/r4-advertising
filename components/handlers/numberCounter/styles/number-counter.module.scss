@@ -1,0 +1,15 @@
+.numberCounter {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 0.5rem;
+
+    .counter {
+        font-family: var(--heading);
+        font-size: clamp(3rem, 4vw, 4rem);
+    }
+
+    .description {
+        color: var(--textLight);
+        text-transform: uppercase;
+    }
+}

@@ -30,6 +30,10 @@
             padding-top: calc(var(--headerHeight) * 1.5);
         }
     }
+
+    &.sectionPadding {
+        padding: 5dvh 0;
+    }
 }
 
 // Container

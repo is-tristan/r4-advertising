@@ -19,21 +19,18 @@ export default function Disciplines({
         {
             number: "01",
             title: "Trade",
-            titleColor,
             description: "Media bought without hidden margins. All volume-based value returned to you, declared up front.",
             href: "/services#trade"
         },
         {
             number: "02",
             title: "Plan",
-            titleColor,
             description: "Decisions built around real behaviour, validated with Experian, TGI and CACI. Not assumptions.",
             href: "/services#plan"
         },
         {
             number: "03",
             title: "Activate",
-            titleColor,
             description: "Delivery overseen, verified and audited. We travel to sites; assumption replaced with proof.",
             href: "/services#activate"
         }

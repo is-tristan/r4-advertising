@@ -6,6 +6,9 @@ import Content from "@/components/sections/content/content";
 import TextIntro from "@/components/screens/services/components/text-intro/text-intro";
 import StickyNav from "@/components/screens/services/components/sticky-nav/sticky-nav";
 import TradeSection from "@/components/screens/services/components/trade-section/trade-section";
+import PlanSection from "@/components/screens/services/components/plan-section/plan-section";
+import ActivateSection from "@/components/screens/services/components/activate-section/activate-section";
+import CtaSection from "@/components/sections/cta/cta-section";
 
 // Styles
 import styles from "./styles/services.module.scss";
@@ -24,7 +27,7 @@ export default function ServicesPage() {
         <>
 
             <Content
-                sectionClassName={`${styles.introBanner} headerOffset borderBottom`}
+                sectionClassName={`${styles.introBanner} headerOffset`}
                 eyebrowNumber="01"
                 eyebrowText="Our Services"
                 title="Trade<span class='colorPrimary'>.</span> <br> Plan<span class='colorPrimary'>.</span> <br> Activate<span class='colorPrimary'>.</span>"
@@ -38,7 +41,23 @@ export default function ServicesPage() {
 
             <StickyNav />
 
-            <TradeSection  />
+            <TradeSection />
+
+            <PlanSection />
+
+            <Content
+                eyebrowNumber={null}
+                eyebrowText={null}
+                title="<span class='colorTextLight'>The plan is Agreed.</span><br>Now make it real."
+                titleClass={`sectionTitle`}
+                hasBrandMark={true}
+                sectionClassName="sectionPadding"
+                btnTextPrimary={null}
+            />
+
+            <ActivateSection />
+
+            <CtaSection />
 
         </>
 

@@ -1,0 +1,98 @@
+.projectedIncomeHeader {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1.5rem;
+    width: 100%;
+
+    @media (width >=768px) {
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .title {
+        font-family: var(--eyebrow);
+        font-size: clamp(1.5rem, 2vw, 2rem);
+        color: var(--light);
+    }
+
+    .nav {
+        display: flex;
+        flex-flow: row nowrap;
+        gap: 1rem;
+
+        @media (width >=768px) {
+            gap: 1.5rem;
+        }
+
+        .navButton {
+            font-family: var(--eyebrow);
+            font-size: clamp(1rem, 1.33vw, 1.33rem);
+            color: var(--light);
+            background: transparent;
+            padding: 0 0 0.25rem 0;
+            border: none;
+            cursor: pointer;
+            position: relative;
+
+            &::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 0;
+                height: 2px;
+                background: var(--primary);
+                transition: width 0.3s ease-in-out;
+            }
+
+            &:hover,
+            &[data-active="true"] {
+                color: var(--primary);
+
+
+                &::after {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+.projectedIncomeBody {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1.75rem;
+    width: 100%;
+    padding-bottom: 1rem;
+
+    @media (width >=768px) {
+        gap: 3rem;
+    }
+
+    .projectedIncomeBodyCounters,
+    .projectedIncomeBodyDescription {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 0.75rem;
+        width: 100%;
+
+        @media (width >=768px) {
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        p {
+            @media (width >=768px) {
+                max-width: 50%;
+            }
+        }
+
+        .button {
+            @media (width >=768px) {
+                padding: 0.875rem;
+            }
+        }
+    }
+}

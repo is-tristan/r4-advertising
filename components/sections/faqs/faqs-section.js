@@ -1,10 +1,14 @@
+// Components
+import Eyebrow from "@/components/content/eyebrow/eyebrow";
+import FaqsSectionContentItem from "./components/faqs-section-content-item";
+
 // Styles
 import styles from "./styles/faqs.module.scss";
 
-// Components
-import FaqsSectionContentItem from "./components/faqs-section-content-item";
-
 export default function FaqsSection({
+    type="inline",
+    eyebrow = null,
+    containerClass = undefined,
     data = [
         {
             id: "trade",
@@ -34,9 +38,20 @@ export default function FaqsSection({
 
         <section className={`row ${styles.faqsSection}`}>
 
-            <div className={`container ${styles.faqsSectionContainer}`}>
+            <div className={`container ${containerClass ? containerClass : undefined} ${styles.faqsSectionContainer}`}>
 
-                <div className={styles.faqsSectionContent}>
+                {eyebrow && (
+                    <Eyebrow
+                        separator={null}
+                        number={null}
+                        text={eyebrow.text}
+                        type="heading"
+                        size="large"
+                        className={`colorLight`}
+                    />
+                )}
+
+                <div className={styles.faqsSectionContent} data-type={type}>
 
                     {data.map((item, index) => (
 

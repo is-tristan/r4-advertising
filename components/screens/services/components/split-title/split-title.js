@@ -19,39 +19,43 @@ export default function SplitTitle({
 
     return (
 
-        <div ref={ref} className={styles.splitTitle} data-position={position}>
+        <div className="container noPaddingTop noPaddingBottom">
 
-            <motion.div
-                className={styles.splitTitleContainer}
-                animate={isInView ? { opacity: 1, x: 0, filter: "blur(0)" } : { opacity: 0, x: -16, filter: "blur(0.25rem)" }}
-                initial={{ opacity: 0, x: -16, filter: "blur(0.25rem)" }}
-                transition={{ duration: 0.5, delay: 0.15 }}
-            >
+            <div ref={ref} className={styles.splitTitle} data-position={position}>
 
-                <h2 className={`sectionTitle ${styles.splitTitleHeading}`}>
+                <motion.div
+                    className={styles.splitTitleContainer}
+                    animate={isInView ? { opacity: 1, x: 0, filter: "blur(0)" } : { opacity: 0, x: -16, filter: "blur(0.25rem)" }}
+                    initial={{ opacity: 0, x: -16, filter: "blur(0.25rem)" }}
+                    transition={{ duration: 0.5, delay: 0.15 }}
+                >
 
-                    <span>
+                    <h2 className={`sectionTitle ${styles.splitTitleHeading}`}>
 
-                        <strong>{number}</strong>
+                        <span>
 
-                    </span>
+                            <strong>{number}</strong>
 
-                    {title}
+                        </span>
 
-                </h2>
+                        {title}
 
-            </motion.div>
+                    </h2>
 
-            <motion.div
-                className={styles.description}
-                animate={isInView ? { opacity: 1, x: 0, filter: "blur(0)" } : { opacity: 0, x: 16, filter: "blur(0.25rem)" }}
-                initial={{ opacity: 0, x: 16, filter: "blur(0.25rem)" }}
-                transition={{ duration: 0.5, delay: 0.15 }}
-            >
+                </motion.div>
 
-                <p>{description}</p>
+                <motion.div
+                    className={styles.description}
+                    animate={isInView ? { opacity: 1, x: 0, filter: "blur(0)" } : { opacity: 0, x: 16, filter: "blur(0.25rem)" }}
+                    initial={{ opacity: 0, x: 16, filter: "blur(0.25rem)" }}
+                    transition={{ duration: 0.5, delay: 0.15 }}
+                >
 
-            </motion.div>
+                    <p>{description}</p>
+
+                </motion.div>
+
+            </div>
 
         </div>
 

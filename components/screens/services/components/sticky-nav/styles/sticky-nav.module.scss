@@ -3,12 +3,12 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    background: rgba(var(--lightRgb), 0.1);
+    background: rgba(var(--darkRgb), 0.9);
     backdrop-filter: blur(0.25rem);
 
     &[data-sticky="true"] {
         position: fixed;
-        z-index: 999;
+        z-index: 555;
         top: var(--mobileHeaderHeight);
         right: 0;
         left: 0;
@@ -22,17 +22,22 @@
         flex-flow: row nowrap;
         justify-content: space-between;
         align-items: center;
-        padding-top: 1rem;
-        padding-bottom: 1rem;
+        padding-top: 0.66rem;
+        padding-bottom: 0.66rem;
+
+        @media (width >=768px) {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
 
         .stickyNavLink {
             font-family: var(--heading);
-            font-size: clamp(1rem, 7.5dvw, 1.5rem);
+            font-size: clamp(0.875rem, 5.5dvw, 1.75rem);
             text-transform: uppercase;
             color: var(--textLight);
 
             &[data-active="true"] {
-                color: var(--light);
+                color: var(--primary);
             }
         }
 
@@ -53,9 +58,13 @@
             }
 
             span {
+                display: block;
+                width: 100%;
                 height: 1px;
                 background: var(--primary);
                 position: relative;
+                transform: scaleX(0);
+                transform-origin: left center;
             }
         }
     }

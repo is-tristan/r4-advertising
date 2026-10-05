@@ -54,21 +54,25 @@ export default function ContentSection({
                             alignment={!image ? "centered" : "default"}
                         />
 
-                        <div className="buttons">
+                        {btnTextPrimary || btnTextSecondary && (
 
-                            {btnTextPrimary && (
+                            <div className="buttons">
 
-                                <Button text={btnTextPrimary} href={btnLinkPrimary} target={btnTargetPrimary} className="primary" />
+                                {btnTextPrimary && (
 
-                            )}
+                                    <Button text={btnTextPrimary} href={btnLinkPrimary} target={btnTargetPrimary} className="primary" />
 
-                            {btnTextSecondary && (
+                                )}
 
-                                <Button text={btnTextSecondary} href={btnLinkSecondary} target={btnTargetSecondary} className="transparent" />
+                                {btnTextSecondary && (
 
-                            )}
+                                    <Button text={btnTextSecondary} href={btnLinkSecondary} target={btnTargetSecondary} className="transparent" />
 
-                        </div>
+                                )}
+
+                            </div>
+
+                        )}
 
                     </div>
 
