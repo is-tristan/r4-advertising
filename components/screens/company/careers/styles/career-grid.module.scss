@@ -1,5 +1,75 @@
 @use "@/styles/init/mixins" as *;
 
+.careersGridHeader {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    gap: 1.5rem;
+
+    h2 {
+        margin-bottom: 0 !important;
+    }
+
+    @media (width >=768px) {
+        flex-flow: row wrap;
+        align-items: flex-end;
+        justify-content: space-between;
+    }
+}
+
+.locationFilter {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 0.5rem;
+    width: 100%;
+    overflow-x: auto;
+
+    @media (width >=1024px) {
+        flex-flow: row wrap;
+        gap: 0.875rem;
+        width: auto;
+        overflow: hidden;
+    }
+
+    button {
+        all: unset;
+        width: max-content;
+
+        .locationFilterButton {
+            @include btn();
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--textLight);
+            width: max-content;
+
+            &:hover {
+                color: var(--light);
+                border-color: var(--primary);
+            }
+        }
+
+        &:hover .locationFilterButton {
+            color: var(--light);
+            border-color: var(--primary);
+        }
+
+        &[data-active="true"] .locationFilterButton {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+    }
+}
+
+.careersGridList {
+    justify-content: flex-start !important;
+    padding-top: 1.5rem !important;
+}
+
+.careersGridEmpty {
+    color: var(--textLight);
+    margin: 0;
+}
+
 .careerItemAnimationContainer {
     width: 100%;
 }

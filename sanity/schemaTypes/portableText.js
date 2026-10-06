@@ -1,8 +1,7 @@
 import { defineArrayMember, defineField } from "sanity"
 import { contentVideoMember } from "./contentVideo"
 
-export const portableTextMembers = [
-  defineArrayMember({
+export const portableTextBlockMember = defineArrayMember({
     type: "block",
     styles: [
       { title: "Normal", value: "normal" },
@@ -46,15 +45,18 @@ export const portableTextMembers = [
         },
       ],
     },
-  }),
+  })
+
+export const portableTextMembers = [
+  portableTextBlockMember,
   contentVideoMember,
 ]
 
-export const portableTextField = (name, title, fieldset) =>
+export const portableTextField = (name, title, fieldset, of = portableTextMembers) =>
   defineField({
     name,
     title,
     type: "array",
-    of: portableTextMembers,
+    of,
     ...(fieldset ? { fieldset } : {}),
   })

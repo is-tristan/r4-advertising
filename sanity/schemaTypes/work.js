@@ -2,7 +2,28 @@ import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-li
 import { defineArrayMember, defineField, defineType } from "sanity"
 import { ImageIcon } from "@sanity/icons/Image"
 import { PlayIcon } from "@sanity/icons/Play"
-import { portableTextField } from "./portableText"
+import { portableTextBlockMember, portableTextField } from "./portableText"
+
+const workContentImageMember = defineArrayMember({
+  type: "image",
+  title: "Image",
+  icon: ImageIcon,
+  options: {
+    hotspot: true,
+  },
+  fields: [
+    defineField({
+      name: "alt",
+      title: "Alternative text",
+      type: "string",
+    }),
+  ],
+})
+
+const workContentMembers = [
+  portableTextBlockMember,
+  workContentImageMember,
+]
 
 const contentSectionFields = (name, title, eyebrow, sectionTitle) => [
   defineField({
@@ -19,7 +40,7 @@ const contentSectionFields = (name, title, eyebrow, sectionTitle) => [
     fieldset: name,
     initialValue: sectionTitle,
   }),
-  portableTextField(`${name}Content`, `${title} Content`, name),
+  portableTextField(`${name}Content`, `${title} Content`, name, workContentMembers),
 ]
 
 export const work = (context) => defineType({
@@ -154,7 +175,7 @@ export const work = (context) => defineType({
     ...contentSectionFields("plan", "Plan", "Strategic Media Planning", "Plan"),
     ...contentSectionFields("activate", "Activate", "Campaign Execution", "Activate"),
     ...contentSectionFields("result", "Result", "Measurable Outcomes", "Result"),
-    portableTextField("testimonialContent", "Testimonial Content"),
+    portableTextField("testimonialContent", "Testimonial Content", undefined, workContentMembers),
   ],
   preview: {
     select: {

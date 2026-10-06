@@ -14,6 +14,13 @@ const portableTextMediaExpansion = /* groq */ `
     poster {
       ${imageFields}
     }
+  },
+  _type == "image" => {
+    ...,
+    alt,
+    asset,
+    hotspot,
+    crop
   }
 `
 

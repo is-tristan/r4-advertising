@@ -15,24 +15,21 @@ import { getSanityImageUrl } from "@/sanity/lib/image";
 
 const portableTextComponents = {
     types: {
-        video: ({ value }) => {
+        image: ({ value }) => {
 
-            if (!value?.url) {
+            const imageUrl = getSanityImageUrl(value, "contentImage");
+
+            if (!imageUrl) {
                 return null;
             }
 
-            const posterUrl = getSanityImageUrl(value.poster, "contentVideoPoster");
-
             return (
 
-                <div className="contentVideo">
+                <div className="contentImage">
 
-                    <video
-                        src={value.url}
-                        poster={posterUrl || undefined}
-                        controls
-                        playsInline
-                        preload="metadata"
+                    <img
+                        src={imageUrl}
+                        alt={value.alt || ""}
                     />
 
                 </div>

@@ -38,7 +38,7 @@ export default function HeaderActions() {
                     <Button text="Brief Us" href="/contact" className={`primary small ${styles.contactBtn}`} hasAnimation={false} />
 
                     <Link
-                        href="#"
+                        href="/calculator"
                         className={`${styles.costCalculatorBtn}`}
                         dangerouslySetInnerHTML={{ __html: costCalulatorIcon }}
                         title="Cost Calculator"
