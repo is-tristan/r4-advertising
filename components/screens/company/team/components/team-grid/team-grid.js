@@ -33,7 +33,7 @@ export default async function TeamGrid() {
 
             </div>
 
-            <div className={`container noPaddingTop flexAuto flexAutoConstrained`}>
+            <div className={`container noPaddingTop flexAuto flexAutoConstrained ${styles.teamGridItems}`}>
 
                 {items.map((item, index) => (
 

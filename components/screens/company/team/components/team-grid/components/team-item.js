@@ -47,7 +47,7 @@ export default function TeamItem({
                         alt={name}
                         fill
                         loading="lazy"
-                        sizes="(max-width: 768px) 100vw, 512px"
+                        sizes="(max-width: 768px) 384px, 512px"
                     />
 
                 </div>

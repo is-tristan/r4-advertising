@@ -22,7 +22,7 @@ export const sanityImagePresets = {
     aspectRatio: 1,
   },
   teamCard: {
-    width: 1024,
+    width: 512,
     aspectRatio: 1,
   },
   careerCard: {
