@@ -511,6 +511,13 @@
             }
         }
     }
+
+    &[data-alignment="centered"] {
+        @media (width >=1024px) {
+            justify-content: center;
+            margin: 0 auto;
+        }
+    }
 }
 
 // Image Fill

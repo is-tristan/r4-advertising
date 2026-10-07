@@ -25,7 +25,7 @@ export default function PlanSectionContent() {
             <div className={styles.planImageCol}>
 
                 <ImageCol
-                    image="/images/services/plan-image.svg"
+                    image="/images/services/our-services-section-plan-illustration.svg"
                     alt="Plan"
                     imagePosition="left"
                     imageFill={false}

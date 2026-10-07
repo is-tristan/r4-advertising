@@ -1,0 +1,18 @@
+.scrollFillTitleText {
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(
+        90deg,
+        var(--primary) 0%,
+        var(--primary) 50%,
+        var(--light) 50%,
+        var(--light) 100%
+    );
+    background-size: 200% 100%;
+    background-repeat: no-repeat;
+    background-position: 100% center;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+}

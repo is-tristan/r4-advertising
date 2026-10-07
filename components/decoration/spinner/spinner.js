@@ -27,7 +27,7 @@ export default function Spinner({
 
         <MotionLink
             ref={ref}
-            href="#"
+            href="/calculator"
             className={`${styles.spinner} hidden-s hidden-m hidden-l hidden-xl`}
             data-type={type}
             tabIndex={-1}

@@ -13,6 +13,7 @@ export default function Text({
     alignment = "default",
     eyebrow = null,
     title,
+    titleContent,
     titleTag = "h2",
     titleClass = undefined,
     description,
@@ -32,7 +33,7 @@ export default function Text({
 
         <div ref={ref} className={`innerContent ${className}`} data-alignment={alignment}>
 
-            {title && (
+            {(title || titleContent) && (
 
                 <motion.div
                     animate={hasAnimation ? (isInView ? { opacity: 1, y: 0, filter: "blur(0)" } : { opacity: 0, y: 16, filter: "blur(0.25rem)" }) : { opacity: 1, y: 0, filter: "blur(0)" }}
@@ -47,7 +48,7 @@ export default function Text({
 
                     )}
 
-                    {(() => {
+                    {titleContent ? titleContent : (() => {
                         switch (titleTag) {
                             case "h1":
                                 return <h1 className={`${titleClass}`} dangerouslySetInnerHTML={{ __html: title }} />;

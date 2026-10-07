@@ -1,0 +1,11 @@
+.sectionImage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    border-radius: var(--borderRadius);
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    position: relative;
+}

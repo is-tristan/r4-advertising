@@ -17,11 +17,12 @@ export default function ContentSection({
     eyebrowText = "Lorem Ipsum",
     titleTag = "h2",
     title,
+    titleContent,
     description,
     image,
     imagePosition = "right",
-    btnTextPrimary = "Start your brief",
-    btnLinkPrimary = "/contact",
+    btnTextPrimary,
+    btnLinkPrimary,
     btnTextSecondary,
     btnLinkSecondary,
     btnTargetPrimary,
@@ -48,6 +49,7 @@ export default function ContentSection({
                         <Text
                             eyebrow={{ number: eyebrowNumber, text: eyebrowText ? eyebrowText : null }}
                             title={title}
+                            titleContent={titleContent}
                             titleClass={`sectionTitle`}
                             titleTag={titleTag}
                             description={description}

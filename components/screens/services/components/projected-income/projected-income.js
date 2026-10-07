@@ -74,13 +74,13 @@ const projectedIncomeBodies = {
         counters: projectedIncomeCounters,
         description: "Project VBD commercial value belongs to the client. It can be retained against the cost of the campaign, or traded up into additional media value.",
         buttonText: "Model your own position",
-        buttonLink: "#",
+        buttonLink: "/calculator",
     },
     annualMediaCommitment: {
         counters: annualMediaCommitmentCounters,
         description: "Under an Annual Media Commitment, Contract VBD forms R4 Advertising's Contractual Trade-Up Commitment. Trade Up only.",
         buttonText: "Model your own position",
-        buttonLink: "#",
+        buttonLink: "/calculator",
     },
 }
 

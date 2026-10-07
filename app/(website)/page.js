@@ -54,7 +54,7 @@ export default function Home() {
         title="Rewarded for your loyalty"
         description="<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
         btnTextPrimary="Calculate your Discount"
-        btnLinkPrimary="#"
+        btnLinkPrimary="/calculator"
         hasSpinner={false}
       />
 

@@ -1,4 +1,5 @@
 // Components
+import SectionImage from "../section-image/section-image";
 import SplitTitle from "../split-title/split-title";
 import PlanSectionContent from "./components/plan-section-content";
 import OrderSection from "../order-section/order-section";
@@ -12,6 +13,11 @@ export default function PlanSection() {
     return (
 
         <section id="plan" className={`row noGap`}>
+
+            <SectionImage
+                image="/images/services/our-services-section-plan.avif"
+                alt="Plan"
+            />
 
             <SplitTitle
                 number="02"

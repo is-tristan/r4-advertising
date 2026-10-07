@@ -9,6 +9,7 @@ import TradeSection from "@/components/screens/services/components/trade-section
 import PlanSection from "@/components/screens/services/components/plan-section/plan-section";
 import ActivateSection from "@/components/screens/services/components/activate-section/activate-section";
 import CtaSection from "@/components/sections/cta/cta-section";
+import ScrollFillTitle from "@/components/screens/services/components/scroll-fill-title/scroll-fill-title";
 
 // Styles
 import styles from "./styles/services.module.scss";
@@ -48,8 +49,7 @@ export default function ServicesPage() {
             <Content
                 eyebrowNumber={null}
                 eyebrowText={null}
-                title="<span class='colorTextLight'>The plan is Agreed.</span><br>Now make it real."
-                titleClass={`sectionTitle`}
+                titleContent={<ScrollFillTitle />}
                 hasBrandMark={true}
                 sectionClassName="sectionPadding"
                 btnTextPrimary={null}

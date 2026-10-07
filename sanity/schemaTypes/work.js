@@ -3,6 +3,7 @@ import { defineArrayMember, defineField, defineType } from "sanity"
 import { ImageIcon } from "@sanity/icons/Image"
 import { PlayIcon } from "@sanity/icons/Play"
 import { portableTextBlockMember, portableTextField } from "./portableText"
+import { videoFileDescription, videoFileOptions, videoFileRule } from "./videoFile"
 
 const workContentImageMember = defineArrayMember({
   type: "image",
@@ -111,9 +112,9 @@ export const work = (context) => defineType({
       name: "video",
       title: "Featured Video",
       type: "file",
-      options: {
-        accept: "video/*",
-      },
+      description: videoFileDescription,
+      options: videoFileOptions,
+      validation: (rule) => videoFileRule(rule),
     }),
     defineField({
       name: "videoPoster",
@@ -140,9 +141,9 @@ export const work = (context) => defineType({
           type: "file",
           title: "Video",
           icon: PlayIcon,
-          options: {
-            accept: "video/*",
-          },
+          description: videoFileDescription,
+          options: videoFileOptions,
+          validation: (rule) => videoFileRule(rule),
           fields: [
             defineField({
               name: "videoPoster",
@@ -175,7 +176,12 @@ export const work = (context) => defineType({
     ...contentSectionFields("plan", "Plan", "Strategic Media Planning", "Plan"),
     ...contentSectionFields("activate", "Activate", "Campaign Execution", "Activate"),
     ...contentSectionFields("result", "Result", "Measurable Outcomes", "Result"),
-    portableTextField("testimonialContent", "Testimonial Content", undefined, workContentMembers),
+    defineField({
+      name: "testimonialContent",
+      title: "Testimonial Content",
+      type: "text",
+      rows: 6,
+    }),
   ],
   preview: {
     select: {

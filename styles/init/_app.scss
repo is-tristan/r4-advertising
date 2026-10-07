@@ -58,36 +58,31 @@
         display: block;
         position: relative;
         margin: 0;
-        padding: 3.25rem 1rem 1rem;
-        background-color: rgba(var(--lightRgb), 0.1);
-        line-height: 175%;
+        padding: 4.5rem 1rem 1rem;
+        background: rgba(var(--primaryRgb), 0.25);
+        border: 1px solid var(--primary);
+        line-height: 150%;
+        font-weight: 700;
         border-radius: var(--borderRadius);
-        color: rgba(var(--lightRgb), 0.875);
+        color: var(--light);
         position: relative;
 
-        &::before {
-            content: "“";
+        &::before,
+        &::after {
             position: absolute;
             z-index: -1;
-            top: 2.5rem;
-            left: 0;
             width: 100%;
             height: 100%;
             color: var(--light);
-            font-size: 7.5rem;
+            font-size: 10rem;
+            font-weight: 400;
             font-style: italic;
-            opacity: 0.5;
         }
 
-        &::after {
-            content: "";
-            position: absolute;
-            top: 0;
+        &::before {
+            content: "“";
+            top: 4rem;
             left: 0;
-            width: 2px;
-            height: 100%;
-            background: var(--primary);
-            z-index: -1;
         }
     }
 }

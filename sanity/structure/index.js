@@ -47,6 +47,7 @@ export const structure = (S, context) =>
                 context,
               }),
               S.documentTypeListItem("careerCategory").title("Career Categories"),
+              S.documentTypeListItem("careerLocation").title("Locations"),
             ])
         ),
       S.listItem()

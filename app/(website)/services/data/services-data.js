@@ -3,26 +3,26 @@ export const tradeSectionData = [
         number: "01",
         title: "Media Investment",
         description: "Media investment creates <strong>buying power</strong>.",
-        href: "/services#trade"
+        href: "/services"
     },
     {
         number: "02",
         title: "Buying power",
         description: "<strong>Buying power</strong> creates commercial value.",
-        href: "/services#trade"
+        href: "/services"
     },
     {
         number: "03",
         title: "commercial value",
         description: "R4 makes that position <strong>visible</strong> & <strong>accountable</strong>.",
-        href: "/services#trade"
+        href: "/services"
     },
     {
         number: "04",
         title: "Client value",
         titleColor: "colorPrimary",
         description: "And that's how we build <strong>client value</strong>.",
-        href: "/services#trade"
+        href: "/services"
     },
 ]
 

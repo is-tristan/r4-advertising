@@ -156,9 +156,7 @@ export const workBySlugQuery = defineQuery(`
     resultContent[]{
       ${portableTextMediaExpansion}
     },
-    testimonialContent[]{
-      ${portableTextMediaExpansion}
-    }
+    testimonialContent
   }
 `)
 
@@ -185,7 +183,11 @@ export const careersGridQuery = defineQuery(`
       ${imageFields}
     },
     "category": category->title,
-    location,
+    "locations": locations[0...2]->{
+      _id,
+      title
+    },
+    "location": array::join(locations[0...2]->title, " / "),
     "contractType": select(
       contractType == "full-time" => "Full-time",
       contractType == "part-time" => "Part-time",
@@ -208,7 +210,7 @@ export const careerBySlugQuery = defineQuery(`
       ${imageFields}
     },
     "category": category->title,
-    location,
+    "location": array::join(locations[0...2]->title, " / "),
     "contractType": select(
       contractType == "full-time" => "Full-time",
       contractType == "part-time" => "Part-time",

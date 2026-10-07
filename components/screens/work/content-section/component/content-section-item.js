@@ -75,6 +75,26 @@ const portableTextComponents = {
     },
 };
 
+function testimonialText(content) {
+
+    if (typeof content === "string") {
+
+        return content;
+
+    }
+
+    if (!Array.isArray(content)) {
+
+        return "";
+
+    }
+
+    return content
+        .flatMap((block) => block?.children?.map((child) => child.text) || [])
+        .join("");
+
+}
+
 export default function ContentSectionItem({
     id,
     content,
@@ -117,10 +137,22 @@ export default function ContentSectionItem({
                     className="contentInner"
                 >
 
-                    <PortableText
-                        value={content}
-                        components={portableTextComponents}
-                    />
+                    {dataType === "testimonial" ? (
+
+                        <blockquote>
+
+                            {testimonialText(content)}
+
+                        </blockquote>
+
+                    ) : (
+
+                        <PortableText
+                            value={content}
+                            components={portableTextComponents}
+                        />
+
+                    )}
 
                 </motion.div>
 

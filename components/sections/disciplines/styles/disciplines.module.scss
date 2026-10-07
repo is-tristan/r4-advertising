@@ -96,15 +96,10 @@
         padding: 2rem 0;
     }
 
-    @media (width >=1024px) {
-        padding: 3rem 0;
-    }
-
     .disciplinesContentItemLeft {
         display: flex;
         flex-flow: column nowrap;
         gap: 0.75rem;
-
 
         @media (width >=1024px) {
             flex-flow: row nowrap;
@@ -116,7 +111,8 @@
         .disciplinesContentItemTitle {
             display: flex;
             flex-flow: row nowrap;
-            gap: 0.25rem;
+            align-items: center;
+            gap: 0.5rem;
             position: relative;
 
             @media (width >=1024px) {
@@ -127,26 +123,19 @@
                 width: 35rem;
             }
 
-            // @media (width >=1440px) {
-            //     width: 50rem;
-            // }
-
             span {
                 color: rgba(var(--primaryRgb), 0.75);
-                position: absolute;
-                top: 0.5rem;
-                left: 0;
                 letter-spacing: 0.1em;
             }
 
             h3 {
                 font-size: clamp(2.5rem, 4dvw, 4rem);
                 line-height: 90%;
-                padding-left: 1.5rem;
+                // padding-left: 1.5rem;
 
-                @media (width >=768px) {
-                    padding-left: 1.75rem;
-                }
+                // @media (width >=768px) {
+                //     padding-left: 1.75rem;
+                // }
 
                 // @media (width >=1024px) {
                 //     white-space: nowrap;

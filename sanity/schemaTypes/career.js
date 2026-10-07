@@ -41,10 +41,17 @@ export const career = (context) => defineType({
       to: [{ type: "careerCategory" }],
     }),
     defineField({
-      name: "location",
-      title: "Location",
-      type: "string",
-      description: "e.g. London / Cardiff (Hybrid)",
+      name: "locations",
+      title: "Locations",
+      type: "array",
+      description: "Select up to 2 locations. They are shown as London / Cardiff.",
+      of: [
+        defineArrayMember({
+          type: "reference",
+          to: [{ type: "careerLocation" }],
+        }),
+      ],
+      validation: (rule) => rule.max(2).unique(),
     }),
     defineField({
       name: "contractType",
@@ -124,10 +131,13 @@ export const career = (context) => defineType({
     select: {
       title: "title",
       category: "category.title",
-      location: "location",
+      location0: "locations.0.title",
+      location1: "locations.1.title",
       media: "image",
     },
-    prepare({ title, category, location, media }) {
+    prepare({ title, category, location0, location1, media }) {
+      const location = [location0, location1].filter(Boolean).join(" / ")
+
       return {
         title,
         subtitle: [category, location].filter(Boolean).join(" · "),

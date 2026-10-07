@@ -10,8 +10,6 @@ import CareerItem from "./career-item";
 // Styles
 import styles from "../styles/career-grid.module.scss";
 
-const locationFilters = ["London", "Cardiff"];
-
 export default function CareersGridList({
     items = [],
 }) {
@@ -20,13 +18,29 @@ export default function CareersGridList({
 
     const locations = useMemo(() => {
 
-        return locationFilters.filter((location) => items.some((item) => item.location?.toLowerCase().includes(location.toLowerCase())));
+        const titles = [];
+
+        items.forEach((item) => {
+
+            item.locations?.forEach((location) => {
+
+                if (location?.title && !titles.includes(location.title)) {
+
+                    titles.push(location.title);
+
+                }
+
+            });
+
+        });
+
+        return titles;
 
     }, [items]);
 
     const filteredItems = activeLocation === "all"
         ? items
-        : items.filter((item) => item.location?.toLowerCase().includes(activeLocation.toLowerCase()));
+        : items.filter((item) => item.locations?.some((location) => location.title === activeLocation));
 
     return (
 

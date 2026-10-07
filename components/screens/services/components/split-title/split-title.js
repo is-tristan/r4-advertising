@@ -12,6 +12,7 @@ export default function SplitTitle({
     title = "Trade",
     description = "This is where value is created and where it belongs.",
     position = "default",
+    hasBorder = true,
 }) {
 
     const ref = useRef(null);
@@ -21,7 +22,7 @@ export default function SplitTitle({
 
         <div className="container noPaddingTop noPaddingBottom">
 
-            <div ref={ref} className={styles.splitTitle} data-position={position}>
+            <div ref={ref} className={styles.splitTitle} data-position={position} data-has-border={hasBorder}>
 
                 <motion.div
                     className={styles.splitTitleContainer}
@@ -34,7 +35,7 @@ export default function SplitTitle({
 
                         <span>
 
-                            <strong>{number}</strong>
+                            <strong>{number}.</strong>
 
                         </span>
 

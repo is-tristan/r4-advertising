@@ -1,5 +1,6 @@
 import { defineArrayMember, defineField } from "sanity"
 import { PlayIcon } from "@sanity/icons/Play"
+import { videoFileDescription, videoFileOptions, videoFileRule } from "./videoFile"
 
 export const contentVideoMember = defineArrayMember({
   type: "object",
@@ -11,10 +12,9 @@ export const contentVideoMember = defineArrayMember({
       name: "file",
       title: "Video File",
       type: "file",
-      options: {
-        accept: "video/*",
-      },
-      validation: (rule) => rule.required(),
+      description: videoFileDescription,
+      options: videoFileOptions,
+      validation: (rule) => videoFileRule(rule.required()),
     }),
     defineField({
       name: "poster",
