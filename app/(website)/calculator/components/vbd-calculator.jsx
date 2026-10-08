@@ -21,7 +21,7 @@
  * ---------------------------------------------------------------------------
  */
 
-import React, { useState, useMemo, useRef, useEffect } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 const FONT_FACE_CSS = `
 @font-face {
   font-family: 'Futura PT Cond';
@@ -41,6 +41,125 @@ const FONT_FACE_CSS = `
 
 const FUTURA = "'Futura PT Cond', 'Arial Narrow', sans-serif";
 const CORPORATE = "'Corporate A BQ', Georgia, serif";
+
+// ============================================================
+//  BACK-OFFICE CONFIG — DEV: fill these in to connect the R4 App.
+//  These are PUBLIC values (safe in the browser). The secret
+//  VBD_CALC_WEBHOOK_SECRET lives server-side in the edge function,
+//  not here. Pull the URL + anon key from the R4 Supabase project
+//  (Project Settings → API), same project as the old site.
+//  Until filled, the form still works but shows a friendly fallback
+//  instead of reaching the R4 App.
+// ============================================================
+const R4_CONFIG = {
+  SUPABASE_URL: "https://kpvztvvmtedmxssobxid.supabase.co", // R4 Supabase project
+  SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtwdnp0dnZtdGVkbXhzc29ieGlkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY0ODU4MTIsImV4cCI6MjA4MjA2MTgxMn0.Oxyk8MvGapYKIGelWksav4JysYvjZOrsBdJgDwcDdd4", // anon public key (safe to embed)
+  WHATSAPP_NUMBER: "15559572412",                            // from spec §06 deep link
+  PAGE_URL: "https://r4advertising.agency/calculator",       // used in the lead payload
+  AMC_PAGE_PATH: "/annual-media-commitment",                 // DEV: route of the Annual Media Commitment page
+};
+
+// POST the lead to the submit-vbd-calc edge function (direct invoke,
+// matching the old site). Returns { wa_token, owner_first_name } on success.
+async function submitVBDLead(payload) {
+  if (!R4_CONFIG.SUPABASE_ANON_KEY) {
+    // Not wired yet — don't fake a network call.
+    return { ok: false, notConfigured: true };
+  }
+  try {
+    const res = await fetch(
+      `${R4_CONFIG.SUPABASE_URL}/functions/v1/submit-vbd-calc`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          apikey: R4_CONFIG.SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${R4_CONFIG.SUPABASE_ANON_KEY}`,
+        },
+        body: JSON.stringify(payload),
+      }
+    );
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || data.success === false) {
+      return { ok: false, error: data.error || `Request failed (${res.status})` };
+    }
+    return { ok: true, wa_token: data.wa_token || null, owner_first_name: data.owner_first_name || null };
+  } catch (e) {
+    return { ok: false, error: e.message || "Network error" };
+  }
+}
+
+// Fire-and-forget WhatsApp attribution ping (wa-message-click).
+async function pingWhatsAppClick(waToken) {
+  if (!waToken || !R4_CONFIG.SUPABASE_ANON_KEY) return;
+  try {
+    await fetch(`${R4_CONFIG.SUPABASE_URL}/functions/v1/wa-message-click`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: R4_CONFIG.SUPABASE_ANON_KEY,
+        Authorization: `Bearer ${R4_CONFIG.SUPABASE_ANON_KEY}`,
+      },
+      body: JSON.stringify({ t: waToken }),
+    });
+  } catch (e) {
+    /* attribution is best-effort; link still works without it */
+  }
+}
+
+// Build the pre-filled WhatsApp deep link, with [ref:token] only when present.
+function buildWhatsAppLink(waToken, ownerFirstName) {
+  const base = `https://wa.me/${R4_CONFIG.WHATSAPP_NUMBER}?text=`;
+  let msg;
+  if (ownerFirstName) {
+    msg = `Hi ${ownerFirstName}, I've just used the R4 VBD calculator. I'd like to book an appointment with you to discuss my next campaign.`;
+  } else {
+    msg = `Hi, I've just used the R4 VBD calculator. I'd like to book an appointment to discuss my next campaign.`;
+  }
+  if (waToken) msg += ` [ref:${waToken}]`;
+  return base + encodeURIComponent(msg);
+}
+
+// Assemble the exact payload shape from spec §06, including the legacy
+// aliases the r4app receiver still reads (each carrying the APPROVED value).
+function buildLeadPayload({ mode, contact, budget, result }) {
+  return {
+    mode, // "project" | "contract"
+    contact: {
+      firstName: contact.firstName || null,
+      lastName: contact.lastName || null,
+      name: `${contact.firstName} ${contact.lastName}`.trim(),
+      position: contact.position || null,
+      email: contact.email || null,
+      company: contact.company || null,
+      phone: contact.phone || null,
+      whatsapp: contact.whatsapp || null,
+    },
+    budget,
+    mediaOwners: [],
+    campaignStart: null,
+    campaignEnd: null,
+    result: {
+      tierName: result.tier.tier_name,
+      discountPercentage: result.discountPercentage,
+      // Approved commercial fields (canonical)
+      commercialValue: Math.round(result.commercialValue),
+      effectiveMediaCost: Math.round(result.effectiveMediaCost),
+      totalMediaValue: Math.round(result.totalMediaValue),
+      // Back-compat aliases — approved values only, never gross-up
+      savings: Math.round(result.commercialValue),
+      clientPays: Math.round(result.effectiveMediaCost),
+      marketValueDelivered: Math.round(result.totalMediaValue),
+      tradeUpUplift: Math.round(result.commercialValue),
+    },
+    source: "website",
+    pageUrl: R4_CONFIG.PAGE_URL,
+    utm_campaign: null,
+    utm_content: null,
+  };
+}
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 // ============================================================
 //  R4 ADVERTISING — VBD CALCULATOR
@@ -120,6 +239,14 @@ export default function VBDCalculator() {
   const [budget, setBudget] = useState(DEFAULT_BUDGET);
   const [exactInput, setExactInput] = useState(String(DEFAULT_BUDGET));
 
+  // Lead-capture flow: "idle" -> "form" -> "submitting" -> "done"
+  const [leadStage, setLeadStage] = useState("idle");
+  const [leadError, setLeadError] = useState("");
+  const [leadResponse, setLeadResponse] = useState(null); // { wa_token, owner_first_name, notConfigured }
+  const [contact, setContact] = useState({
+    firstName: "", lastName: "", position: "", email: "", company: "", phone: "", whatsapp: "",
+  });
+
   // Fall back to Project if budget drops below threshold while in Contract.
   useEffect(() => {
     if (mode === "contract" && budget < CONTRACT_THRESHOLD) setMode("project");
@@ -160,10 +287,42 @@ export default function VBDCalculator() {
 
   const sliderPct = ((sliderValue - SLIDER_MIN) / (SLIDER_MAX - SLIDER_MIN)) * 100;
 
+  const setField = (k) => (e) => setContact((c) => ({ ...c, [k]: e.target.value }));
+
+  // All seven fields required by the browser form (spec §06); email format checked.
+  const formValid =
+    contact.firstName.trim() &&
+    contact.lastName.trim() &&
+    contact.position.trim() &&
+    contact.email.trim() &&
+    contact.company.trim() &&
+    contact.phone.trim() &&
+    contact.whatsapp.trim() &&
+    EMAIL_RE.test(contact.email.trim());
+
+  const handleLeadSubmit = async () => {
+    if (!formValid || !result) return;
+    setLeadError("");
+    setLeadStage("submitting");
+    const payload = buildLeadPayload({ mode, contact, budget, result });
+    const resp = await submitVBDLead(payload);
+    if (resp.ok || resp.notConfigured) {
+      setLeadResponse(resp);
+      setLeadStage("done");
+    } else {
+      setLeadError(resp.error || "Something went wrong. Please try again.");
+      setLeadStage("form");
+    }
+  };
+
+  const openForm = () => { setLeadStage("form"); setLeadError(""); };
+  const resetLead = () => { setLeadStage("idle"); setLeadResponse(null); setLeadError(""); };
+
   return (
     <div style={S.page}>
       <style>{`
         ${FONT_FACE_CSS}
+        button, input, select, textarea { font-family: var(--text); }
         .vbd-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 2px; background: transparent; cursor: pointer; }
         .vbd-slider::-webkit-slider-runnable-track { height: 2px; background: linear-gradient(to right, ${ACCENT} 0%, ${ACCENT} var(--pct), #2a2a2a var(--pct), #2a2a2a 100%); }
         .vbd-slider::-moz-range-track { height: 2px; background: #2a2a2a; }
@@ -260,17 +419,42 @@ export default function VBDCalculator() {
           <TierReference mode={mode} activeTiers={activeTiers} budget={budget} />
         )}
 
-        {/* Discuss a Project CTA */}
+        {/* Lead-capture CTA — connects to the R4 App via submit-vbd-calc */}
         <div style={S.ctaPanel}>
-          <h2 style={S.ctaTitle}>
-            {mode === "contract" ? "Discuss an Annual Media Commitment" : "Discuss a Project"}
-          </h2>
-          <p style={S.ctaCopy}>
-            Speak to R4 Advertising about the commercial value available against your media investment.
-          </p>
-          <a href="https://r4-advertising.vercel.app/contact" style={S.ctaBtn}>
-            {mode === "contract" ? "Discuss Contract Terms" : "Discuss a Project"} <span aria-hidden>→</span>
-          </a>
+          {leadStage === "idle" && (
+            <>
+              <h2 style={S.ctaTitle}>
+                {mode === "contract" ? "Discuss an Annual Media Commitment" : "Discuss a Project"}
+              </h2>
+              <p style={S.ctaCopy}>
+                Speak to R4 Advertising about the commercial value available against your media investment.
+              </p>
+              <button type="button" onClick={openForm} style={S.ctaBtn} disabled={!result}>
+                {mode === "contract" ? "Discuss Contract Terms" : "Discuss a Project"} <span aria-hidden>→</span>
+              </button>
+            </>
+          )}
+
+          {leadStage !== "idle" && leadStage !== "done" && (
+            <ContactForm
+              contact={contact}
+              setField={setField}
+              formValid={formValid}
+              submitting={leadStage === "submitting"}
+              error={leadError}
+              onSubmit={handleLeadSubmit}
+              onCancel={resetLead}
+              mode={mode}
+            />
+          )}
+
+          {leadStage === "done" && (
+            <LeadSuccess
+              response={leadResponse}
+              contact={contact}
+              onReset={resetLead}
+            />
+          )}
         </div>
 
         {/* Disclaimer */}
@@ -337,6 +521,9 @@ function ProjectResult({ result, budget, comparison, canGoContract, contractAtBu
               <span style={S.resLabel}>Total Media Value</span>
             </div>
           </div>
+          <a href={R4_CONFIG.AMC_PAGE_PATH} style={S.ghostBtn}>
+            View Annual Media Commitment <span aria-hidden>→</span>
+          </a>
         </div>
       )}
     </>
@@ -398,8 +585,114 @@ function TierReference({ activeTiers, budget }) {
 }
 
 // ---- Styles ------------------------------------------------
+// ---- Contact form (7 fields, all required per spec §06) ----
+function ContactForm({ contact, setField, formValid, submitting, error, onSubmit, onCancel, mode }) {
+  const F = [
+    { k: "firstName", label: "First name", type: "text", half: true },
+    { k: "lastName", label: "Last name", type: "text", half: true },
+    { k: "position", label: "Position", type: "text", half: true },
+    { k: "company", label: "Company", type: "text", half: true },
+    { k: "email", label: "Email", type: "email", half: false },
+    { k: "phone", label: "Phone", type: "tel", half: true },
+    { k: "whatsapp", label: "WhatsApp", type: "tel", half: true },
+  ];
+  return (
+    <div>
+      <h2 style={S.ctaTitle}>Get your breakdown</h2>
+      <p style={S.ctaCopy}>
+        Enter your details and an R4 planner will be in touch. We'll send your commercial
+        breakdown and connect you by WhatsApp or email.
+      </p>
+      <div style={S.formGrid}>
+        {F.map((f) => (
+          <div key={f.k} style={f.half ? S.formHalf : S.formFull}>
+            <label style={S.formLabel}>{f.label}</label>
+            <input
+              type={f.type}
+              value={contact[f.k]}
+              onChange={setField(f.k)}
+              style={S.formInput}
+              autoComplete="off"
+            />
+          </div>
+        ))}
+      </div>
+      {error && <p style={S.formError}>{error}</p>}
+      <div style={S.formActions}>
+        <button type="button" onClick={onSubmit} style={{ ...S.ctaBtn, opacity: formValid && !submitting ? 1 : 0.45, cursor: formValid && !submitting ? "pointer" : "not-allowed" }} disabled={!formValid || submitting}>
+          {submitting ? "Sending…" : "Send my breakdown"} <span aria-hidden>→</span>
+        </button>
+        <button type="button" onClick={onCancel} style={S.textBtn}>Cancel</button>
+      </div>
+    </div>
+  );
+}
+
+// ---- Success state: WhatsApp / email dropdown (connects to R4 App) ----
+function LeadSuccess({ response, contact, onReset }) {
+  const [channel, setChannel] = useState("whatsapp");
+  const owner = response && response.owner_first_name;
+  const waToken = response && response.wa_token;
+  const notConfigured = response && response.notConfigured;
+
+  const handleWhatsApp = () => {
+    // Fire attribution first, then open the deep link (works with or without token).
+    pingWhatsAppClick(waToken);
+    const url = buildWhatsAppLink(waToken, owner);
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+
+  const emailHref =
+    "mailto:hello@r4advertising.agency" +
+    "?subject=" + encodeURIComponent("R4 VBD calculator enquiry") +
+    "&body=" + encodeURIComponent(
+      `Hi${owner ? " " + owner : ""}, I've just used the R4 VBD calculator and I'd like to discuss my next campaign.`
+    );
+
+  return (
+    <div>
+      <h2 style={S.ctaTitle}>{owner ? `Thanks — ${owner} will be in touch` : "Thanks — we've got your details"}</h2>
+      <p style={S.ctaCopy}>
+        {notConfigured
+          ? "Your details are captured. Choose how you'd like to continue the conversation."
+          : "Your breakdown is on its way. Choose how you'd like to pick up the conversation with your R4 planner."}
+      </p>
+
+      {/* Channel dropdown */}
+      <label style={S.formLabel}>Continue by</label>
+      <select value={channel} onChange={(e) => setChannel(e.target.value)} style={S.select}>
+        <option value="whatsapp">WhatsApp</option>
+        <option value="email">Email</option>
+      </select>
+
+      <div style={{ marginTop: 18 }}>
+        {channel === "whatsapp" ? (
+          <button type="button" onClick={handleWhatsApp} style={S.ctaBtn}>
+            Open WhatsApp <span aria-hidden>→</span>
+          </button>
+        ) : (
+          <a href={emailHref} style={S.ctaBtn}>
+            Send an email <span aria-hidden>→</span>
+          </a>
+        )}
+      </div>
+
+      {notConfigured && (
+        <p style={S.configNote}>
+          Note for developer: set <code>R4_CONFIG.SUPABASE_ANON_KEY</code> to connect this
+          to the R4 App. Until then the lead is not transmitted and no WhatsApp token is issued.
+        </p>
+      )}
+
+      <button type="button" onClick={onReset} style={{ ...S.textBtn, marginTop: 14 }}>
+        Start over
+      </button>
+    </div>
+  );
+}
+
 const S = {
-  page: { background: "#0D0E12", minHeight: "100vh", color: "#fff", padding: "48px 20px" },
+  page: { background: "#0D0E12", minHeight: "100vh", color: "#fff", fontFamily: "var(--text), ui-sans-serif", padding: "48px 20px" },
   wrap: { maxWidth: 620, margin: "0 auto" },
   eyebrow: { fontFamily: CORPORATE, color: ACCENT, fontSize: 13, fontWeight: 700, letterSpacing: "normal", textTransform: "none", fontStyle: "italic" },
   h1: { fontFamily: FUTURA, fontSize: 52, lineHeight: 1.0, fontWeight: 700, letterSpacing: "0.01em", margin: "16px 0 14px", textTransform: "uppercase" },
@@ -430,12 +723,23 @@ const S = {
   optionBox: { border: "1px solid #242424", borderRadius: 5, padding: 18 },
   optionHead: { fontSize: 13, fontWeight: 800, marginBottom: 12 },
   compareBox: { background: "#161616", border: "1px solid #242424", borderRadius: 5, padding: 22, marginTop: 26 },
+  ghostBtn: { display: "inline-flex", alignItems: "center", gap: 10, background: "transparent", color: "#fff", border: "1px solid #333", borderRadius: 3, padding: "11px 18px", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", cursor: "pointer", textDecoration: "none", marginTop: 20 },
   compareGrid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, margin: "16px 0 18px" },
   ctaPanel: { background: "#161616", border: "1px solid #1e1e1e", borderRadius: 6, padding: 28, marginTop: 20 },
   ctaTitle: { fontFamily: FUTURA, fontSize: 30, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.01em", margin: "0 0 10px" },
   ctaCopy: { color: "#9a9a9a", fontSize: 14, lineHeight: 1.55, margin: "0 0 20px", maxWidth: 420 },
   ctaBtn: { display: "inline-flex", alignItems: "center", gap: 10, background: ACCENT, color: "#0a0a0a", border: "none", borderRadius: 3, padding: "13px 22px", fontSize: 11, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", cursor: "pointer", textDecoration: "none" },
-  disclaimer: { color: "rgba(var(--lightRgb), 0.55)", fontSize: 14, lineHeight: 1.6, marginTop: 24, maxWidth: 560 },
+  formGrid: { display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 6 },
+  formHalf: { gridColumn: "span 1" },
+  formFull: { gridColumn: "1 / -1" },
+  formLabel: { display: "block", color: "#9a9a9a", fontSize: 11, fontWeight: 600, marginBottom: 6 },
+  formInput: { width: "100%", background: "#0a0a0a", border: "1px solid #242424", borderRadius: 4, color: "#fff", fontSize: 14, padding: "10px 12px", outline: "none", fontFamily: "inherit" },
+  formError: { color: "#ff6b6b", fontSize: 13, margin: "12px 0 0" },
+  formActions: { display: "flex", alignItems: "center", gap: 16, marginTop: 20 },
+  textBtn: { background: "transparent", border: "none", color: "#9a9a9a", fontSize: 13, cursor: "pointer", textDecoration: "underline", padding: 0, fontFamily: "inherit" },
+  select: { width: "100%", maxWidth: 260, background: "#0a0a0a", border: "1px solid #242424", borderRadius: 4, color: "#fff", fontSize: 14, padding: "10px 12px", outline: "none", fontFamily: "inherit", cursor: "pointer" },
+  configNote: { color: "#7a7a2a", background: "rgba(219,249,5,0.06)", border: "1px solid rgba(219,249,5,0.2)", borderRadius: 4, padding: "10px 12px", fontSize: 11, lineHeight: 1.5, marginTop: 18 },
+  disclaimer: { color: "#5a5a5a", fontSize: 11, lineHeight: 1.6, marginTop: 24, maxWidth: 560 },
   tierPanel: { background: "#101010", border: "1px solid #1e1e1e", borderRadius: 6, padding: 28, marginTop: 20 },
   tierTitle: { fontFamily: FUTURA, fontSize: 28, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.01em", margin: "0 0 18px" },
   tierHeadRow: { display: "flex", justifyContent: "space-between", color: "#9a9a9a", fontSize: 10, fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", background: "#1a1a1a", padding: "11px 14px", borderRadius: 4 },

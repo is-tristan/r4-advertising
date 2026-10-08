@@ -15,7 +15,7 @@ import styles from "../styles/header.module.scss"
 import stylesMobileMenu from "../styles/header-mobile-menu.module.scss"
 
 // Icon
-import { costCalulatorIcon } from "@/utils/icons"
+import { costIcon, calendarIcon } from "@/utils/icons"
 
 export default function HeaderActions() {
 
@@ -38,9 +38,16 @@ export default function HeaderActions() {
                     <Button text="Brief Us" href="/contact" className={`primary small ${styles.contactBtn}`} hasAnimation={false} />
 
                     <Link
+                        href="/annual-media-commitment"
+                        className={`${styles.headerButton} ${styles.annualMediaCommitmentBtn}`}
+                        dangerouslySetInnerHTML={{ __html: calendarIcon }}
+                        title="Annual Media Commitment"
+                    />
+
+                    <Link
                         href="/calculator"
-                        className={`${styles.costCalculatorBtn}`}
-                        dangerouslySetInnerHTML={{ __html: costCalulatorIcon }}
+                        className={`${styles.headerButton} ${styles.costCalculatorBtn}`}
+                        dangerouslySetInnerHTML={{ __html: costIcon }}
                         title="Cost Calculator"
                     />
 

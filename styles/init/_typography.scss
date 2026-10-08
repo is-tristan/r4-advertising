@@ -115,7 +115,7 @@ em {
 }
 
 
-ul:not(.splide__list):not(.splide__pagination) {
+ul:not(.splide__list):not(.splide__pagination):not(.bullets) {
     display: flex;
     flex-flow: column nowrap;
     gap: 0.75rem;
