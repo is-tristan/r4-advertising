@@ -53,24 +53,29 @@
     align-items: center;
     justify-content: flex-start;
     height: 1.75rem;
+    width: calc(1.75rem * 67 / 48);
+    flex-shrink: 0;
     position: relative;
     color: var(--light);
     transition: var(--ease);
 
     @media (width >=768px) {
         height: 2rem;
+        width: calc(2rem * 67 / 48);
     }
 
     @media (width >=1024px) {
         height: 2.5rem;
+        width: calc(2.5rem * 67 / 48);
     }
 
     .logoImage {
         display: flex;
-        width: max-content;
+        width: 100%;
         height: 100%;
 
         svg {
+            display: block;
             width: 100%;
             height: 100%;
         }
