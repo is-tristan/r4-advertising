@@ -342,18 +342,18 @@ export default function VBDCalculator() {
         </p>
 
         {/* Mode toggle */}
-        <div style={S.toggle} role="tablist" aria-label="Calculator mode">
+        <div style={S.toggle} role="group" aria-label="Calculator mode">
           <button
-            role="tab"
-            aria-selected={mode === "project"}
+            type="button"
+            aria-pressed={mode === "project"}
             onClick={() => setMode("project")}
             style={mode === "project" ? S.tabOn : S.tabOff}
           >
             Project
           </button>
           <button
-            role="tab"
-            aria-selected={mode === "contract"}
+            type="button"
+            aria-pressed={mode === "contract"}
             onClick={() => canGoContract && setMode("contract")}
             disabled={!canGoContract}
             style={{
@@ -369,7 +369,7 @@ export default function VBDCalculator() {
         {/* Main panel */}
         <div style={S.panel}>
           <div style={S.inputRow}>
-            <span style={S.inputLabel}>
+            <span id="vbdBudgetLabel" style={S.inputLabel}>
               {mode === "contract" ? "Annual Media Commitment" : "Media Investment"}
             </span>
             <span style={S.bigBudget}>{budgetDisplay}</span>
@@ -384,21 +384,21 @@ export default function VBDCalculator() {
             value={sliderValue}
             onChange={handleSlider}
             style={{ "--pct": `${sliderPct}%` }}
-            aria-label="Media budget"
+            aria-labelledby="vbdBudgetLabel"
           />
           <div style={S.sliderEnds}>
             <span>£50,000</span>
             <span>£1,000,000+</span>
           </div>
 
-          <label style={S.exactLabel}>Or enter an exact amount</label>
+          <label htmlFor="vbdExactAmount" style={S.exactLabel}>Or enter an exact amount</label>
           <div style={S.exactBox}>
             <input
+              id="vbdExactAmount"
               value={exactInput}
               onChange={handleExact}
               inputMode="numeric"
               style={S.exactInput}
-              aria-label="Exact amount"
             />
             <span style={S.poundBadge}>£</span>
           </div>
@@ -606,18 +606,21 @@ function ContactForm({ contact, setField, formValid, submitting, error, onSubmit
       <div style={S.formGrid}>
         {F.map((f) => (
           <div key={f.k} style={f.half ? S.formHalf : S.formFull}>
-            <label style={S.formLabel}>{f.label}</label>
+            <label htmlFor={`vbd${f.k}`} style={S.formLabel}>{f.label}</label>
             <input
+              id={`vbd${f.k}`}
               type={f.type}
               value={contact[f.k]}
               onChange={setField(f.k)}
               style={S.formInput}
-              autoComplete="off"
+              required
+              aria-required="true"
+              autoComplete={f.k === "firstName" ? "given-name" : f.k === "lastName" ? "family-name" : f.k === "email" ? "email" : f.k === "phone" || f.k === "whatsapp" ? "tel" : f.k === "company" ? "organization" : f.k === "position" ? "organization-title" : "on"}
             />
           </div>
         ))}
       </div>
-      {error && <p style={S.formError}>{error}</p>}
+      {error && <p style={S.formError} role="alert">{error}</p>}
       <div style={S.formActions}>
         <button type="button" onClick={onSubmit} style={{ ...S.ctaBtn, opacity: formValid && !submitting ? 1 : 0.45, cursor: formValid && !submitting ? "pointer" : "not-allowed" }} disabled={!formValid || submitting}>
           {submitting ? "Sending…" : "Send my breakdown"} <span aria-hidden>→</span>
@@ -659,8 +662,8 @@ function LeadSuccess({ response, contact, onReset }) {
       </p>
 
       {/* Channel dropdown */}
-      <label style={S.formLabel}>Continue by</label>
-      <select value={channel} onChange={(e) => setChannel(e.target.value)} style={S.select}>
+      <label htmlFor="vbdContinueBy" style={S.formLabel}>Continue by</label>
+      <select id="vbdContinueBy" value={channel} onChange={(e) => setChannel(e.target.value)} style={S.select}>
         <option value="whatsapp">WhatsApp</option>
         <option value="email">Email</option>
       </select>

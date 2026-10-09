@@ -7,10 +7,10 @@ import styles from "./styles/banner.module.scss";
 export default function Banner({
     sectionClass,
     containerClass,
-    eyebrow = "Lorem Ipsum",
-    eyebrowNumber = "01",
-    title = "Lorem Ipsum dolor sit amet",
-    description = "Lorem Ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    eyebrow = null,
+    eyebrowNumber = null,
+    title = null,
+    description = null,
 }) {
 
     return (

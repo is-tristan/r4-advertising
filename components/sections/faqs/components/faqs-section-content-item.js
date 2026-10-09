@@ -47,6 +47,8 @@ export default function FaqsSectionContentItem({
 
     }, [item.description]);
 
+    const panelId = `faq-panel-${item.id || index}`;
+
     return (
 
         <motion.div
@@ -74,9 +76,11 @@ export default function FaqsSectionContentItem({
                     <p className={styles.faqShortDescription}><strong>{item.shortDescription}</strong></p>
 
                     <div
+                        id={panelId}
                         ref={descriptionRef}
                         className={styles.faqLongDescription}
                         style={{ height: isOpen ? `${contentHeight}px` : "0" }}
+                        aria-hidden={!isOpen}
                         dangerouslySetInnerHTML={{ __html: item.description }}
                     />
 
@@ -86,7 +90,17 @@ export default function FaqsSectionContentItem({
 
             <div className={styles.faqItemRight}>
 
-                <button className={styles.faqItemButton} />
+                <button
+                    type="button"
+                    className={styles.faqItemButton}
+                    aria-expanded={isOpen}
+                    aria-controls={panelId}
+                    aria-label={isOpen ? `Collapse ${item.title}` : `Expand ${item.title}`}
+                    onClick={(event) => {
+                        event.stopPropagation();
+                        setIsOpen(!isOpen);
+                    }}
+                />
 
             </div>
 

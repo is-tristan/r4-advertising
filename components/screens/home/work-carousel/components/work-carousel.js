@@ -44,6 +44,23 @@ function pauseAllVideos(root) {
     });
 }
 
+function syncSlideInert(splide) {
+    splide.Components.Slides.get().forEach((slide) => {
+        const element = slide.slide;
+
+        if (!element) {
+            return;
+        }
+
+        if (element.classList.contains("is-active")) {
+            element.removeAttribute("inert");
+            return;
+        }
+
+        element.setAttribute("inert", "");
+    });
+}
+
 function playActiveVideo(root) {
     const activeVideo = root?.querySelector(".splide__slide.is-active video")
         || root?.querySelector("video");
@@ -101,6 +118,10 @@ export default function WorkCarousel({ works = [] }) {
                             arrows: false,
                         }
                     }
+                }}
+                onMounted={(splide) => {
+                    syncSlideInert(splide);
+                    splide.on("moved", () => syncSlideInert(splide));
                 }}
                 onActive={(splide, slide) => {
 

@@ -23,7 +23,7 @@ export default function WorkGridItemNav({
 
     return (
 
-        <nav ref={ref} className={styles.workGridItemNav} role="tablist">
+        <nav ref={ref} className={styles.workGridItemNav} aria-label="Filter work">
 
             {navItems.map((item, index) => {
 
@@ -35,9 +35,7 @@ export default function WorkGridItemNav({
                         key={item.slug}
                         type="button"
                         data-name={item.slug}
-                        role="tab"
-                        aria-selected={isActive}
-                        aria-controls={item.slug}
+                        aria-pressed={isActive}
                         data-active={isActive}
                         onClick={() => onSelect?.(item._id)}
                         animate={isInView ? { opacity: 1, y: 0, filter: "blur(0)" } : { opacity: 0, y: 16, filter: "blur(0.25rem)" }}

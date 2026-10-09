@@ -1,7 +1,7 @@
 export const menuItemsData = [
     {
         label: "Company",
-        href: "#",
+        href: "/company",
         submenu: [
             {
                 label: "About",

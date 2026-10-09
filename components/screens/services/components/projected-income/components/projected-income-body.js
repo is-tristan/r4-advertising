@@ -10,7 +10,7 @@ export default function ProjectedIncomeBody({
     counters = [],
     description = null,
     buttonText = "Model your own position",
-    buttonLink = "#",
+    buttonLink = "/calculator",
 }) {
 
     return (

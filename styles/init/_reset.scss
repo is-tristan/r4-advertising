@@ -57,6 +57,37 @@ a:active {
     outline: 0;
 }
 
+:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+}
+
+.skipLink {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    z-index: 10000;
+    padding: 0.75rem 1rem;
+    background: var(--primary);
+    color: var(--dark);
+    transform: translateY(-200%);
+
+    &:focus {
+        transform: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
 .app {
     width: 100%;
     max-width: 100%;

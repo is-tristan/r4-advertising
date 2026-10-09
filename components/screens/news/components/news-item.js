@@ -9,7 +9,7 @@ import { useRef } from "react";
 import { motion, useInView } from "motion/react";
 
 // Sanity
-import { getSanityImageUrl } from "@/sanity/lib/image";
+import { getSanityImageAlt, getSanityImageUrl } from "@/sanity/lib/image";
 
 // Icons
 import { arrowUpRight } from "@/utils/icons";
@@ -75,7 +75,7 @@ export default function NewsItem({
 
                             <Image
                                 src={imageUrl}
-                                alt={title}
+                                alt={getSanityImageAlt(image, title)}
                                 fill
                                 loading="lazy"
                                 sizes="(max-width: 576px) 384px, (max-width: 1024px) 576px, 768px"

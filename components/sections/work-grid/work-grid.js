@@ -29,16 +29,16 @@ export default async function WorkGrid({
 
     const [items, categories, total] = await Promise.all([
         client.fetch(workGridQuery, {}, {
-            next: { revalidate: 1 },
+            next: { revalidate: 30 },
         }),
         hasNav
             ? client.fetch(workCategoriesQuery, {}, {
-                next: { revalidate: 1 },
+                next: { revalidate: 30 },
             })
             : Promise.resolve([]),
         hasPagination
             ? client.fetch(workGridCountQuery, { categoryId: "" }, {
-                next: { revalidate: 1 },
+                next: { revalidate: 30 },
             })
             : Promise.resolve(0),
     ]);

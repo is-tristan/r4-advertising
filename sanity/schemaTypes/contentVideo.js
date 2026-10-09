@@ -1,6 +1,7 @@
 import { defineArrayMember, defineField } from "sanity"
 import { PlayIcon } from "@sanity/icons/Play"
 import { videoFileDescription, videoFileOptions, videoFileRule } from "./videoFile"
+import { imageAltField } from "./imageField"
 
 export const contentVideoMember = defineArrayMember({
   type: "object",
@@ -23,6 +24,9 @@ export const contentVideoMember = defineArrayMember({
       options: {
         hotspot: true,
       },
+      fields: [
+        imageAltField(),
+      ],
     }),
   ],
   preview: {

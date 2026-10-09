@@ -12,7 +12,7 @@ import WorkCarousel from "./components/work-carousel";
 export default async function WorkCarouselSection() {
 
     const works = await client.fetch(workCarouselQuery, {}, {
-        next: { revalidate: 1 },
+        next: { revalidate: 30 },
     });
 
     return (

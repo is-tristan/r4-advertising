@@ -1,7 +1,7 @@
 "use client";
 
 // React
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // Next
 import Link from "next/link";
@@ -21,6 +21,11 @@ export default function HeaderMobileMenu({ isOpen = false, onClose }) {
     // Handle Menu & Submenu Logic
     const pathname = usePathname();
     const [openSubmenu, setOpenSubmenu] = useState(null);
+    const closeButtonRef = useRef(null);
+    const previouslyFocusedRef = useRef(null);
+    const onCloseRef = useRef(onClose);
+
+    onCloseRef.current = onClose;
 
     const isActive = (item) => {
         if (item.submenu?.some((submenuItem) => pathname === submenuItem.href || pathname.startsWith(`${submenuItem.href}/`))) {
@@ -54,24 +59,57 @@ export default function HeaderMobileMenu({ isOpen = false, onClose }) {
     useEffect(() => {
         if (!isOpen) {
             setOpenSubmenu(null);
+            return;
         }
+
+        previouslyFocusedRef.current = document.activeElement;
+        closeButtonRef.current?.focus();
+
+        const onKeyDown = (event) => {
+            if (event.key === "Escape") {
+                onCloseRef.current?.();
+            }
+        };
+
+        document.addEventListener("keydown", onKeyDown);
+
+        return () => {
+            document.removeEventListener("keydown", onKeyDown);
+            previouslyFocusedRef.current?.focus?.();
+        };
     }, [isOpen]);
 
     return (
 
         <>
 
-            <div className={`hidden-xxl ${styles.mobileMenu}`} data-toggled={isOpen} role="navigation" data-name="mobileMenu">
+            <div
+                id="mobileMenu"
+                className={`hidden-xxl ${styles.mobileMenu}`}
+                data-toggled={isOpen}
+                data-name="mobileMenu"
+                role="dialog"
+                aria-modal="true"
+                aria-label="Menu"
+                aria-hidden={!isOpen}
+            >
 
                 <div className={styles.mobileMenuHeader}>
 
                     <Link href="/" className={styles.mobileMenuLogo} aria-label="Home" onClick={handleLinkClick} dangerouslySetInnerHTML={{ __html: logo }} />
 
-                    <span className={`${styles.mobileMenuToggle} ${styles.mobileMenuClose}`} onClick={onClose} dangerouslySetInnerHTML={{ __html: xClose }} />
+                    <button
+                        ref={closeButtonRef}
+                        type="button"
+                        className={`${styles.mobileMenuToggle} ${styles.mobileMenuClose}`}
+                        onClick={onClose}
+                        aria-label="Close menu"
+                        dangerouslySetInnerHTML={{ __html: xClose }}
+                    />
 
                 </div>
 
-                <div className={styles.mobileMenuItems}>
+                <nav className={styles.mobileMenuItems} aria-label="Primary">
 
                     {data.map((item) => (
 
@@ -85,6 +123,7 @@ export default function HeaderMobileMenu({ isOpen = false, onClose }) {
                                         type="button"
                                         className={styles.mobileMenuItemToggle}
                                         data-submenu-open={isSubmenuOpen(item.label)}
+                                        aria-expanded={isSubmenuOpen(item.label)}
                                         onClick={() => handleSubmenuToggle(item.label)}
                                     >
 
@@ -134,13 +173,13 @@ export default function HeaderMobileMenu({ isOpen = false, onClose }) {
 
                         <span>Contact Us</span>
 
-                    </Link>D
+                    </Link>
 
-                </div>
+                </nav>
 
             </div>
 
-            <div className={`hidden-xxl ${styles.mobileMenuBackdrop}`} onClick={onClose} data-toggled={isOpen} />
+            <div className={`hidden-xxl ${styles.mobileMenuBackdrop}`} onClick={onClose} data-toggled={isOpen} aria-hidden="true" />
 
         </>
 

@@ -6,7 +6,7 @@ import { motion, useInView } from "motion/react";
 import { Image } from "next-sanity/image";
 
 // Sanity
-import { getSanityImageUrl } from "@/sanity/lib/image";
+import { getSanityImageAlt, getSanityImageUrl } from "@/sanity/lib/image";
 
 // Styles
 import styles from "../styles/team-grid.module.scss";
@@ -44,7 +44,7 @@ export default function TeamItem({
 
                     <Image
                         src={imageUrl}
-                        alt={name}
+                        alt={getSanityImageAlt(image, name)}
                         fill
                         loading="lazy"
                         sizes="(max-width: 768px) 384px, 512px"

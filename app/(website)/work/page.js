@@ -17,7 +17,7 @@ export default function WorkPage() {
 
         <>
 
-            <FeaturedVideo />
+            <FeaturedVideo eager />
 
             <WorkGrid
                 titleContainerClass="noPaddingTop"

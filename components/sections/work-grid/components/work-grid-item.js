@@ -12,7 +12,7 @@ import { motion, useInView } from "motion/react";
 import CategoryTags from "@/components/content/category-tags/category-tags";
 
 // Sanity
-import { getSanityImageUrl } from "@/sanity/lib/image";
+import { getSanityImageAlt, getSanityImageUrl } from "@/sanity/lib/image";
 
 // Styles
 import styles from "../styles/work-grid.module.scss";
@@ -59,6 +59,7 @@ export default function WorkGridItem({
                     <Link
                         href={href}
                         className={styles.workGridItemLink}
+                        aria-label={`View ${item.title}`}
                         dangerouslySetInnerHTML={{ __html: arrowUpRight }}
                     />
 
@@ -68,7 +69,7 @@ export default function WorkGridItem({
 
                     <Image
                         src={imageUrl}
-                        alt={item.title}
+                        alt={getSanityImageAlt(item.image, item.title)}
                         fill
                         sizes="(max-width: 768px) 384px, (max-width: 1200px) 576px, 768px"
                         loading="lazy"
@@ -80,6 +81,8 @@ export default function WorkGridItem({
                 <Link
                     href={href}
                     className={`colLink`}
+                    tabIndex={-1}
+                    aria-hidden="true"
                 />
 
             </div>

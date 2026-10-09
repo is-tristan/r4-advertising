@@ -52,7 +52,7 @@ export default function Home() {
       <CtaSection
         eyebrowNumber="05"
         title="Rewarded for your loyalty"
-        description="<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+        description="<p>Loyalty is returned as a discount you can see. Model the saving on your media investment, then decide how you want to put it to work.</p>"
         btnTextPrimary="Calculate your Discount"
         btnLinkPrimary="/calculator"
         hasSpinner={false}

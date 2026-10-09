@@ -8,7 +8,7 @@ import CategoryTags from "@/components/content/category-tags/category-tags";
 import Button from "@/components/handlers/button";
 
 // Sanity
-import { getSanityImageUrl } from "@/sanity/lib/image";
+import { getSanityImageAlt, getSanityImageUrl } from "@/sanity/lib/image";
 
 // Styles
 import styles from "../styles/work-carousel-section.module.scss";
@@ -25,6 +25,7 @@ export default function WorkCarouselItem({
 }) {
 
     const imageUrl = getSanityImageUrl(image, "videoPoster");
+    const imageAlt = getSanityImageAlt(image, title);
 
     return (
 
@@ -83,16 +84,18 @@ export default function WorkCarouselItem({
                             loop
                             playsInline
                             preload={index === 0 ? "metadata" : "none"}
+                            aria-hidden="true"
                         />
 
                     ) : (
 
                         <Image
                             src={imageUrl}
-                            alt={title}
+                            alt={imageAlt}
                             fill
                             sizes="100vw"
                             priority={index === 0}
+                            loading={index === 0 ? undefined : "lazy"}
                             style={{ objectFit: "cover" }}
                         />
 

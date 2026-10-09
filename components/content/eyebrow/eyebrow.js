@@ -15,7 +15,7 @@ export default function Eyebrow({
     type = "default",
     number = "01",
     separator = "//",
-    text = "Lorem Ipsum",
+    text = null,
     hasAnimation = true,
     size = "default",
 }) {

@@ -9,12 +9,20 @@ import styles from "./styles/content.module.scss";
 // Icons
 import { logo } from "@/utils/icons";
 
+function plainText(value) {
+    if (typeof value !== "string") {
+        return "";
+    }
+
+    return value.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+}
+
 export default function ContentSection({
     sectionName = undefined,
     sectionClassName = undefined,
     containerClassName = undefined,
     eyebrowNumber = "01",
-    eyebrowText = "Lorem Ipsum",
+    eyebrowText = null,
     titleTag = "h2",
     title,
     titleContent,
@@ -38,7 +46,7 @@ export default function ContentSection({
 
                 {image && (
 
-                    <ImageCol image={image} alt={title} imagePosition={imagePosition} />
+                    <ImageCol image={image} alt={plainText(title)} imagePosition={imagePosition} />
 
                 )}
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Image } from "next-sanity/image";
 
 // Sanity
-import { getSanityImageUrl } from "@/sanity/lib/image";
+import { getSanityImageAlt, getSanityImageUrl } from "@/sanity/lib/image";
 
 // Styles
 import styles from "../styles/news-singular.module.scss";
@@ -56,7 +56,7 @@ export default function NewsMeta({
                             width={80}
                             height={80}
                             src={authorImageUrl}
-                            alt={author.name}
+                            alt={getSanityImageAlt(author.image, author.name)}
                             loading="lazy"
                             sizes="80px"
                         />

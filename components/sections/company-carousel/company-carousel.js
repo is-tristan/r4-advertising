@@ -56,10 +56,11 @@ export default function CompanyCarousel({
 
     return (
 
-        <section
+            <section
             ref={sectionRef}
             className={`${styles.companyCarousel} ${className ? className : undefined}`}
             data-has-borders={hasBorders}
+            aria-label="Clients"
         >
 
             <div
@@ -76,7 +77,7 @@ export default function CompanyCarousel({
 
                     <Fragment key={index}>
 
-                        <div className={`${styles.companyCarouselBrandMark}`} dangerouslySetInnerHTML={{ __html: brandMark }} />
+                        <div className={`${styles.companyCarouselBrandMark}`} aria-hidden="true" dangerouslySetInnerHTML={{ __html: brandMark }} />
 
                         <div className={`${styles.companyCarouselItem}`}>
 

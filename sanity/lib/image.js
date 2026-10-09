@@ -4,6 +4,14 @@ import { dataset, projectId } from "@/sanity/env"
 
 const builder = createImageUrlBuilder({ projectId, dataset })
 
+export function getSanityImageAlt(source, fallback = "") {
+  if (source && typeof source === "object" && typeof source.alt === "string" && source.alt.trim()) {
+    return source.alt.trim()
+  }
+
+  return fallback
+}
+
 export function urlFor(source) {
   return builder.image(source)
 }

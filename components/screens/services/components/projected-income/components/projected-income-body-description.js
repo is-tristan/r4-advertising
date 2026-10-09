@@ -13,7 +13,7 @@ import styles from "../styles/projected-income.module.scss";
 export default function ProjectedIncomeBodyDescription({
     description = null,
     buttonText = "Model your own position",
-    buttonLink = "#",
+    buttonLink = "/calculator",
 }) {
 
     const ref = useRef(null);

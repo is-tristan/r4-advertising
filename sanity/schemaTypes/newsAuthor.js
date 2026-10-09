@@ -1,5 +1,6 @@
 import { defineField, defineType } from "sanity"
 import { UserIcon } from "@sanity/icons/User"
+import { imageAltField } from "./imageField"
 
 export const newsAuthor = defineType({
   name: "newsAuthor",
@@ -30,6 +31,9 @@ export const newsAuthor = defineType({
       options: {
         hotspot: true,
       },
+      fields: [
+        imageAltField(),
+      ],
     }),
   ],
   preview: {

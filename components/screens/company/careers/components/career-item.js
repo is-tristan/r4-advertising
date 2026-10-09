@@ -14,7 +14,7 @@ import Link from "next/link";
 import { Image } from "next-sanity/image";
 
 // Sanity
-import { getSanityImageUrl } from "@/sanity/lib/image";
+import { getSanityImageAlt, getSanityImageUrl } from "@/sanity/lib/image";
 
 // Styles
 import styles from "../styles/career-grid.module.scss";
@@ -76,7 +76,7 @@ export default function CareerItem({
 
                         <Image
                             src={imageUrl}
-                            alt={title}
+                            alt={getSanityImageAlt(image, title)}
                             fill
                             loading="lazy"
                             sizes="(max-width: 768px) 384px, 512px"
@@ -126,7 +126,7 @@ export default function CareerItem({
 
                 </div>
 
-                <Link href={`/company/careers/${slug}`} className={`colLink`} aria-label={`View details for ${title}`} />
+                <Link href={`/company/careers/${slug}`} className={`colLink`} tabIndex={-1} aria-hidden="true" />
 
             </div>
 

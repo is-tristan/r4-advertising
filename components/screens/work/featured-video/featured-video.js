@@ -7,11 +7,12 @@ import FeaturedVideoItem from "./components/featured-video-item";
 
 export default async function FeaturedVideo({
     headerOffset = true,
-    containerClass = undefined
+    containerClass = undefined,
+    eager = false,
 }) {
 
     const work = await client.fetch(featuredVideoQuery, {}, {
-        next: { revalidate: 1 },
+        next: { revalidate: 30 },
     });
 
     if (!work?.video) {
@@ -27,6 +28,8 @@ export default async function FeaturedVideo({
                 <FeaturedVideoItem
                     video={work.video}
                     videoPoster={work.videoPoster}
+                    title={work.title}
+                    eager={eager}
                 />
 
             </div>

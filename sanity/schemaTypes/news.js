@@ -2,6 +2,7 @@ import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-li
 import { defineArrayMember, defineField, defineType } from "sanity"
 import { DocumentTextIcon } from "@sanity/icons/DocumentText"
 import { contentVideoMember } from "./contentVideo"
+import { imageAltField } from "./imageField"
 
 export const news = (context) => defineType({
   name: "news",
@@ -34,6 +35,9 @@ export const news = (context) => defineType({
       options: {
         hotspot: true,
       },
+      fields: [
+        imageAltField(),
+      ],
     }),
     defineField({
       name: "excerpt",

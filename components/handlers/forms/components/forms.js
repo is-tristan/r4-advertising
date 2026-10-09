@@ -24,11 +24,11 @@ export default function ContactForm() {
 
             <fieldset className="fieldset half" data-name="firstName">
 
-                <legend className="legend">First Name <span className="required">*</span></legend>
+                <label className="legend" htmlFor="firstName">First Name <span className="required">*</span></label>
 
                 <div className="field">
 
-                    <input type="text" name="firstName" required autoComplete="given-name" placeholder="Enter your first name" aria-required="true" />
+                    <input id="firstName" type="text" name="firstName" required autoComplete="given-name" placeholder="Enter your first name" aria-required="true" />
 
                 </div>
 
@@ -36,11 +36,11 @@ export default function ContactForm() {
 
             <fieldset className="fieldset half" data-name="lastName">
 
-                <legend className="legend">Last Name <span className="required">*</span></legend>
+                <label className="legend" htmlFor="lastName">Last Name <span className="required">*</span></label>
 
                 <div className="field">
 
-                    <input type="text" name="lastName" required autoComplete="family-name" placeholder="Enter your last name" aria-required="true" />
+                    <input id="lastName" type="text" name="lastName" required autoComplete="family-name" placeholder="Enter your last name" aria-required="true" />
 
                 </div>
 
@@ -48,11 +48,11 @@ export default function ContactForm() {
 
             <fieldset className="fieldset half" data-name="email">
 
-                <legend className="legend">Email Address <span className="required">*</span></legend>
+                <label className="legend" htmlFor="email">Email Address <span className="required">*</span></label>
 
                 <div className="field">
 
-                    <input type="email" name="email" required autoComplete="email" placeholder="Enter your email address" aria-required="true" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
+                    <input id="email" type="email" name="email" required autoComplete="email" placeholder="Enter your email address" aria-required="true" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
 
                 </div>
 
@@ -60,11 +60,11 @@ export default function ContactForm() {
 
             <fieldset className="fieldset half" data-name="mobileNumber">
 
-                <legend className="legend">Mobile Number <span className="required">*</span></legend>
+                <label className="legend" htmlFor="mobileNumber">Mobile Number <span className="required">*</span></label>
 
                 <div className="field">
 
-                    <input type="tel" name="mobileNumber" required autoComplete="tel" placeholder="+44 7XXX XXXXXX" aria-required="true" />
+                    <input id="mobileNumber" type="tel" name="mobileNumber" required autoComplete="tel" placeholder="+44 7XXX XXXXXX" aria-required="true" />
 
                 </div>
 
@@ -72,11 +72,11 @@ export default function ContactForm() {
 
             <fieldset className="fieldset half" data-name="landlineNumber">
 
-                <legend className="legend">Landline Number</legend>
+                <label className="legend" htmlFor="landlineNumber">Landline Number</label>
 
                 <div className="field">
 
-                    <input type="tel" name="landlineNumber" autoComplete="tel" placeholder="+44 XX XXXX XXXX" />
+                    <input id="landlineNumber" type="tel" name="landlineNumber" autoComplete="tel" placeholder="+44 XX XXXX XXXX" />
 
                 </div>
 
@@ -84,11 +84,11 @@ export default function ContactForm() {
 
             <fieldset className="fieldset half" data-name="company">
 
-                <legend className="legend">Company</legend>
+                <label className="legend" htmlFor="company">Company</label>
 
                 <div className="field">
 
-                    <input type="text" name="company" autoComplete="organization" placeholder="Enter your company name" />
+                    <input id="company" type="text" name="company" autoComplete="organization" placeholder="Enter your company name" />
 
                 </div>
 
@@ -96,11 +96,11 @@ export default function ContactForm() {
 
             <fieldset className="fieldset" data-name="website">
 
-                <legend className="legend">Website</legend>
+                <label className="legend" htmlFor="website">Website</label>
 
                 <div className="field">
 
-                    <input type="url" name="website" autoComplete="url" placeholder="Enter your website URL" />
+                    <input id="website" type="url" name="website" autoComplete="url" placeholder="Enter your website URL" />
 
                 </div>
 
@@ -108,11 +108,11 @@ export default function ContactForm() {
 
             <fieldset className="fieldset" data-name="message">
 
-                <legend className="legend">Message <span className="required">*</span></legend>
+                <label className="legend" htmlFor="message">Message <span className="required">*</span></label>
 
                 <div className="field">
 
-                    <textarea name="message" required autoComplete="off" placeholder="Enter your message..." aria-required="true" />
+                    <textarea id="message" name="message" required autoComplete="off" placeholder="Enter your message..." aria-required="true" />
 
                 </div>
 
@@ -151,7 +151,7 @@ export default function ContactForm() {
 
                 </button>
 
-                <div className="resultContainer" style={{ display: result ? "flex" : "none" }}>
+                <div className="resultContainer" role="status" aria-live="polite" style={{ display: result ? "flex" : "none" }}>
 
                     <span>{result}</span>
 

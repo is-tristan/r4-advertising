@@ -1,6 +1,7 @@
 import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-list"
 import { defineArrayMember, defineField, defineType } from "sanity"
 import { CaseIcon } from "@sanity/icons/Case"
+import { imageAltField } from "./imageField"
 
 export const career = (context) => defineType({
   name: "career",
@@ -33,6 +34,9 @@ export const career = (context) => defineType({
       options: {
         hotspot: true,
       },
+      fields: [
+        imageAltField(),
+      ],
     }),
     defineField({
       name: "category",

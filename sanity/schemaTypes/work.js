@@ -3,6 +3,7 @@ import { defineArrayMember, defineField, defineType } from "sanity"
 import { ImageIcon } from "@sanity/icons/Image"
 import { PlayIcon } from "@sanity/icons/Play"
 import { portableTextBlockMember, portableTextField } from "./portableText"
+import { imageAltField } from "./imageField"
 import { videoFileDescription, videoFileOptions, videoFileRule } from "./videoFile"
 
 const workContentImageMember = defineArrayMember({
@@ -13,11 +14,7 @@ const workContentImageMember = defineArrayMember({
     hotspot: true,
   },
   fields: [
-    defineField({
-      name: "alt",
-      title: "Alternative text",
-      type: "string",
-    }),
+    imageAltField(),
   ],
 })
 
@@ -123,6 +120,9 @@ export const work = (context) => defineType({
       options: {
         hotspot: true,
       },
+      fields: [
+        imageAltField(),
+      ],
     }),
     defineField({
       name: "gallery",
@@ -136,6 +136,9 @@ export const work = (context) => defineType({
           options: {
             hotspot: true,
           },
+          fields: [
+            imageAltField(),
+          ],
         }),
         defineArrayMember({
           type: "file",
@@ -152,6 +155,9 @@ export const work = (context) => defineType({
               options: {
                 hotspot: true,
               },
+              fields: [
+                imageAltField(),
+              ],
             }),
           ],
           preview: {

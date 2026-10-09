@@ -48,7 +48,7 @@ export default function HeaderMenu() {
 
     return (
 
-        <div className={`hidden-s hidden-m hidden-l hidden-xl ${styles.desktopMenu}`} role="navigation" data-name="desktopMenu">
+        <nav className={`hidden-s hidden-m hidden-l hidden-xl ${styles.desktopMenu}`} aria-label="Primary" data-name="desktopMenu">
 
             {data.map((item) => (
 
@@ -59,6 +59,12 @@ export default function HeaderMenu() {
                     data-active={isActive(item)}
                     onMouseEnter={() => item.submenu && handleSubmenuOpen(item.label)}
                     onMouseLeave={() => item.submenu && handleSubmenuClose()}
+                    onFocus={() => item.submenu && handleSubmenuOpen(item.label)}
+                    onBlur={(event) => {
+                        if (item.submenu && !event.currentTarget.contains(event.relatedTarget)) {
+                            handleSubmenuClose();
+                        }
+                    }}
                 >
 
                     {item.submenu ? (
@@ -67,13 +73,26 @@ export default function HeaderMenu() {
 
                             <div className={`${styles.menuItem} ${styles.hasSubmenu}`}>
 
-                                <div className={styles.menuItemLink} style={{ cursor: "pointer" }} aria-label={`Open ${item.label} submenu`}>
+                                <button
+                                    type="button"
+                                    className={styles.menuItemLink}
+                                    aria-expanded={isSubmenuOpen(item.label)}
+                                    aria-haspopup="true"
+                                    onClick={() => {
+                                        if (isSubmenuOpen(item.label)) {
+                                            handleSubmenuClose();
+                                            return;
+                                        }
+
+                                        handleSubmenuOpen(item.label);
+                                    }}
+                                >
 
                                     <span>{item.label}</span>
 
-                                    <span className={styles.menuItemIcon} dangerouslySetInnerHTML={{ __html: chevronDown }} />
+                                    <span className={styles.menuItemIcon} aria-hidden="true" dangerouslySetInnerHTML={{ __html: chevronDown }} />
 
-                                </div>
+                                </button>
 
                             </div>
 
@@ -121,7 +140,7 @@ export default function HeaderMenu() {
 
             ))}
 
-        </div>
+        </nav>
 
     );
 

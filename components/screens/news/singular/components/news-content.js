@@ -40,7 +40,7 @@ const portableTextComponents = {
                         poster={posterUrl || undefined}
                         controls
                         playsInline
-                        preload="metadata"
+                        preload="none"
                     />
 
                 </div>
@@ -50,19 +50,27 @@ const portableTextComponents = {
         },
     },
     marks: {
-        link: ({ children, value }) => (
+        link: ({ children, value }) => {
 
-            <a
-                href={value?.href}
-                target={value?.blank ? "_blank" : undefined}
-                rel={value?.blank ? "noopener noreferrer" : undefined}
-            >
+            if (!value?.href) {
+                return children;
+            }
 
-                {children}
+            return (
 
-            </a>
+                <a
+                    href={value.href}
+                    target={value?.blank ? "_blank" : undefined}
+                    rel={value?.blank ? "noopener noreferrer" : undefined}
+                >
 
-        ),
+                    {children}
+
+                </a>
+
+            );
+
+        },
     },
 };
 

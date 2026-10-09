@@ -47,6 +47,23 @@ function pauseAllVideos(root) {
     });
 }
 
+function syncSlideInert(splide) {
+    splide.Components.Slides.get().forEach((slide) => {
+        const element = slide.slide;
+
+        if (!element) {
+            return;
+        }
+
+        if (element.classList.contains("is-active")) {
+            element.removeAttribute("inert");
+            return;
+        }
+
+        element.setAttribute("inert", "");
+    });
+}
+
 function playActiveVideo(root) {
     const activeVideo = root?.querySelector(".splide__slide.is-active video")
         || root?.querySelector("video");
@@ -84,6 +101,7 @@ export default function GalleryCarousel({
                     type: "video",
                     video: item.video,
                     posterUrl: getSanityImageUrl(item.videoPoster, "videoPoster"),
+                    alt: item.videoPoster?.alt || "",
                 };
 
             }
@@ -98,6 +116,7 @@ export default function GalleryCarousel({
                 key: item?._key || `gallery-${index}`,
                 type: "image",
                 imageUrl,
+                alt: item?.alt || "",
             };
 
         })
@@ -165,6 +184,10 @@ export default function GalleryCarousel({
                         }
                     }
                 }}
+                onMounted={(splide) => {
+                    syncSlideInert(splide);
+                    splide.on("moved", () => syncSlideInert(splide));
+                }}
                 onActive={(splide, slide) => {
 
                     if (!isVisibleRef.current) {
@@ -191,7 +214,7 @@ export default function GalleryCarousel({
                                 loop
                                 playsInline
                                 controls
-                                preload="metadata"
+                                preload="none"
                                 style={{
                                     width: "100%",
                                     height: "100%",
@@ -204,7 +227,7 @@ export default function GalleryCarousel({
 
                             <Image
                                 src={slide.imageUrl}
-                                alt={`Gallery image ${index + 1}`}
+                                alt={slide.alt || `Gallery image ${index + 1}`}
                                 fill
                                 sizes="100%"
                                 loading="lazy"

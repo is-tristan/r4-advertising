@@ -29,8 +29,10 @@ export default function FeaturedImage({ image, alt }) {
 
                 <Image
                     src={image}
-                    alt={alt}
+                    alt={alt || ""}
                     fill
+                    sizes="100vw"
+                    loading="lazy"
                     style={{ objectFit: "cover" }}
                 />
 

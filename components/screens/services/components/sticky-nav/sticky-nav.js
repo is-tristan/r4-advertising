@@ -167,11 +167,12 @@ export default function StickyNav() {
             style={isSticky ? { height: navHeight } : undefined}
         >
 
-            <div
+            <nav
                 ref={navRef}
                 className={`${styles.stickyNav} borderBottom`}
                 data-sticky={isSticky}
                 style={isSticky ? { top: headerOffset } : undefined}
+                aria-label="Services"
             >
 
                 <div className={`container ${styles.stickyNavContainer}`}>
@@ -196,7 +197,7 @@ export default function StickyNav() {
 
                 </div>
 
-            </div>
+            </nav>
 
         </div>
 

@@ -19,12 +19,12 @@ export async function fetchWorkGridPage({
         client.fetch(workGridPageQuery(safeStart, safeEnd), {
             categoryId: safeCategoryId,
         }, {
-            next: { revalidate: 1 },
+            next: { revalidate: 30 },
         }),
         client.fetch(workGridCountQuery, {
             categoryId: safeCategoryId,
         }, {
-            next: { revalidate: 1 },
+            next: { revalidate: 30 },
         }),
     ]);
 

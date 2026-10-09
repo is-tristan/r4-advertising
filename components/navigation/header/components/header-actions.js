@@ -39,6 +39,7 @@ export default function HeaderActions() {
                         href="/calculator"
                         className={`${styles.headerButton} ${styles.costCalculatorBtn}`}
                         dangerouslySetInnerHTML={{ __html: costIcon }}
+                        aria-label="Cost Calculator"
                         title="Cost Calculator"
                     />
 
@@ -46,6 +47,7 @@ export default function HeaderActions() {
                         href="/annual-media-commitment"
                         className={`${styles.headerButton} ${styles.annualMediaCommitmentBtn}`}
                         dangerouslySetInnerHTML={{ __html: calendarIcon }}
+                        aria-label="Annual Media Commitment"
                         title="Annual Media Commitment"
                     />
 
@@ -53,7 +55,15 @@ export default function HeaderActions() {
 
                 </div>
 
-                <div className={`hidden-xxl ${stylesMobileMenu.mobileMenuToggle}`} onClick={toggleMobileMenu} data-name="mobileMenuToggle">
+                <button
+                    type="button"
+                    className={`hidden-xxl ${stylesMobileMenu.mobileMenuToggle}`}
+                    onClick={toggleMobileMenu}
+                    data-name="mobileMenuToggle"
+                    aria-expanded={isMobileMenuOpen}
+                    aria-controls="mobileMenu"
+                    aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+                >
 
                     <span className={stylesMobileMenu.mobileMenuToggleItem} />
 
@@ -61,7 +71,7 @@ export default function HeaderActions() {
 
                     <span className={stylesMobileMenu.mobileMenuToggleItem} />
 
-                </div>
+                </button>
 
             </div>
 

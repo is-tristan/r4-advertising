@@ -20,6 +20,12 @@
 }
 
 .menuItemLink {
+    appearance: none;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    font: inherit;
+    cursor: pointer;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;

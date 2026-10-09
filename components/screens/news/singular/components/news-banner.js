@@ -8,7 +8,7 @@ import NewsMeta from "@/components/screens/news/singular/components/news-meta";
 import NewsBannerReveal from "@/components/screens/news/singular/components/news-banner-reveal";
 
 // Sanity
-import { getSanityImageUrl } from "@/sanity/lib/image";
+import { getSanityImageAlt, getSanityImageUrl } from "@/sanity/lib/image";
 
 // Styles
 import styles from "../styles/news-singular.module.scss";
@@ -77,7 +77,7 @@ export default function NewsBanner({
 
                         <Image
                             src={imageUrl}
-                            alt={title}
+                            alt={getSanityImageAlt(image, title)}
                             fill
                             sizes="(max-width: 768px) 100vw, 960px"
                             priority

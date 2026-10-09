@@ -19,7 +19,7 @@ export default async function sitemap() {
   const siteUrl = getSiteUrl()
 
   const data = await client.fetch(sitemapQuery, {}, {
-    next: { revalidate: 3600 },
+    next: { revalidate: 30 },
   }).catch(() => null)
 
   const staticEntries = staticRoutes.map((path) => ({

@@ -49,7 +49,7 @@ export default function DisciplineSectionContentItem({
 
             <div className={styles.disciplinesContentItemRight}>
 
-                <Link href={item.href} className={styles.disciplinesContentItemLink} dangerouslySetInnerHTML={{ __html: arrowUpRight }} />
+                <Link href={item.href} className={styles.disciplinesContentItemLink} aria-label={`Go to ${item.title}`} dangerouslySetInnerHTML={{ __html: arrowUpRight }} />
 
             </div>
 

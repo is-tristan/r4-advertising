@@ -31,7 +31,7 @@ export default function HeaderClient() {
 
     return (
 
-        <header id="header" className={styles.header} role="navigation" data-sticky={isSticky}>
+        <header id="header" className={styles.header} data-sticky={isSticky}>
 
             <HeaderContainer />
 

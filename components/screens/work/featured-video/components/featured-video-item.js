@@ -1,17 +1,36 @@
 "use client";
 
 // Imports
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { motion, useInView } from "motion/react";
 
 // Sanity
 import { getSanityImageUrl } from "@/sanity/lib/image";
 
-export default function FeaturedVideoItem({ video, videoPoster }) {
+export default function FeaturedVideoItem({ video, videoPoster, title = "Featured work", eager = false }) {
 
     const ref = useRef(null);
+    const videoRef = useRef(null);
     const isInView = useInView(ref, { once: true, amount: 0.15 });
+    const isVisible = useInView(ref, { amount: 0.15 });
     const posterUrl = getSanityImageUrl(videoPoster, "videoPoster");
+
+    useEffect(() => {
+
+        const element = videoRef.current;
+
+        if (!element) {
+            return;
+        }
+
+        if (isVisible) {
+            element.play().catch(() => {});
+            return;
+        }
+
+        element.pause();
+
+    }, [isVisible]);
 
     return (
 
@@ -24,13 +43,15 @@ export default function FeaturedVideoItem({ video, videoPoster }) {
         >
 
             <video
+                ref={videoRef}
                 src={video}
                 poster={posterUrl || undefined}
                 controls
                 muted
                 playsInline
-                autoPlay
                 loop
+                preload={eager ? "metadata" : "none"}
+                aria-label={title}
                 style={{ width: "100%", height: "100%", borderRadius: "1rem", objectFit: "cover" }}
             />
 
