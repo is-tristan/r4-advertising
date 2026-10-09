@@ -24,6 +24,11 @@
     width: 100%;
     overflow-x: auto;
 
+    @media (width <1024px) {
+      justify-content: center;
+      align-items: center;
+    }
+
     @media (width >=1024px) {
         flex-flow: row wrap;
         gap: 0.875rem;

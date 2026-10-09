@@ -43,15 +43,15 @@ export default function HeaderActions() {
                         title="Cost Calculator"
                     />
 
-                    <Link
+                    {/* <Link
                         href="/annual-media-commitment"
                         className={`${styles.headerButton} ${styles.annualMediaCommitmentBtn}`}
                         dangerouslySetInnerHTML={{ __html: calendarIcon }}
                         aria-label="Annual Media Commitment"
                         title="Annual Media Commitment"
-                    />
+                    /> */}
 
-                    <Button text="Brief Us" href="/contact" className={`primary small ${styles.contactBtn}`} hasAnimation={false} />
+                    <Button text="Send us your brief" href="/contact" className={`primary small ${styles.contactBtn}`} hasAnimation={false} />
 
                 </div>
 

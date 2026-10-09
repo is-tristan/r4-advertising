@@ -16,6 +16,9 @@ import { menuItemsData as data } from "@/data/menu-items-data";
 // Icons
 import { logo, xClose, chevronDown } from "@/utils/icons";
 
+// Components
+import Button from "@/components/handlers/button";
+
 export default function HeaderMobileMenu({ isOpen = false, onClose }) {
 
     // Handle Menu & Submenu Logic
@@ -169,13 +172,13 @@ export default function HeaderMobileMenu({ isOpen = false, onClose }) {
 
                     ))}
 
-                    <Link href="/contact" className={styles.mobileMenuContact} onClick={handleLinkClick}>
-
-                        <span>Contact Us</span>
-
-                    </Link>
-
                 </nav>
+
+                <div onClick={handleLinkClick}>
+
+                    <Button text="Contact Us" href="/contact" className={`primary ${styles.mobileMenuContact}`} hasAnimation={false} />
+
+                </div>
 
             </div>
 

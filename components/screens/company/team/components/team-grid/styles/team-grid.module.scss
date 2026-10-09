@@ -21,11 +21,6 @@
         position: relative;
         overflow: hidden;
 
-        @media (hover:hover) and (pointer:fine) {
-            filter: grayscale(100%);
-            transition: filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
         img {
             width: 100%;
             height: 100%;

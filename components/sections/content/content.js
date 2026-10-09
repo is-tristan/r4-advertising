@@ -21,6 +21,7 @@ export default function ContentSection({
     sectionName = undefined,
     sectionClassName = undefined,
     containerClassName = undefined,
+    mobileAlignment,
     eyebrowNumber = "01",
     eyebrowText = null,
     titleTag = "h2",
@@ -29,8 +30,8 @@ export default function ContentSection({
     description,
     image,
     imagePosition = "right",
-    btnTextPrimary,
-    btnLinkPrimary,
+    btnTextPrimary = "Brief us",
+    btnLinkPrimary = "/contact",
     btnTextSecondary,
     btnLinkSecondary,
     btnTargetPrimary,
@@ -52,7 +53,7 @@ export default function ContentSection({
 
                 <div className="contentCol">
 
-                    <div className="content" data-alignment={!image ? "centered" : null}>
+                    <div className="content" data-alignment={!image ? "centered" : null} data-mobile-alignment={mobileAlignment}>
 
                         <Text
                             eyebrow={{ number: eyebrowNumber, text: eyebrowText ? eyebrowText : null }}
@@ -64,15 +65,11 @@ export default function ContentSection({
                             alignment={!image ? "centered" : "default"}
                         />
 
-                        {btnTextPrimary || btnTextSecondary && (
+                        {btnTextPrimary && (
 
                             <div className="buttons">
 
-                                {btnTextPrimary && (
-
-                                    <Button text={btnTextPrimary} href={btnLinkPrimary} target={btnTargetPrimary} className="primary" />
-
-                                )}
+                                <Button text={btnTextPrimary} href={btnLinkPrimary} target={btnTargetPrimary} className="primary" />
 
                                 {btnTextSecondary && (
 

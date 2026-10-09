@@ -395,6 +395,14 @@
         }
     }
 
+    &[data-mobile-alignment="centered"] {
+        @media (width <1024px) {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+    }
+
     &.innerContent {
         gap: 1rem;
 

@@ -28,7 +28,7 @@ h6 {
 
 h1,
 .bigHeading h2 {
-    font-size: clamp(3.75rem, 7.5dvw, 7.5rem);
+    font-size: clamp(2.75rem, 7.5dvw, 7.5rem);
     line-height: 90%;
 }
 
@@ -37,7 +37,7 @@ h2,
     font-size: clamp(2.33rem, 3.5dvw, 3.5rem);
 
     &.sectionTitle {
-        font-size: clamp(2.33rem, 6.5dvw, 6.5rem);
+        font-size: clamp(2.75rem, 6.5dvw, 6.5rem);
     }
 
     small {

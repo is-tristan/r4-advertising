@@ -8,8 +8,8 @@
     flex-flow: column nowrap;
     justify-content: space-between;
     align-items: center;
-    width: 2.25rem;
-    height: 1rem;
+    width: 1.875rem;
+    height: 1.25rem;
     border-radius: 0.5rem;
     cursor: pointer;
     position: relative;
@@ -84,8 +84,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 2rem;
-        height: 2rem;
+        width: 1.5rem;
+        height: 1.5rem;
         color: var(--light);
         cursor: pointer;
 
@@ -193,25 +193,6 @@
     &:active,
     &[data-active="true"] {
         color: var(--primary);
-    }
-}
-
-.mobileMenuContact {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: auto;
-    padding: 0.875rem 1rem;
-    border-radius: var(--btnRadius);
-    background: var(--btnGradient);
-    color: var(--dark);
-    font-size: 0.9375rem;
-    font-weight: 400;
-    text-align: center;
-    transition: var(--ease);
-
-    &:hover {
-        filter: brightness(1.05);
     }
 }
 

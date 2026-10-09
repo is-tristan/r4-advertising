@@ -41,6 +41,10 @@
     .workCarouselItemContent {
         padding-bottom: 3rem;
 
+        @media (width <1024px) {
+            gap: 1rem;
+        }
+
         @media (width >=1024px) {
             p {
                 max-width: 80ch;
@@ -92,6 +96,7 @@
                     from {
                         transform: scale(1);
                     }
+
                     to {
                         transform: scale(1.1);
                     }

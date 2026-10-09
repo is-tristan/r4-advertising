@@ -6,13 +6,18 @@
     height: max-content;
 
     .categoryTag {
-        font-size: 0.75rem;
+        font-size: 0.66rem;
+        font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.12em;
         line-height: 1;
         border-radius: 10rem;
         padding: 0.25rem 0.5rem;
         border: 1px solid transparent;
+
+        @media (width >=768px) {
+            font-size: 0.75rem;
+        }
     }
 
     &[data-theme="primary"] {

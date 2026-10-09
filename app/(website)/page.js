@@ -32,6 +32,7 @@ export default function Home() {
         eyebrowNumber="02"
         eyebrowText="Why we stand out"
         title="Stand out Ideas"
+        titleTag="h1"
         titleClass={`sectionTitle`}
         description="<p>R4 exists to close the gap between ambition and outcome - by bringing trading discipline, audience understanding, and delivery governance into one system.</p><p><strong>That's how investment turns into results. Consistently. Deliberately.</strong></p>"
         hasBrandMark={true}
@@ -40,7 +41,9 @@ export default function Home() {
       <WorkGrid hasButton={true} />
 
       <ContentSection
-        containerClassName={`noPaddingTop`}
+        sectionClassName={`sectionPadding`}
+        containerClassName={`noPaddingTop noPaddingBottom`}
+        mobileAlignment="centered"
         eyebrowNumber={null}
         eyebrowText={null}
         title="Ready to be our next case study?"
@@ -51,8 +54,8 @@ export default function Home() {
 
       <CtaSection
         eyebrowNumber="05"
-        title="Rewarded for your loyalty"
-        description="<p>Loyalty is returned as a discount you can see. Model the saving on your media investment, then decide how you want to put it to work.</p>"
+        title="Your Media Investment Creates Commercial Value"
+        description="<p>Media owners offer increasing discounts when campaign spend reaches defined thresholds. The more you spend, the greater the Volume Based Discount available.</p><p>R4 makes this value visible before campaign planning begins, so you understand the discount your investment has unlocked</p>"
         btnTextPrimary="Calculate your Discount"
         btnLinkPrimary="/calculator"
         hasSpinner={false}

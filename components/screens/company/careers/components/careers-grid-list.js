@@ -6,6 +6,7 @@ import { useMemo, useState } from "react";
 // Components
 import Eyebrow from "@/components/content/eyebrow/eyebrow";
 import CareerItem from "./career-item";
+import LocationFilter from "./location-filter";
 
 // Styles
 import styles from "../styles/career-grid.module.scss";
@@ -54,48 +55,11 @@ export default function CareersGridList({
                     type="heading"
                 />
 
-                {locations.length > 0 && (
-
-                    <div className={styles.locationFilter} role="group" aria-label="Filter by location">
-
-                        <button
-                            type="button"
-                            data-active={activeLocation === "all"}
-                            aria-pressed={activeLocation === "all"}
-                            onClick={() => setActiveLocation("all")}
-                        >
-
-                            <div className={styles.locationFilterButton}>
-
-                                <span>All</span>
-
-                            </div>
-
-                        </button>
-
-                        {locations.map((location) => (
-
-                            <button
-                                key={location}
-                                type="button"
-                                data-active={activeLocation === location}
-                                aria-pressed={activeLocation === location}
-                                onClick={() => setActiveLocation(location)}
-                            >
-
-                                <div className={styles.locationFilterButton}>
-
-                                    <span>{location}</span>
-
-                                </div>
-
-                            </button>
-
-                        ))}
-
-                    </div>
-
-                )}
+                <LocationFilter
+                    locations={locations}
+                    activeLocation={activeLocation}
+                    onSelect={setActiveLocation}
+                />
 
             </div>
 

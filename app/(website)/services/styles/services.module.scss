@@ -5,6 +5,9 @@
         }
 
         h1 {
+            @media (width < 768px) {
+                font-size: 4.75rem !important;
+            }
             @media (width >=1024px) {
                 line-height: 85%;
             }

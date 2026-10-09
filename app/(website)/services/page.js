@@ -29,6 +29,7 @@ export default function ServicesPage() {
 
             <Content
                 sectionClassName={`${styles.introBanner} headerOffset`}
+                containerClassName={`noPaddingBottom`}
                 eyebrowNumber="01"
                 eyebrowText="Our Services"
                 title="Trade<span class='colorPrimary'>.</span> <br> Plan<span class='colorPrimary'>.</span> <br> Activate<span class='colorPrimary'>.</span>"
