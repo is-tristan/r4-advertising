@@ -33,9 +33,14 @@ export default function HeaderActions() {
 
                 <div className={`${styles.headerButtons}`}>
 
-                    <Link href="/contact">Sign In</Link>
+                    {/* <Link href="/contact">Sign In</Link> */}
 
-                    <Button text="Brief Us" href="/contact" className={`primary small ${styles.contactBtn}`} hasAnimation={false} />
+                    <Link
+                        href="/calculator"
+                        className={`${styles.headerButton} ${styles.costCalculatorBtn}`}
+                        dangerouslySetInnerHTML={{ __html: costIcon }}
+                        title="Cost Calculator"
+                    />
 
                     <Link
                         href="/annual-media-commitment"
@@ -44,12 +49,7 @@ export default function HeaderActions() {
                         title="Annual Media Commitment"
                     />
 
-                    <Link
-                        href="/calculator"
-                        className={`${styles.headerButton} ${styles.costCalculatorBtn}`}
-                        dangerouslySetInnerHTML={{ __html: costIcon }}
-                        title="Cost Calculator"
-                    />
+                    <Button text="Brief Us" href="/contact" className={`primary small ${styles.contactBtn}`} hasAnimation={false} />
 
                 </div>
 

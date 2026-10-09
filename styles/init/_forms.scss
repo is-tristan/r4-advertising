@@ -253,6 +253,21 @@ $formCheckboxCheck: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000
     font-size: 0.875rem;
 }
 
+.hubspotFormWrap {
+    width: 100%;
+    align-self: stretch;
+}
+
+.hubspotForm {
+    width: 100%;
+    max-width: 50rem;
+    margin: 0 auto;
+
+    .hs-form-frame {
+        width: 100%;
+    }
+}
+
 .formFooter {
     display: flex;
     flex-flow: column nowrap;

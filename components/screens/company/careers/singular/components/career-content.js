@@ -5,7 +5,7 @@
 "use client";
 
 // Components
-import Button from "@/components/handlers/button";
+import HubspotForm from "@/components/handlers/forms/hubspot-form";
 
 // React
 import { PortableText } from "@portabletext/react";
@@ -43,32 +43,30 @@ export default function CareerContent({
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, amount: 0.15 });
 
-    if (!content?.length) {
-
-        return null;
-
-    }
-
     return (
 
         <div className={styles.careerContent}>
 
             <div className={`container noPaddingTop condensed`}>
 
-                <motion.div
-                    ref={ref}
-                    className={styles.careerContentInner}
-                    animate={hasAnimation ? (isInView ? { opacity: 1, y: 0, filter: "blur(0)" } : { opacity: 0, y: 16, filter: "blur(0.25rem)" }) : { opacity: 1, y: 0, filter: "blur(0)" }}
-                    initial={hasAnimation ? { opacity: 0, y: 16, filter: "blur(0.25rem)" } : { opacity: 1, y: 0, filter: "blur(0)" }}
-                    transition={hasAnimation ? { duration: 0.5, delay: 0.33, ease: "easeOut" } : { duration: 0, delay: 0 }}
-                >
+                {content?.length ? (
 
-                    <PortableText
-                        value={content}
-                        components={portableTextComponents}
-                    />
+                    <motion.div
+                        ref={ref}
+                        className={styles.careerContentInner}
+                        animate={hasAnimation ? (isInView ? { opacity: 1, y: 0, filter: "blur(0)" } : { opacity: 0, y: 16, filter: "blur(0.25rem)" }) : { opacity: 1, y: 0, filter: "blur(0)" }}
+                        initial={hasAnimation ? { opacity: 0, y: 16, filter: "blur(0.25rem)" } : { opacity: 1, y: 0, filter: "blur(0)" }}
+                        transition={hasAnimation ? { duration: 0.5, delay: 0.33, ease: "easeOut" } : { duration: 0, delay: 0 }}
+                    >
 
-                </motion.div>
+                        <PortableText
+                            value={content}
+                            components={portableTextComponents}
+                        />
+
+                    </motion.div>
+
+                ) : null}
 
                 <div className={styles.careerContentFooter}>
 
@@ -80,11 +78,9 @@ export default function CareerContent({
 
                     </div>
 
-                    <Button
-                        hasAnimation={false}
-                        text="Apply now"
-                        href={`#`}
-                        className="primary small"
+                    <HubspotForm
+                        portalId="139805116"
+                        formId="2850ce22-89ef-4773-84b2-f3dd57ca1f99"
                     />
 
                 </div>
