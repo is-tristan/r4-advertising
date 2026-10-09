@@ -41,8 +41,8 @@
     gap: 3rem;
 
     @media (width <1024px) {
-        flex: auto;
-        width: max-content;
+        flex: 0 0 25%;
+        width: auto;
         justify-content: flex-start;
     }
 }
@@ -67,7 +67,7 @@
 
     .logoImage {
         display: flex;
-        width: max-content;
+        width: auto;
         height: 100%;
 
         svg {
