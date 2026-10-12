@@ -1,3 +1,6 @@
+// Components
+import { GoogleTagManager } from "@next/third-parties/google";
+
 // Styles
 import "@/styles/main.scss"
 
@@ -15,6 +18,8 @@ export default function WebsiteLayout({ children }) {
   return (
 
     <SmoothScroll>
+
+      <GoogleTagManager gtmId="GTM-KMNF368K" />
 
       <div id="app" className="app">
 
