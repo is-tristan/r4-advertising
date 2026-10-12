@@ -4,9 +4,6 @@
 import { useEffect, useId, useRef } from "react";
 import Script from "next/script";
 
-// Styles
-import styles from "./styles/hubspot-form.module.scss";
-
 const hubspotScriptSrc = "https://js-eu1.hsforms.net/forms/embed/v2.js";
 
 export default function HubspotForm({ portalId, formId, region = "eu1" }) {
@@ -83,7 +80,6 @@ export default function HubspotForm({ portalId, formId, region = "eu1" }) {
             <div
                 id={targetId}
                 ref={containerRef}
-                className={styles.hubspotForm}
             />
 
         </>

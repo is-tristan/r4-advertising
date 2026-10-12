@@ -86,10 +86,14 @@ export default function CareerContent({
 
                     </div>
 
-                    <HubspotForm
-                        portalId="139805116"
-                        formId="2850ce22-89ef-4773-84b2-f3dd57ca1f99"
-                    />
+                    <div className={`hsForm`}>
+
+                        <HubspotForm
+                            portalId="139805116"
+                            formId="2850ce22-89ef-4773-84b2-f3dd57ca1f99"
+                        />
+
+                    </div>
 
                 </div>
 

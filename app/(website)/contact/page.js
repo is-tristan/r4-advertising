@@ -19,7 +19,7 @@ export default function ContactPage() {
 
             <div className={`container`}>
 
-                <div className={`content`} data-alignment="centered">
+                <div className={`content hasMaxWidth`} data-alignment="centered">
 
                     <Text
                         eyebrow={{

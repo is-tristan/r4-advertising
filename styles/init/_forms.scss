@@ -3,61 +3,92 @@
 $formSelectChevronDark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'%3E%3Cpath d='M4 6L8 10L12 6' stroke='%23202020' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 $formCheckboxCheck: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M2 6.5L4.75 9.25L10 3.75' stroke='%230A0A0A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 
-.form {
-    display: flex;
-    flex-flow: row wrap;
-    gap: 1.5rem;
-    max-width: 50rem;
-    margin: 0 auto;
+.hsForm {
+    width: 100%;
+    min-height: 50rem;
 
-    * {
-        font-family: var(--text);
-        font-weight: 700;
-        text-align: left;
-    }
-}
+    form {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 1.5rem;
+        width: 100%;
+        margin: 0 auto;
 
-.fieldset {
-    display: flex;
-    flex-flow: column nowrap;
-    gap: 0.5rem;
-    padding: 0;
-    margin: 0;
-    border: none;
-    flex-basis: 100%;
-
-    &.half {
-        @media (width >=768px) {
-            flex-basis: calc(50% - 0.75rem);
-        }
-    }
-
-    .legend {
-        font-weight: 400;
-        font-size: 0.875rem;
-        margin-bottom: 0.5rem;
-
-        .required {
-            color: var(--primary);
+        * {
+            font-family: var(--text);
             font-weight: 700;
+            text-align: left;
+            width: 100%;
+            color: var(--textLight);
         }
+    }
+
+    .form-columns-1,
+    .form-columns-2 {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 1rem;
+        width: 100%;
+
+        &.form-columns-2 {
+            flex-flow: row nowrap;
+
+            @media (width >=768px) {
+                flex-basis: calc(50% - 0.75rem);
+            }
+        }
+    }
+
+
+    fieldset {
+        display: flex;
+        flex-flow: column nowrap;
+        gap: 0.5rem;
+        padding: 0;
+        margin: 0;
+        border: none;
+        flex-basis: 100%;
+        max-width: 100% !important;
     }
 
     .field {
         display: flex;
-        align-items: center;
+        flex-flow: column nowrap;
+        gap: 0.5rem;
         position: relative;
 
+        // Labels
+        label {
+            font-weight: 400;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+
+            .hs-form-required {
+                color: var(--primary);
+                font-weight: 700;
+                margin-left: 0.25rem;
+            }
+        }
+
+        // Reset input styles
+        .input {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
+        // Inputs
         input:not([type="checkbox"]):not([type="file"]),
         textarea,
         select {
             display: flex;
             align-items: center;
-            width: 100%;
+            width: 100% !important;
             padding: 1rem;
+            margin: 0;
             border-radius: var(--borderRadius);
             border: 1.5px solid var(--border);
-            background: var(--dark);
+            background-color: var(--dark);
             color: var(--primary);
             transition: all 0.1s ease;
 
@@ -77,15 +108,16 @@ $formCheckboxCheck: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000
             }
         }
 
+        // Textareas
         textarea {
             min-height: 7.5rem;
         }
 
+        // Selects
         select {
             appearance: none;
             -webkit-appearance: none;
             padding: 1rem 3rem 1rem 1rem;
-            background-color: var(--light);
             background-image: $formSelectChevronDark;
             background-repeat: no-repeat;
             background-position: right 1rem center;
@@ -93,18 +125,17 @@ $formCheckboxCheck: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000
             cursor: pointer;
             font-size: 0.875rem;
             line-height: 1.25;
-            color: var(--dark);
 
-            option {
-                background-color: var(--light);
-                color: var(--dark);
+            &.is-placeholder {
+                color: var(--textLight);
             }
 
-            option:disabled {
-                color: rgba(var(--darkRgb), 0.5);
+            option {
+                background-color: var(--dark);
             }
         }
 
+        // File inputs
         input[type="file"] {
             width: 100%;
             padding: 0.75rem 1rem;
@@ -163,146 +194,25 @@ $formCheckboxCheck: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000
         }
     }
 
-    &.consent {
-        .field {
-            flex-flow: row nowrap;
-            align-items: flex-start;
-            gap: 0.5rem;
-            margin-top: 1rem;
-
-            input[type="checkbox"] {
-                appearance: none;
-                -webkit-appearance: none;
-                width: 1rem;
-                height: 1rem;
-                flex-shrink: 0;
-                border: 1.5px solid var(--border);
-                border-radius: 0.25rem;
-                background-repeat: no-repeat;
-                background-position: center;
-                background-size: 0.75rem;
-                cursor: pointer;
-                position: relative;
-                transition: var(--ease);
-
-                @media (width >=1024px) {
-                    top: 0.125rem;
-                }
-
-                &:hover {
-                    border-color: var(--primary);
-                }
-
-                &:checked {
-                    background-color: var(--primary);
-                    border-color: var(--primary);
-                    background-image: $formCheckboxCheck;
-                }
-            }
-
-            label {
-                font-size: 0.875rem;
-                font-weight: 400;
-                line-height: 150%;
-
-                * {
-                    display: inline;
-                }
-
-                a {
-                    text-decoration: underline;
-                }
-            }
-
-            .fieldConsetContent {
-                display: flex;
-                flex-flow: column nowrap;
-                gap: 0.5rem;
-                font-size: inherit;
-                font-weight: inherit;
-
-                p {
-                    font-size: inherit;
-                    font-weight: inherit;
-                    margin-bottom: 0;
-
-                    &:first-child {
-                        @media (width >=768px) {
-                            font-size: 1rem;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-.contactFormWrap {
-    display: flex;
-    flex-flow: column nowrap;
-    width: 100%;
-}
-
-.policyLinks {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 1.5rem;
-    font-size: 0.875rem;
-}
-
-.hubspotFormWrap {
-    width: 100%;
-    align-self: stretch;
-}
-
-.hubspotForm {
-    width: 100%;
-    max-width: 50rem;
-    margin: 0 auto;
-
-    .hs-form-frame {
-        width: 100%;
-    }
-}
-
-.formFooter {
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    gap: 1rem;
-    flex-basis: 100%;
-
-    .resultContainer {
-        display: none;
+    // Legal consent container
+    .legal-consent-container {
+        display: flex;
         flex-flow: column nowrap;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
         gap: 0.5rem;
-        padding: 1.5rem 1rem;
-        text-align: center;
-        border: 1.5px dashed var(--primary);
-        background: rgba(var(--lightRgb), 0.05);
-        border-radius: var(--borderRadius);
-
-        @media (width >=768px) {
-            padding: 2rem 1.5rem;
-        }
-    }
-
-    span:not(.btn span) {
-        color: var(--primary);
-        text-align: center;
-    }
-
-    .error {
-        margin: 0;
-        color: var(--dark);
-        text-align: center;
         font-size: 0.875rem;
         line-height: 150%;
+    }
+
+    // Recaptcha
+    .hs_recaptcha {
+        display: none;
+    }
+
+    // Submit button
+    .hs-button {
+        @include btn;
+        background: var(--primary);
+        color: var(--dark);
+        width: 100%;
     }
 }
