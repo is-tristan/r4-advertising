@@ -52,11 +52,34 @@ export const workCarouselQuery = defineQuery(`
 `)
 
 export const featuredVideoQuery = defineQuery(`
-  *[_type == "work"] | order(orderRank)[0] {
+  *[_id == "workPage"][0] {
     _id,
-    title,
-    "video": video.asset->url,
-    videoPoster {
+    "title": "Featured work",
+    "video": featuredVideo.asset->url,
+    "videoPoster": featuredVideoPoster {
+      ${imageFields}
+    }
+  }
+`)
+
+export const servicesFeaturedVideoQuery = defineQuery(`
+  *[_id == "servicesPage"][0] {
+    _id,
+    "title": "Activate",
+    "video": featuredVideo.asset->url,
+    "videoPoster": featuredVideoPoster {
+      ${imageFields}
+    }
+  }
+`)
+
+export const servicesPageQuery = defineQuery(`
+  *[_id == "servicesPage"][0] {
+    _id,
+    tradeSectionImage {
+      ${imageFields}
+    },
+    planSectionImage {
       ${imageFields}
     }
   }

@@ -30,8 +30,8 @@ export default function Home() {
       <ContentSection
         containerClassName={`noPaddingBottom`}
         eyebrowNumber="02"
-        eyebrowText="Why we stand out"
-        title="Stand out Ideas"
+        eyebrowText="How we work"
+        title="TRADE. PLAN. ACTIVATE."
         titleTag="h1"
         titleClass={`sectionTitle`}
         description="<p>R4 exists to close the gap between ambition and outcome - by bringing trading discipline, audience understanding, and delivery governance into one system.</p><p><strong>That's how investment turns into results. Consistently. Deliberately.</strong></p>"
@@ -55,7 +55,7 @@ export default function Home() {
       <CtaSection
         eyebrowNumber="05"
         title="Your Media Investment Creates Commercial Value"
-        description="<p>Media owners offer increasing discounts when campaign spend reaches defined thresholds. The more you spend, the greater the Volume Based Discount available.</p><p>R4 makes this value visible before campaign planning begins, so you understand the discount your investment has unlocked</p>"
+        description="<p>Media owners offer increasing discounts when campaign spend reaches defined thresholds. The more you spend, the greater the Volume Based Discount available.</p><p>R4 makes this value visible before campaign planning begins, so you understand the discount your investment has unlocked.</p>"
         btnTextPrimary="Calculate your Discount"
         btnLinkPrimary="/calculator"
         hasSpinner={false}

@@ -12,7 +12,7 @@ import { logo } from "@/utils/icons";
 export default function CtaSection({
     eyebrowNumber = "04",
     eyebrowText = "Take Action Now",
-    title = "Bring us the problem <br> Trade. Plan. Activate.",
+    title = "Bring us the problem. <br> Trade. Plan. Activate.",
     description = "<p>We work with ambitious brands and organisations that value clarity, pace and measurable commercial outcomes. We combine senior leadership, hands-on delivery and deep market knowledge to make media perform under real-world conditions. No bias. No lock-in. Just disciplined media, built to grow brands.</p>",
     btnTextPrimary = "Get started",
     btnLinkPrimary = "/contact",

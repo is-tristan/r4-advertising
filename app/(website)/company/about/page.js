@@ -18,7 +18,7 @@ export default function AboutPage() {
     return (
 
         <>
-        
+
             <Banner
                 eyebrow="About Us"
                 title="Built for the Real World"
@@ -49,11 +49,14 @@ export default function AboutPage() {
                 eyebrowText="Why it works"
                 title="Inseparable Disciplines"
                 description="<p><strong>Because these disciplines are inseparable.</strong></p> <p>Trading without planning creates waste. Planning without activation creates risk. Activation without commercial control creates leakage. When trade, plan and activate operate as a single system, media becomes a growth engine rather than a cost centre.</p> <p><strong>That is the difference at R4.</strong></p> <p>We work with ambitious brands and organisations that value clarity, pace and measurable commercial outcomes. We combine senior leadership, hands-on delivery and deep market knowledge to make media perform under real-world conditions. No bias. No lock-in. Just disciplined media, built to grow brands.</p>"
-                btnTextPrimary="Get started"
+                btnTextPrimary={null}
                 image="/images/company/about/about-inseparable-disciplines.png"
             />
 
-            <CtaSection eyebrowNumber="06" />
+            <CtaSection
+                eyebrowNumber="06"
+                title="Bring us the problem"
+            />
 
         </>
 

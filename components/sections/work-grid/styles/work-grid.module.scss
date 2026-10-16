@@ -78,19 +78,19 @@
     }
 
     @media (width >=1024px) {
-        gap: 3rem;
+        gap: 2rem;
         min-height: 100vh;
 
         >article {
-            flex: 0 0 calc(50% - 1.5rem);
-            $offset: 3rem;
+            flex: 0 0 calc(50% - 1rem);
+            $offset: 2rem;
 
             &:nth-child(even) {
-                padding-top: $offset;
+                padding-top: calc($offset + 0.125rem);
             }
 
             &:nth-child(odd):not(:first-child) {
-                margin-top: -$offset;
+                margin-top: calc($offset * -0.175);
             }
         }
     }

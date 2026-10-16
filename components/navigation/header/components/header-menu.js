@@ -1,7 +1,7 @@
 "use client";
 
 // React
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Next
 import Link from "next/link";
@@ -16,11 +16,27 @@ import styles from "../styles/header-desktop-menu.module.scss";
 // Icons
 import { chevronDown } from "@/utils/icons";
 
+function getActiveSubmenuLabel(pathname) {
+    return data.find((item) =>
+        item.submenu?.some((submenuItem) =>
+            pathname === submenuItem.href || pathname.startsWith(`${submenuItem.href}/`)
+        )
+    )?.label ?? null;
+}
+
 export default function HeaderMenu() {
 
     // Handle Submenu Logic
     const pathname = usePathname();
-    const [openSubmenu, setOpenSubmenu] = useState(null);
+    const [openSubmenu, setOpenSubmenu] = useState(() => getActiveSubmenuLabel(pathname));
+
+    useEffect(() => {
+        const activeSubmenuLabel = getActiveSubmenuLabel(pathname);
+
+        if (activeSubmenuLabel) {
+            setOpenSubmenu(activeSubmenuLabel);
+        }
+    }, [pathname]);
 
     const isActive = (item) => {
         if (item.submenu?.some((submenuItem) => pathname === submenuItem.href || pathname.startsWith(`${submenuItem.href}/`))) {
@@ -107,7 +123,6 @@ export default function HeaderMenu() {
                                             href={submenuItem.href}
                                             className={styles.submenuSimpleLink}
                                             data-active={pathname === submenuItem.href || pathname.startsWith(`${submenuItem.href}/`)}
-                                            onClick={handleSubmenuClose}
                                         >
 
                                             <span>{submenuItem.label}</span>

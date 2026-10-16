@@ -49,6 +49,11 @@ export const sanityImagePresets = {
     width: 1920,
     aspectRatio: 16 / 9,
   },
+  sectionImage: {
+    width: 1920,
+    aspectRatio: 16 / 9,
+  },
+
   contentVideoPoster: {
     width: 1280,
     aspectRatio: 16 / 9,

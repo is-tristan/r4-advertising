@@ -64,10 +64,10 @@ export default async function WorkGrid({
                             number: "01",
                             text: "Our Work",
                         }}
-                        title={"Case studies from campaigns that moved the needle"}
+                        title={"Campaigns that moved the needle."}
                         titleTag="h1"
                         titleClass={"sectionTitle"}
-                        description={"<p class='large'>A selection of work across sectors — each with its own brief, challenge, and outcome.</p>"}
+                        description={"<p class='large'>A selection of work across sectors, each with its own brief, challenge, and outcome.</p>"}
                     />
 
                 ) : (

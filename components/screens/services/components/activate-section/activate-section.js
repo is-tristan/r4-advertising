@@ -23,6 +23,7 @@ export default function ActivateSection() {
             />
 
             <FeaturedVideo
+                source="services"
                 headerOffset={false}
                 containerClass="noPaddingTop noPaddingBottom"
             />

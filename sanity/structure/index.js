@@ -1,9 +1,36 @@
 import { orderableDocumentListDeskItem } from "@sanity/orderable-document-list"
+import { DocumentsIcon } from "@sanity/icons/Documents"
+import { FolderIcon } from "@sanity/icons/Folder"
+import { PlayIcon } from "@sanity/icons/Play"
+
+function createSingleton(S, typeName, title, icon) {
+  return S.listItem()
+    .title(title)
+    .icon(icon)
+    .child(
+      S.document()
+        .schemaType(typeName)
+        .documentId(typeName)
+        .title(title)
+    )
+}
 
 export const structure = (S, context) =>
   S.list()
     .title("Content")
     .items([
+      S.listItem()
+        .title("Pages")
+        .icon(FolderIcon)
+        .child(
+          S.list()
+            .title("Pages")
+            .items([
+              createSingleton(S, "servicesPage", "Services", DocumentsIcon),
+              createSingleton(S, "workPage", "Work", PlayIcon),
+            ])
+        ),
+      S.divider(),
       S.listItem()
         .title("Work")
         .child(

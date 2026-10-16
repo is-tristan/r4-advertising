@@ -130,15 +130,12 @@
             h3 {
                 font-size: clamp(2.5rem, 4dvw, 4rem);
                 line-height: 90%;
-                // padding-left: 1.5rem;
 
-                // @media (width >=768px) {
-                //     padding-left: 1.75rem;
-                // }
-
-                // @media (width >=1024px) {
-                //     white-space: nowrap;
-                // }
+                @media (width >=1280px) {
+                    position: relative;
+                    bottom: 0.25rem;
+                    line-height: 0;
+                }
             }
         }
 
@@ -148,7 +145,7 @@
 
             @media (width >=768px) {
                 padding-left: 1.75rem;
-    
+
             }
 
             @media (width >=1024px) {
