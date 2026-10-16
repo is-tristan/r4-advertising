@@ -12,6 +12,9 @@ const staticRoutes = [
   "/company/about",
   "/company/team",
   "/company/careers",
+  "/calculator",
+  "/annual-media-commitment",
+  "/in-charge-calendar",
   "/legal",
 ]
 
