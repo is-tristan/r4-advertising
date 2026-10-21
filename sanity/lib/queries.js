@@ -196,7 +196,9 @@ export const workBySlugQuery = defineQuery(`
     resultContent[]{
       ${portableTextMediaExpansion}
     },
-    testimonialContent
+    testimonialContent,
+    seoTitle,
+    seoDescription
   }
 `)
 
@@ -309,7 +311,9 @@ export const newsBySlugQuery = defineQuery(`
     },
     content[]{
       ${portableTextMediaExpansion}
-    }
+    },
+    seoTitle,
+    seoDescription
   }
 `)
 

@@ -40,8 +40,8 @@ export async function generateMetadata({ params }) {
   }
 
   return buildPageMetadata({
-    title: news.title,
-    description: news.excerpt,
+    title: news.seoTitle ? { absolute: news.seoTitle } : news.title,
+    description: news.seoDescription || news.excerpt,
     image: news.image,
     path: `/news/${news.slug}`,
     type: "article",
@@ -65,7 +65,7 @@ export default async function NewsDetailsPage({ params }) {
 
   const articleJsonLd = getArticleJsonLd({
     title: news.title,
-    description: news.excerpt,
+    description: news.seoDescription || news.excerpt,
     image: news.image,
     path: `/news/${news.slug}`,
     publishedTime: news._createdAt,

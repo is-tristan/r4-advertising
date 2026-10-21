@@ -29,8 +29,8 @@ export async function generateMetadata({ params }) {
   }
 
   return buildPageMetadata({
-    title: work.title,
-    description: work.description,
+    title: work.seoTitle ? { absolute: work.seoTitle } : work.title,
+    description: work.seoDescription || work.description,
     image: work.seoImage,
     path: `/work/${work.slug}`,
   })

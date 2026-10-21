@@ -3,6 +3,7 @@ import { defineArrayMember, defineField, defineType } from "sanity"
 import { DocumentTextIcon } from "@sanity/icons/DocumentText"
 import { contentVideoMember } from "./contentVideo"
 import { imageAltField } from "./imageField"
+import { seoFields, seoFieldset } from "./seoFields"
 
 export const news = (context) => defineType({
   name: "news",
@@ -10,6 +11,7 @@ export const news = (context) => defineType({
   type: "document",
   icon: DocumentTextIcon,
   orderings: [orderRankOrdering],
+  fieldsets: [seoFieldset],
   fields: [
     orderRankField({ type: "news", context }),
     defineField({
@@ -111,6 +113,7 @@ export const news = (context) => defineType({
         contentVideoMember,
       ],
     }),
+    ...seoFields(),
   ],
   preview: {
     select: {

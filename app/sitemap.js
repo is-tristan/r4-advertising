@@ -1,7 +1,7 @@
 import { client } from "@/sanity/lib/client"
 import { sitemapQuery } from "@/sanity/lib/queries"
 import { getSanityImageUrl } from "@/sanity/lib/image"
-import { getAbsoluteUrl } from "@/lib/seo"
+import { getAbsoluteUrl, sitemapTag } from "@/lib/seo"
 
 const staticRoutes = [
   { path: "/", changeFrequency: "weekly", priority: 1 },
@@ -39,7 +39,7 @@ function getImages(image) {
 
 export default async function sitemap() {
   const data = await client.fetch(sitemapQuery, {}, {
-    next: { revalidate: 30 },
+    next: { revalidate: 30, tags: [sitemapTag] },
   }).catch(() => null)
 
   const work = data?.work ?? []

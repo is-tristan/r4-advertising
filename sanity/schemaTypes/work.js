@@ -5,6 +5,7 @@ import { PlayIcon } from "@sanity/icons/Play"
 import { portableTextBlockMember, portableTextField } from "./portableText"
 import { imageAltField } from "./imageField"
 import { videoFileDescription, videoFileOptions, videoFileRule } from "./videoFile"
+import { seoFields, seoFieldset } from "./seoFields"
 
 const workContentImageMember = defineArrayMember({
   type: "image",
@@ -52,6 +53,7 @@ export const work = (context) => defineType({
     { name: "plan", title: "Section 2 / Plan", options: { collapsible: true } },
     { name: "activate", title: "Section 3 / Activate", options: { collapsible: true } },
     { name: "result", title: "Section 4 / Result", options: { collapsible: true } },
+    seoFieldset,
   ],
   fields: [
     orderRankField({ type: "work", context }),
@@ -188,6 +190,7 @@ export const work = (context) => defineType({
       type: "text",
       rows: 6,
     }),
+    ...seoFields(),
   ],
   preview: {
     select: {
