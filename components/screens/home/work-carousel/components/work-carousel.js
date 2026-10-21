@@ -113,7 +113,7 @@ export default function WorkCarousel({ works = [] }) {
                     pagination: true,
                     arrows: true,
                     rewind: true,
-                    autoPlay: true,
+                    autoplay: true,
                     interval: 30000,
                     breakpoints: {
                         1023: {
