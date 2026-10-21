@@ -31,7 +31,7 @@ export async function generateMetadata({ params }) {
   return buildPageMetadata({
     title: work.title,
     description: work.description,
-    image: work.videoPoster,
+    image: work.seoImage,
     path: `/work/${work.slug}`,
   })
 }

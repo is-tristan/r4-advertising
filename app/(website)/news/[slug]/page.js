@@ -6,7 +6,7 @@ import { client } from "@/sanity/lib/client"
 import { newsBySlugQuery } from "@/sanity/lib/queries"
 
 // SEO
-import { buildPageMetadata } from "@/lib/seo"
+import { buildPageMetadata, getArticleJsonLd, serializeJsonLd } from "@/lib/seo"
 
 // Components
 import NewsBanner from "@/components/screens/news/singular/components/news-banner"
@@ -44,6 +44,10 @@ export async function generateMetadata({ params }) {
     description: news.excerpt,
     image: news.image,
     path: `/news/${news.slug}`,
+    type: "article",
+    publishedTime: news._createdAt,
+    modifiedTime: news._updatedAt,
+    authors: news.author?.name ? [news.author.name] : undefined,
   })
 }
 
@@ -59,9 +63,24 @@ export default async function NewsDetailsPage({ params }) {
 
   const shareUrl = await getShareUrl(`/news/${news.slug}`)
 
+  const articleJsonLd = getArticleJsonLd({
+    title: news.title,
+    description: news.excerpt,
+    image: news.image,
+    path: `/news/${news.slug}`,
+    publishedTime: news._createdAt,
+    modifiedTime: news._updatedAt,
+    authorName: news.author?.name,
+  })
+
   return (
 
     <>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(articleJsonLd) }}
+      />
 
       <NewsBanner
         title={news.title}

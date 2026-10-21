@@ -2,7 +2,7 @@
 import localFont from "next/font/local"
 
 // SEO
-import { siteDescription, siteName, getSiteUrl } from "@/lib/seo"
+import { defaultOgImage, getSiteUrl, siteDescription, siteLocale, siteName } from "@/lib/seo"
 
 const acidGrotesk = localFont({
   display: "swap",
@@ -60,14 +60,17 @@ export const metadata = {
   applicationName: siteName,
   openGraph: {
     type: "website",
+    locale: siteLocale,
     siteName,
     title: siteName,
     description: siteDescription,
+    images: [defaultOgImage],
   },
   twitter: {
     card: "summary_large_image",
     title: siteName,
     description: siteDescription,
+    images: [defaultOgImage.url],
   },
 }
 
@@ -75,7 +78,7 @@ export default function RootLayout({ children }) {
 
   return (
 
-    <html lang="en" className={`${acidGrotesk.variable} ${futuraPtCondensed.variable} ${corporateABq.variable}`} >
+    <html lang="en-GB" className={`${acidGrotesk.variable} ${futuraPtCondensed.variable} ${corporateABq.variable}`} >
 
       <body>
 

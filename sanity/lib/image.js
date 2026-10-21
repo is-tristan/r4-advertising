@@ -65,6 +65,8 @@ export const sanityImagePresets = {
   openGraph: {
     width: 1200,
     aspectRatio: 1200 / 630,
+    format: "jpg",
+    quality: 85,
   },
 }
 
@@ -89,10 +91,14 @@ export function getSanityImageUrl(source, preset) {
 
   const height = Math.round(config.width / config.aspectRatio)
 
-  return urlFor(source)
+  const imageBuilder = urlFor(source)
     .width(config.width)
     .height(height)
     .fit("crop")
-    .auto("format")
-    .url()
+
+  if (config.format) {
+    return imageBuilder.format(config.format).quality(config.quality ?? 80).url()
+  }
+
+  return imageBuilder.auto("format").url()
 }

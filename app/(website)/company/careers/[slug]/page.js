@@ -6,7 +6,7 @@ import { client } from "@/sanity/lib/client"
 import { careerBySlugQuery } from "@/sanity/lib/queries"
 
 // SEO
-import { buildPageMetadata } from "@/lib/seo"
+import { buildPageMetadata, cleanDescription } from "@/lib/seo"
 
 // Components
 import CareersBanner from "@/components/screens/company/careers/singular/components/careers-banner"
@@ -26,11 +26,11 @@ export async function generateMetadata({ params }) {
     return {}
   }
 
-  const description = [
+  const description = cleanDescription([
     career.contractType,
     career.location,
     career.description,
-  ].filter(Boolean).join(" — ")
+  ].filter(Boolean).join(" — "))
 
   return buildPageMetadata({
     title: career.title,

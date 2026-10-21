@@ -7,6 +7,14 @@ const imageFields = /* groq */ `
   crop
 `
 
+const seoDescriptionField = /* groq */ `array::join(
+  string::split(
+    pt::text(content[_type == "block" && style == "normal" && !string::startsWith(children[0].text, "Last updated")]),
+    ""
+  )[0...320],
+  ""
+)`
+
 const portableTextMediaExpansion = /* groq */ `
   ...,
   _type == "video" => {
@@ -148,6 +156,13 @@ export const workBySlugQuery = defineQuery(`
     videoPoster {
       ${imageFields}
     },
+    "seoImage": coalesce(
+      select(defined(videoPoster.asset) => videoPoster),
+      gallery[_type == "image" && defined(asset)][0],
+      gallery[_type == "file" && defined(videoPoster.asset)][0].videoPoster
+    ) {
+      ${imageFields}
+    },
     gallery[]{
       _key,
       _type,
@@ -246,7 +261,7 @@ export const careerBySlugQuery = defineQuery(`
     ),
     salary,
     content,
-    "description": array::join(string::split(pt::text(content), "")[0...160], "")
+    "description": ${seoDescriptionField}
   }
 `)
 
@@ -256,7 +271,7 @@ export const legalBySlugQuery = defineQuery(`
     title,
     "slug": slug.current,
     content,
-    "description": array::join(string::split(pt::text(content), "")[0...160], "")
+    "description": ${seoDescriptionField}
   }
 `)
 
@@ -277,6 +292,8 @@ export const newsGridQuery = defineQuery(`
 export const newsBySlugQuery = defineQuery(`
   *[_type == "news" && slug.current == $slug][0] {
     _id,
+    _createdAt,
+    _updatedAt,
     title,
     "slug": slug.current,
     image {
@@ -317,19 +334,35 @@ export const sitemapQuery = defineQuery(`
   {
     "work": *[_type == "work" && defined(slug.current)] | order(orderRank) {
       "slug": slug.current,
-      _updatedAt
+      _updatedAt,
+      "image": coalesce(
+        select(defined(videoPoster.asset) => videoPoster),
+        gallery[_type == "image" && defined(asset)][0],
+        gallery[_type == "file" && defined(videoPoster.asset)][0].videoPoster
+      ) {
+        ${imageFields}
+      }
     },
     "news": *[_type == "news" && defined(slug.current)] | order(orderRank) {
       "slug": slug.current,
-      _updatedAt
+      _updatedAt,
+      image {
+        ${imageFields}
+      }
     },
     "careers": *[_type == "career" && defined(slug.current)] | order(orderRank) {
       "slug": slug.current,
-      _updatedAt
+      _updatedAt,
+      image {
+        ${imageFields}
+      }
     },
     "legal": *[_type == "legal" && defined(slug.current)] | order(title asc) {
       "slug": slug.current,
       _updatedAt
-    }
+    },
+    "teamUpdatedAt": *[_type == "team"] | order(_updatedAt desc)[0]._updatedAt,
+    "workPageUpdatedAt": *[_id == "workPage"][0]._updatedAt,
+    "servicesPageUpdatedAt": *[_id == "servicesPage"][0]._updatedAt
   }
 `)

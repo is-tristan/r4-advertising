@@ -6,7 +6,7 @@ import { client } from "@/sanity/lib/client"
 import { legalBySlugQuery } from "@/sanity/lib/queries"
 
 // SEO
-import { buildPageMetadata } from "@/lib/seo"
+import { buildPageMetadata, cleanDescription } from "@/lib/seo"
 
 // Components
 import Banner from "@/components/sections/banner/banner"
@@ -28,7 +28,7 @@ export async function generateMetadata({ params }) {
 
   return buildPageMetadata({
     title: legal.title,
-    description: legal.description,
+    description: cleanDescription(legal.description),
     path: `/legal/${legal.slug}`,
   })
 }
