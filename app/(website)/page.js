@@ -1,5 +1,5 @@
 // SEO
-import { buildPageMetadata, siteName } from "@/lib/seo"
+import { buildPageMetadata } from "@/lib/seo"
 
 // Components
 import WorkCarouselSection from "@/components/screens/home/work-carousel/work-carousel-section";
@@ -10,10 +10,8 @@ import DisciplinesSection from "@/components/sections/disciplines/disciplines-se
 import CtaSection from "@/components/sections/cta/cta-section";
 
 export const metadata = buildPageMetadata({
-  title: {
-    absolute: siteName,
-  },
-  description: "R4 exists to close the gap between ambition and outcome — by bringing trading discipline, audience understanding, and delivery governance into one system.",
+  title: "Media Buying & Planning Specialists",
+  description: "R4 Advertising. The Media Buying and Planning Specialists in Cardiff and London. Trade. Plan. Activate. More commercial value from your media investment.",
   path: "/",
 })
 

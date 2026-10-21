@@ -8,8 +8,8 @@ import OurModel from "@/components/screens/company/about/our-model/our-model-sec
 import CtaSection from "@/components/sections/cta/cta-section";
 
 export const metadata = buildPageMetadata({
-    title: "About",
-    description: "R4 is a media trading, planning and activation agency built around how media actually works in the real world.",
+    title: "About Our Media Specialists",
+    description: "Meet R4 Advertising, the media buying and planning specialists in Cardiff and London. Built on trading expertise, audience intelligence and commercial ambition.",
     path: "/company/about",
 })
 

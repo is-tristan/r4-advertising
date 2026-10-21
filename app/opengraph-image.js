@@ -1,4 +1,6 @@
 import { ImageResponse } from "next/og"
+import { readFile } from "node:fs/promises"
+import { join } from "node:path"
 
 import { logo } from "@/utils/icons"
 
@@ -21,7 +23,28 @@ const logoSvg = logo
 
 const logoSrc = `data:image/svg+xml;base64,${Buffer.from(logoSvg).toString("base64")}`
 
-export default function OpenGraphImage() {
+const fontsDirectory = join(process.cwd(), "public/fonts")
+
+const dotStyle = {
+  width: "22px",
+  height: "22px",
+  marginLeft: "6px",
+  marginBottom: "14px",
+  borderRadius: "11px",
+  flexShrink: 0,
+  backgroundColor: primaryColor,
+}
+
+const wordStyle = {
+  flexShrink: 0,
+}
+
+export default async function OpenGraphImage() {
+
+  const [futuraPtCondensed, acidGrotesk] = await Promise.all([
+    readFile(join(fontsDirectory, "futura-pt-condensed-extra-bold.ttf")),
+    readFile(join(fontsDirectory, "acid-grotesk-regular.ttf")),
+  ])
 
   return new ImageResponse(
 
@@ -37,6 +60,7 @@ export default function OpenGraphImage() {
           padding: "80px",
           backgroundColor: darkColor,
           color: lightColor,
+          fontFamily: "Acid Grotesk",
         }}
       >
 
@@ -44,23 +68,34 @@ export default function OpenGraphImage() {
 
         <div style={{ display: "flex", flexDirection: "column" }}>
 
-          <div style={{ display: "flex", fontSize: 88, fontWeight: 700, letterSpacing: "-2px", lineHeight: 1 }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "flex-end",
+              fontFamily: "Futura PT Condensed",
+              fontSize: 116,
+              fontWeight: 800,
+              letterSpacing: "-0.025em",
+              lineHeight: 0.9,
+              textTransform: "uppercase",
+            }}
+          >
 
-            <span>Trade</span>
+            <span style={wordStyle}>Trade</span>
 
-            <span style={{ color: primaryColor }}>.</span>
+            <div style={dotStyle} />
 
-            <span style={{ marginLeft: "24px" }}>Plan</span>
+            <span style={{ ...wordStyle, marginLeft: "28px" }}>Plan</span>
 
-            <span style={{ color: primaryColor }}>.</span>
+            <div style={dotStyle} />
 
-            <span style={{ marginLeft: "24px" }}>Activate</span>
+            <span style={{ ...wordStyle, marginLeft: "28px" }}>Activate</span>
 
-            <span style={{ color: primaryColor }}>.</span>
+            <div style={dotStyle} />
 
           </div>
 
-          <div style={{ display: "flex", marginTop: "28px", fontSize: 30, color: "rgba(255, 255, 255, 0.7)" }}>
+          <div style={{ display: "flex", marginTop: "32px", fontSize: 30, color: "rgba(255, 255, 255, 0.7)" }}>
 
             r4advertising.agency
 
@@ -72,7 +107,23 @@ export default function OpenGraphImage() {
 
     ),
 
-    size,
+    {
+      ...size,
+      fonts: [
+        {
+          name: "Futura PT Condensed",
+          data: futuraPtCondensed,
+          weight: 800,
+          style: "normal",
+        },
+        {
+          name: "Acid Grotesk",
+          data: acidGrotesk,
+          weight: 400,
+          style: "normal",
+        },
+      ],
+    },
 
   )
 

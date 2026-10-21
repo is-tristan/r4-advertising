@@ -5,8 +5,8 @@ import { buildPageMetadata } from "@/lib/seo"
 import VBDCalculator from "./components/vbd-calculator";
 
 export const metadata = buildPageMetadata({
-    title: "VBD Calculator",
-    description: "Establish the commercial value of your media investment. Compare the Volume-Based Discount available through a Project or an Annual Contract with R4 Advertising.",
+    title: "Media Investment Discount Calculator",
+    description: "Your media investment creates commercial value. Use R4 Advertising's calculator to explore the potential volume-based discount your budget could unlock.",
     path: "/calculator",
 })
 

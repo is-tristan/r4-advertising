@@ -8,8 +8,8 @@ import TeamGrid from "@/components/screens/company/team/components/team-grid/tea
 import DisciplinesSection from "@/components/sections/disciplines/disciplines-section"
 
 export const metadata = buildPageMetadata({
-    title: "Team",
-    description: "A collective of strategists, traders, and creatives united by a shared passion for delivering exceptional media experiences.",
+    title: "Meet Our Media Buying & Planning Team",
+    description: "Meet the specialists behind R4 Advertising. Media trading expertise, planning intelligence and activation experience, brought together in Cardiff and London.",
     path: "/company/team",
 })
 

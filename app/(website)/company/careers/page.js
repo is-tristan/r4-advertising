@@ -8,8 +8,8 @@ import CtaSection from "@/components/sections/cta/cta-section"
 import DisciplinesSection from "@/components/sections/disciplines/disciplines-section"
 
 export const metadata = buildPageMetadata({
-    title: "Careers",
-    description: "Join a team that values creativity, strategy, and results. We're always looking for talented people who share our passion for creating impactful media experiences.",
+    title: "Media Careers in Cardiff & London",
+    description: "Build your career with R4 Advertising, the media buying and planning specialists in Cardiff and London. Explore opportunities across our growing team.",
     path: "/company/careers",
 })
 

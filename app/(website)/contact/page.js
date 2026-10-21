@@ -6,8 +6,8 @@ import Text from "@/components/content/text/text";
 import FormClient from "@/components/handlers/forms/form-client";
 
 export const metadata = buildPageMetadata({
-    title: "Contact",
-    description: "Have a campaign, a media budget, or want to understand what your media could be doing differently? Get in touch with R4.",
+    title: "Contact Our Cardiff & London Team",
+    description: "Looking for a media buying and planning agency in Cardiff or London? Speak to the specialists at R4 Advertising about your next campaign.",
     path: "/contact",
 })
 

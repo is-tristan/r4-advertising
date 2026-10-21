@@ -5,8 +5,8 @@ import { buildPageMetadata } from "@/lib/seo"
 import InChargeCalendar from "./components/InChargeCalendar";
 
 export const metadata = buildPageMetadata({
-    title: "In-Charge Calendar",
-    description: "Every out-of-home in-charge period for the next three years, standard and bus off-cycle. Find the dates you want, then book a conversation about them.",
+    title: "Meet the Media Buying & Planning Specialists",
+    description: "Book a conversation with R4 Advertising in Cardiff or London. Discuss your media investment, audience priorities and ambitions for your next campaign.",
     path: "/in-charge-calendar",
 })
 

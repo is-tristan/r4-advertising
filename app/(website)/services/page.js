@@ -16,8 +16,8 @@ import styles from "./styles/services.module.scss";
 
 // SEO
 export const metadata = buildPageMetadata({
-    title: "Services",
-    description: "Trade. Plan. Activate. Three connected disciplines designed to operate together — giving clients control over margins, clarity in decision-making, and outcomes that stand up to scrutiny.",
+    title: "Media Buying & Planning Cardiff & London",
+    description: "Media buying and planning in Cardiff and London. Trade. Plan. Activate. Discover R4 Advertising's approach to media investment, audiences and campaign delivery.",
     path: "/services",
 })
 

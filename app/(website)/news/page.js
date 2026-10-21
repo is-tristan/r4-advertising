@@ -6,8 +6,8 @@ import Banner from "@/components/sections/banner/banner";
 import NewsGrid from "@/components/screens/news/news-grid";
 
 export const metadata = buildPageMetadata({
-    title: "News & Insights",
-    description: "The latest updates, industry insights, and company news from R4.",
+    title: "Media Buying & Planning Insights",
+    description: "Media buying, planning and advertising insights from R4 Advertising. Explore industry perspectives, client wins and news from our Cardiff and London teams.",
     path: "/news",
 })
 
