@@ -1,5 +1,5 @@
 // SEO
-import { buildPageMetadata } from "@/lib/seo"
+import { buildRouteMetadata } from "@/lib/pageSeo"
 
 // Components
 import Banner from "@/components/sections/banner/banner"
@@ -7,11 +7,13 @@ import CareersGrid from "@/components/screens/company/careers/careers-grid"
 import CtaSection from "@/components/sections/cta/cta-section"
 import DisciplinesSection from "@/components/sections/disciplines/disciplines-section"
 
-export const metadata = buildPageMetadata({
-    title: "Media Careers in Cardiff & London",
-    description: "Build your career with R4 Advertising, the media buying and planning specialists in Cardiff and London. Explore opportunities across our growing team.",
-    path: "/company/careers",
-})
+export async function generateMetadata() {
+    return buildRouteMetadata({
+        title: "Media Careers in Cardiff & London",
+        description: "Build your career with R4 Advertising, the media buying and planning specialists in Cardiff and London. Explore opportunities across our growing team.",
+        path: "/company/careers",
+    })
+}
 
 export default function CareersPage() {
 

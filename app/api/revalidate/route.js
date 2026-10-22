@@ -2,7 +2,7 @@ import { revalidatePath, revalidateTag } from "next/cache"
 import { NextResponse } from "next/server"
 import { parseBody } from "next-sanity/webhook"
 
-import { sitemapDocumentTypes, sitemapTag } from "@/lib/seo"
+import { pageSeoTag, sitemapDocumentTypes, sitemapTag } from "@/lib/seo"
 
 export async function POST(request) {
   const secret = process.env.SANITY_REVALIDATE_SECRET
@@ -28,6 +28,10 @@ export async function POST(request) {
 
     revalidateTag(sitemapTag, { expire: 0 })
     revalidatePath("/sitemap.xml")
+
+    if (body._type === "pageSeo") {
+      revalidateTag(pageSeoTag, { expire: 0 })
+    }
 
     return NextResponse.json({ revalidated: true, type: body._type, now: Date.now() })
   } catch (error) {

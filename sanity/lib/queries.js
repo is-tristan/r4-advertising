@@ -7,6 +7,16 @@ const imageFields = /* groq */ `
   crop
 `
 
+const seoProjection = /* groq */ `
+  seoTitle,
+  seoDescription,
+  seoKeywords,
+  seoNoIndex,
+  seoImage {
+    ${imageFields}
+  }
+`
+
 const seoDescriptionField = /* groq */ `array::join(
   string::split(
     pt::text(content[_type == "block" && style == "normal" && !string::startsWith(children[0].text, "Last updated")]),
@@ -156,7 +166,7 @@ export const workBySlugQuery = defineQuery(`
     videoPoster {
       ${imageFields}
     },
-    "seoImage": coalesce(
+    "shareImage": coalesce(
       select(defined(videoPoster.asset) => videoPoster),
       gallery[_type == "image" && defined(asset)][0],
       gallery[_type == "file" && defined(videoPoster.asset)][0].videoPoster
@@ -197,8 +207,7 @@ export const workBySlugQuery = defineQuery(`
       ${portableTextMediaExpansion}
     },
     testimonialContent,
-    seoTitle,
-    seoDescription
+    ${seoProjection}
   }
 `)
 
@@ -263,7 +272,8 @@ export const careerBySlugQuery = defineQuery(`
     ),
     salary,
     content,
-    "description": ${seoDescriptionField}
+    "description": ${seoDescriptionField},
+    ${seoProjection}
   }
 `)
 
@@ -273,7 +283,8 @@ export const legalBySlugQuery = defineQuery(`
     title,
     "slug": slug.current,
     content,
-    "description": ${seoDescriptionField}
+    "description": ${seoDescriptionField},
+    ${seoProjection}
   }
 `)
 
@@ -312,8 +323,7 @@ export const newsBySlugQuery = defineQuery(`
     content[]{
       ${portableTextMediaExpansion}
     },
-    seoTitle,
-    seoDescription
+    ${seoProjection}
   }
 `)
 
@@ -334,12 +344,20 @@ export const relatedNewsQuery = defineQuery(`
   }
 `)
 
+export const pageSeoQuery = defineQuery(`
+  *[_type == "pageSeo" && path == $path][0] {
+    path,
+    ${seoProjection}
+  }
+`)
+
 export const sitemapQuery = defineQuery(`
   {
-    "work": *[_type == "work" && defined(slug.current)] | order(orderRank) {
+    "work": *[_type == "work" && defined(slug.current) && seoNoIndex != true] | order(orderRank) {
       "slug": slug.current,
       _updatedAt,
       "image": coalesce(
+        select(defined(seoImage.asset) => seoImage),
         select(defined(videoPoster.asset) => videoPoster),
         gallery[_type == "image" && defined(asset)][0],
         gallery[_type == "file" && defined(videoPoster.asset)][0].videoPoster
@@ -347,26 +365,40 @@ export const sitemapQuery = defineQuery(`
         ${imageFields}
       }
     },
-    "news": *[_type == "news" && defined(slug.current)] | order(orderRank) {
+    "news": *[_type == "news" && defined(slug.current) && seoNoIndex != true] | order(orderRank) {
       "slug": slug.current,
       _updatedAt,
-      image {
+      "image": coalesce(
+        select(defined(seoImage.asset) => seoImage),
+        image
+      ) {
         ${imageFields}
       }
     },
-    "careers": *[_type == "career" && defined(slug.current)] | order(orderRank) {
+    "careers": *[_type == "career" && defined(slug.current) && seoNoIndex != true] | order(orderRank) {
       "slug": slug.current,
       _updatedAt,
-      image {
+      "image": coalesce(
+        select(defined(seoImage.asset) => seoImage),
+        image
+      ) {
         ${imageFields}
       }
     },
-    "legal": *[_type == "legal" && defined(slug.current)] | order(title asc) {
+    "legal": *[_type == "legal" && defined(slug.current) && seoNoIndex != true] | order(title asc) {
       "slug": slug.current,
       _updatedAt
     },
     "teamUpdatedAt": *[_type == "team"] | order(_updatedAt desc)[0]._updatedAt,
     "workPageUpdatedAt": *[_id == "workPage"][0]._updatedAt,
-    "servicesPageUpdatedAt": *[_id == "servicesPage"][0]._updatedAt
+    "servicesPageUpdatedAt": *[_id == "servicesPage"][0]._updatedAt,
+    "pageSeo": *[_type == "pageSeo" && defined(path)] {
+      path,
+      _updatedAt,
+      seoNoIndex,
+      seoImage {
+        ${imageFields}
+      }
+    }
   }
 `)

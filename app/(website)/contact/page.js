@@ -1,15 +1,17 @@
 // SEO
-import { buildPageMetadata } from "@/lib/seo"
+import { buildRouteMetadata } from "@/lib/pageSeo"
 
 // Components
 import Text from "@/components/content/text/text";
 import FormClient from "@/components/handlers/forms/form-client";
 
-export const metadata = buildPageMetadata({
-    title: "Contact Our Cardiff & London Team",
-    description: "Looking for a media buying and planning agency in Cardiff or London? Speak to the specialists at R4 Advertising about your next campaign.",
-    path: "/contact",
-})
+export async function generateMetadata() {
+    return buildRouteMetadata({
+        title: "Contact Our Cardiff & London Team",
+        description: "Looking for a media buying and planning agency in Cardiff or London? Speak to the specialists at R4 Advertising about your next campaign.",
+        path: "/contact",
+    })
+}
 
 export default function ContactPage() {
 

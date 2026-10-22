@@ -5,6 +5,7 @@ import { legal } from "./legal"
 import { news } from "./news"
 import { newsAuthor } from "./newsAuthor"
 import { newsCategory } from "./newsCategory"
+import { pageSeo } from "./pageSeo"
 import { servicesPage } from "./pages/servicesPage"
 import { team } from "./team"
 import { teamCategory } from "./teamCategory"
@@ -26,4 +27,5 @@ export const schemaTypes = (context) => [
   newsCategory,
   newsAuthor,
   legal,
+  pageSeo,
 ]

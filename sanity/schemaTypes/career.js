@@ -2,6 +2,7 @@ import { orderRankField, orderRankOrdering } from "@sanity/orderable-document-li
 import { defineArrayMember, defineField, defineType } from "sanity"
 import { CaseIcon } from "@sanity/icons/Case"
 import { imageAltField } from "./imageField"
+import { seoFields, seoFieldset } from "./seoFields"
 
 export const career = (context) => defineType({
   name: "career",
@@ -9,6 +10,7 @@ export const career = (context) => defineType({
   type: "document",
   icon: CaseIcon,
   orderings: [orderRankOrdering],
+  fieldsets: [seoFieldset],
   fields: [
     orderRankField({ type: "career", context }),
     defineField({
@@ -129,6 +131,9 @@ export const career = (context) => defineType({
           },
         }),
       ],
+    }),
+    ...seoFields({
+      descriptionFallback: "the contract type, location and opening paragraph",
     }),
   ],
   preview: {

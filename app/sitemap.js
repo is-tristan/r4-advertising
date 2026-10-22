@@ -50,6 +50,7 @@ export default async function sitemap() {
   const workUpdatedAt = work.map((item) => item._updatedAt)
   const newsUpdatedAt = news.map((item) => item._updatedAt)
   const careersUpdatedAt = careers.map((item) => item._updatedAt)
+  const pageSeoByPath = new Map((data?.pageSeo ?? []).map((item) => [item.path, item]))
 
   const staticLastModified = {
     "/": getLatestDate(workUpdatedAt),
@@ -60,12 +61,15 @@ export default async function sitemap() {
     "/company/careers": getLatestDate(careersUpdatedAt),
   }
 
-  const staticEntries = staticRoutes.map(({ path, changeFrequency, priority }) => ({
-    url: getAbsoluteUrl(path),
-    lastModified: staticLastModified[path],
-    changeFrequency,
-    priority,
-  }))
+  const staticEntries = staticRoutes
+    .filter(({ path }) => !pageSeoByPath.get(path)?.seoNoIndex)
+    .map(({ path, changeFrequency, priority }) => ({
+      url: getAbsoluteUrl(path),
+      lastModified: getLatestDate(staticLastModified[path], pageSeoByPath.get(path)?._updatedAt),
+      changeFrequency,
+      priority,
+      images: getImages(pageSeoByPath.get(path)?.seoImage),
+    }))
 
   const workEntries = work.map((item) => ({
     url: getAbsoluteUrl(`/work/${item.slug}`),

@@ -1,5 +1,5 @@
 // SEO
-import { buildPageMetadata } from "@/lib/seo"
+import { buildRouteMetadata } from "@/lib/pageSeo"
 
 // Components
 import Banner from "@/components/sections/banner/banner";
@@ -7,11 +7,13 @@ import Content from "@/components/sections/content/content";
 import OurModel from "@/components/screens/company/about/our-model/our-model-section";
 import CtaSection from "@/components/sections/cta/cta-section";
 
-export const metadata = buildPageMetadata({
-    title: "About Our Media Specialists",
-    description: "Meet R4 Advertising, the media buying and planning specialists in Cardiff and London. Built on trading expertise, audience intelligence and commercial ambition.",
-    path: "/company/about",
-})
+export async function generateMetadata() {
+    return buildRouteMetadata({
+        title: "About Our Media Specialists",
+        description: "Meet R4 Advertising, the media buying and planning specialists in Cardiff and London. Built on trading expertise, audience intelligence and commercial ambition.",
+        path: "/company/about",
+    })
+}
 
 export default function AboutPage() {
 

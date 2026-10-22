@@ -1,15 +1,17 @@
 // SEO
-import { buildPageMetadata } from "@/lib/seo"
+import { buildRouteMetadata } from "@/lib/pageSeo"
 
 // Components
 import Banner from "@/components/sections/banner/banner";
 import NewsGrid from "@/components/screens/news/news-grid";
 
-export const metadata = buildPageMetadata({
-    title: "Media Buying & Planning Insights",
-    description: "Media buying, planning and advertising insights from R4 Advertising. Explore industry perspectives, client wins and news from our Cardiff and London teams.",
-    path: "/news",
-})
+export async function generateMetadata() {
+    return buildRouteMetadata({
+        title: "Media Buying & Planning Insights",
+        description: "Media buying, planning and advertising insights from R4 Advertising. Explore industry perspectives, client wins and news from our Cardiff and London teams.",
+        path: "/news",
+    })
+}
 
 export default function NewsPage() {
 

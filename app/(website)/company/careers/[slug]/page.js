@@ -6,7 +6,7 @@ import { client } from "@/sanity/lib/client"
 import { careerBySlugQuery } from "@/sanity/lib/queries"
 
 // SEO
-import { buildPageMetadata, cleanDescription } from "@/lib/seo"
+import { buildPageMetadata, cleanDescription, withSeoFields } from "@/lib/seo"
 
 // Components
 import CareersBanner from "@/components/screens/company/careers/singular/components/careers-banner"
@@ -32,12 +32,12 @@ export async function generateMetadata({ params }) {
     career.description,
   ].filter(Boolean).join(" — "))
 
-  return buildPageMetadata({
+  return buildPageMetadata(withSeoFields(career, {
     title: career.title,
     description,
     image: career.image,
     path: `/company/careers/${career.slug}`,
-  })
+  }))
 }
 
 export default async function CareerDetailsPage({ params }) {

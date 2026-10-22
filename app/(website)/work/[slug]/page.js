@@ -6,7 +6,7 @@ import { client } from "@/sanity/lib/client"
 import { workBySlugQuery } from "@/sanity/lib/queries"
 
 // SEO
-import { buildPageMetadata } from "@/lib/seo"
+import { buildPageMetadata, withSeoFields } from "@/lib/seo"
 
 // Components
 import Banner from "@/components/sections/banner/banner"
@@ -28,12 +28,12 @@ export async function generateMetadata({ params }) {
     return {}
   }
 
-  return buildPageMetadata({
-    title: work.seoTitle ? { absolute: work.seoTitle } : work.title,
-    description: work.seoDescription || work.description,
-    image: work.seoImage,
+  return buildPageMetadata(withSeoFields(work, {
+    title: work.title,
+    description: work.description,
+    image: work.shareImage,
     path: `/work/${work.slug}`,
-  })
+  }))
 }
 
 export default async function WorkDetailsPage({ params }) {

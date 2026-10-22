@@ -1,5 +1,5 @@
 // SEO
-import { buildPageMetadata } from "@/lib/seo"
+import { buildRouteMetadata } from "@/lib/pageSeo"
 
 // Components
 import WorkCarouselSection from "@/components/screens/home/work-carousel/work-carousel-section";
@@ -9,11 +9,13 @@ import WorkGrid from "@/components/sections/work-grid/work-grid";
 import DisciplinesSection from "@/components/sections/disciplines/disciplines-section";
 import CtaSection from "@/components/sections/cta/cta-section";
 
-export const metadata = buildPageMetadata({
-  title: "Media Buying & Planning Specialists",
-  description: "R4 Advertising. The Media Buying and Planning Specialists in Cardiff and London. Trade. Plan. Activate. More commercial value from your media investment.",
-  path: "/",
-})
+export async function generateMetadata() {
+  return buildRouteMetadata({
+    title: "Media Buying & Planning Specialists",
+    description: "R4 Advertising. The Media Buying and Planning Specialists in Cardiff and London. Trade. Plan. Activate. More commercial value from your media investment.",
+    path: "/",
+  })
+}
 
 export default function Home() {
 

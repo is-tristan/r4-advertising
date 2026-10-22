@@ -1,5 +1,5 @@
 // SEO
-import { buildPageMetadata } from "@/lib/seo"
+import { buildRouteMetadata } from "@/lib/pageSeo"
 
 // Components
 import Banner from "@/components/sections/banner/banner"
@@ -7,11 +7,13 @@ import CtaSection from "@/components/sections/cta/cta-section"
 import TeamGrid from "@/components/screens/company/team/components/team-grid/team-grid"
 import DisciplinesSection from "@/components/sections/disciplines/disciplines-section"
 
-export const metadata = buildPageMetadata({
-    title: "Meet Our Media Buying & Planning Team",
-    description: "Meet the specialists behind R4 Advertising. Media trading expertise, planning intelligence and activation experience, brought together in Cardiff and London.",
-    path: "/company/team",
-})
+export async function generateMetadata() {
+    return buildRouteMetadata({
+        title: "Meet Our Media Buying & Planning Team",
+        description: "Meet the specialists behind R4 Advertising. Media trading expertise, planning intelligence and activation experience, brought together in Cardiff and London.",
+        path: "/company/team",
+    })
+}
 
 export default function TeamPage() {
 

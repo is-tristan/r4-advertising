@@ -1,11 +1,13 @@
 import { defineArrayMember, defineField, defineType } from "sanity"
 import { DocumentIcon } from "@sanity/icons/Document"
+import { seoFields, seoFieldset } from "./seoFields"
 
 export const legal = defineType({
   name: "legal",
   title: "Legal",
   type: "document",
   icon: DocumentIcon,
+  fieldsets: [seoFieldset],
   fields: [
     defineField({
       name: "title",
@@ -74,6 +76,10 @@ export const legal = defineType({
           },
         }),
       ],
+    }),
+    ...seoFields({
+      descriptionFallback: "the opening paragraph",
+      imageFallback: "the default R4 share image",
     }),
   ],
   preview: {

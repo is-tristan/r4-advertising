@@ -2,6 +2,7 @@ import { orderableDocumentListDeskItem } from "@sanity/orderable-document-list"
 import { DocumentsIcon } from "@sanity/icons/Documents"
 import { FolderIcon } from "@sanity/icons/Folder"
 import { PlayIcon } from "@sanity/icons/Play"
+import { SearchIcon } from "@sanity/icons/Search"
 
 function createSingleton(S, typeName, title, icon) {
   return S.listItem()
@@ -94,4 +95,13 @@ export const structure = (S, context) =>
             ])
         ),
       S.documentTypeListItem("legal").title("Legal"),
+      S.divider(),
+      S.listItem()
+        .title("SEO")
+        .icon(SearchIcon)
+        .child(
+          S.documentTypeList("pageSeo")
+            .title("Page SEO")
+            .defaultOrdering([{ field: "path", direction: "asc" }])
+        ),
     ])

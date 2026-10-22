@@ -1,5 +1,5 @@
 // SEO
-import { buildPageMetadata } from "@/lib/seo"
+import { buildRouteMetadata } from "@/lib/pageSeo"
 
 // Components
 import Content from "@/components/sections/content/content";
@@ -15,11 +15,13 @@ import ScrollFillTitle from "@/components/screens/services/components/scroll-fil
 import styles from "./styles/services.module.scss";
 
 // SEO
-export const metadata = buildPageMetadata({
-    title: "Media Buying & Planning Cardiff & London",
-    description: "Media buying and planning in Cardiff and London. Trade. Plan. Activate. Discover R4 Advertising's approach to media investment, audiences and campaign delivery.",
-    path: "/services",
-})
+export async function generateMetadata() {
+    return buildRouteMetadata({
+        title: "Media Buying & Planning Cardiff & London",
+        description: "Media buying and planning in Cardiff and London. Trade. Plan. Activate. Discover R4 Advertising's approach to media investment, audiences and campaign delivery.",
+        path: "/services",
+    })
+}
 
 export default function ServicesPage() {
 
