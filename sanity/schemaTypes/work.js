@@ -106,6 +106,7 @@ export const work = (context) => defineType({
           to: [{ type: "workCategory" }],
         }),
       ],
+      validation: (rule) => rule.required().min(1),
     }),
     defineField({
       name: "video",

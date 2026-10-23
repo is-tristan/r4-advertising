@@ -53,7 +53,7 @@ export default async function WorkDetailsPage({ params }) {
       <Banner
         sectionClass="headerOffset1_5x"
         containerClass="centered noPaddingBottom noPaddingTop"
-        eyebrow={work.categories.map((category) => category.title).join(", ")}
+        eyebrow={work.categories?.map((category) => category.title).join(", ")}
         eyebrowNumber={work.year ? work.year : `2026`}
         title={work.title}
         description={work.description ? `<p>${work.description}</p>` : undefined}
