@@ -23,7 +23,7 @@ export default async function TeamGrid() {
 
         <section className={styles.teamGrid}>
 
-            <div className={`container noPaddingBottom`}>
+            <div className={`container noPaddingTop noPaddingBottom`}>
 
                 <Eyebrow
                     number="02"
