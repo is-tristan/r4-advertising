@@ -134,7 +134,7 @@
                 @media (width >=1280px) {
                     position: relative;
                     bottom: 0.25rem;
-                    line-height: 80%;
+                    line-height: 0;
                 }
             }
         }
@@ -190,6 +190,16 @@
 
         .disciplinesContentItemLink {
             @include btnIconOnly();
+        }
+    }
+
+    &[data-has-line-height="true"] {
+        .disciplinesContentItemTitle {
+            h3 {
+                @media (width >=1280px) {
+                    line-height: 80%;
+                }
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 import { buildRouteMetadata } from "@/lib/pageSeo"
 
 // Components
+import IntroAnimation from "@/components/screens/home/intro/intro-animation";
 import WorkCarouselSection from "@/components/screens/home/work-carousel/work-carousel-section";
 import CompanyCarouselSection from "@/components/sections/company-carousel/company-carousel";
 import ContentSection from "@/components/sections/content/content";
@@ -22,6 +23,8 @@ export default function Home() {
   return (
 
     <>
+
+      <IntroAnimation />
 
       <WorkCarouselSection />
 

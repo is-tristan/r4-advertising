@@ -43,7 +43,8 @@ export default function CareersPage() {
                         number: "02",
                         title: "Global reach, local roots",
                         description: "With offices in Cardiff, London, Manchester, and New York, you'll work on international campaigns while staying connected to tight-knit teams.",
-                        href: "/contact"
+                        href: "/contact",
+                        hasLineHeight: true,
                     },
                     {
                         number: "03",

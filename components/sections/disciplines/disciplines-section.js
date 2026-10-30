@@ -20,19 +20,22 @@ export default function Disciplines({
             number: "01",
             title: "Trade",
             description: "Media bought without hidden margins. All volume-based value returned to you, declared up front.",
-            href: "/services#trade"
+            href: "/services#trade",
+            hasLineHeight: false,
         },
         {
             number: "02",
             title: "Plan",
             description: "Decisions built around real behaviour, validated with Experian, TGI and CACI. Not assumptions.",
-            href: "/services#plan"
+            href: "/services#plan",
+            hasLineHeight: false,
         },
         {
             number: "03",
             title: "Activate",
             description: "Delivery overseen, verified and audited. We travel to sites; assumption replaced with proof.",
-            href: "/services#activate"
+            href: "/services#activate",
+            hasLineHeight: false,
         }
     ]
 }) {
@@ -61,6 +64,7 @@ export default function Disciplines({
                             item={item}
                             index={index}
                             headingType={headingType}
+                            hasLineHeight={item.hasLineHeight}
                         />
 
                     ))}

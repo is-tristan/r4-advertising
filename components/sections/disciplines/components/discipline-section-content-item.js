@@ -17,6 +17,7 @@ export default function DisciplineSectionContentItem({
     item,
     headingType,
     index = 0,
+    hasLineHeight = false,
 }) {
 
     const ref = useRef(null);
@@ -31,6 +32,7 @@ export default function DisciplineSectionContentItem({
             initial={{ opacity: 0, y: 16, filter: "blur(0.25rem)" }}
             transition={{ duration: 0.5, delay: 0.15 + (index * 0.075), ease: "easeOut" }}
             data-heading-type={headingType}
+            data-has-line-height={hasLineHeight}
         >
 
             <div className={styles.disciplinesContentItemLeft}>

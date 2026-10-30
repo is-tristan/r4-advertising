@@ -17,6 +17,7 @@
     "@sanity/vision": "^6.13.2",
     "@splidejs/react-splide": "^0.7.12",
     "lenis": "^1.3.23",
+    "lottie-web": "^5.13.0",
     "motion": "^12.40.0",
     "next": "^16.4.0",
     "next-sanity": "^13.3.4",

@@ -1,6 +1,10 @@
 .workCarousel {
     width: 100%;
 
+    @media (width <1024px) {
+        padding-top: var(--mobileHeaderHeight);
+    }
+
     &::before {
         content: "";
         position: absolute;
