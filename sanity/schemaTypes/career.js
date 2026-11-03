@@ -3,6 +3,7 @@ import { defineArrayMember, defineField, defineType } from "sanity"
 import { CaseIcon } from "@sanity/icons/Case"
 import { imageAltField } from "./imageField"
 import { seoFields, seoFieldset } from "./seoFields"
+import { contentSectionFields } from "./contentSection"
 
 export const career = (context) => defineType({
   name: "career",
@@ -10,7 +11,13 @@ export const career = (context) => defineType({
   type: "document",
   icon: CaseIcon,
   orderings: [orderRankOrdering],
-  fieldsets: [seoFieldset],
+  fieldsets: [
+    { name: "section1", title: "Section 1", options: { collapsible: true } },
+    { name: "section2", title: "Section 2", options: { collapsible: true } },
+    { name: "section3", title: "Section 3", options: { collapsible: true } },
+    { name: "section4", title: "Section 4", options: { collapsible: true } },
+    seoFieldset,
+  ],
   fields: [
     orderRankField({ type: "career", context }),
     defineField({
@@ -80,60 +87,12 @@ export const career = (context) => defineType({
       type: "string",
       description: "e.g. £30,000 or Competitive",
     }),
-    defineField({
-      name: "content",
-      title: "Content",
-      type: "array",
-      of: [
-        defineArrayMember({
-          type: "block",
-          styles: [
-            { title: "Normal", value: "normal" },
-            { title: "Heading 2", value: "h2" },
-            { title: "Heading 3", value: "h3" },
-            { title: "Heading 4", value: "h4" },
-            { title: "Quote", value: "blockquote" },
-          ],
-          lists: [
-            { title: "Bullet", value: "bullet" },
-            { title: "Numbered", value: "number" },
-          ],
-          marks: {
-            decorators: [
-              { title: "Strong", value: "strong" },
-              { title: "Emphasis", value: "em" },
-            ],
-            annotations: [
-              {
-                name: "link",
-                type: "object",
-                title: "Link",
-                fields: [
-                  defineField({
-                    name: "href",
-                    title: "URL",
-                    type: "url",
-                    validation: (rule) =>
-                      rule.uri({
-                        allowRelative: true,
-                        scheme: ["http", "https", "mailto", "tel"],
-                      }),
-                  }),
-                  defineField({
-                    name: "blank",
-                    title: "Open in new tab",
-                    type: "boolean",
-                    initialValue: true,
-                  }),
-                ],
-              },
-            ],
-          },
-        }),
-      ],
-    }),
+    ...contentSectionFields("section1", "Section 1"),
+    ...contentSectionFields("section2", "Section 2"),
+    ...contentSectionFields("section3", "Section 3"),
+    ...contentSectionFields("section4", "Section 4"),
     ...seoFields({
-      descriptionFallback: "the contract type, location and opening paragraph",
+      descriptionFallback: "the contract type, location and opening paragraph of the sections",
     }),
   ],
   preview: {

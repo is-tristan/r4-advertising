@@ -32,6 +32,7 @@ export default function WorkCarouselItem({
         <div
             className={styles.workCarouselItem}
             data-has-featured-video={hasFeaturedVideo ? "true" : "false"}
+            style={{ position: "relative", zIndex: "100" }}
         >
 
             <div className={`container`}>

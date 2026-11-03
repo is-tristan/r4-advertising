@@ -140,7 +140,7 @@ export default function WorkCarousel({ works = [] }) {
 
                 {works.map((work, index) => (
 
-                    <SplideSlide key={work._id}>
+                    <SplideSlide key={work._id} style={{ position: "relative", zIndex: "100" }}>
 
                         <WorkCarouselItem
                             index={index}

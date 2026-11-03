@@ -61,7 +61,15 @@ export default async function CareerDetailsPage({ params }) {
         salary={career.salary}
       />
 
-      <CareerContent content={career.content} />
+      <CareerContent
+        sections={[1, 2, 3, 4].map((number) => ({
+          key: `section${number}`,
+          number: `${number}.`,
+          eyebrow: career[`section${number}Eyebrow`],
+          title: career[`section${number}Title`],
+          content: career[`section${number}Content`],
+        }))}
+      />
 
     </>
 

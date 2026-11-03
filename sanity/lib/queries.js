@@ -17,12 +17,19 @@ const seoProjection = /* groq */ `
   }
 `
 
-const seoDescriptionField = /* groq */ `array::join(
+const seoDescriptionField = (contentField = "content") => /* groq */ `array::join(
   string::split(
-    pt::text(content[_type == "block" && style == "normal" && !string::startsWith(children[0].text, "Last updated")]),
+    pt::text(${contentField}[_type == "block" && style == "normal" && !string::startsWith(children[0].text, "Last updated")]),
     ""
   )[0...320],
   ""
+)`
+
+const careerContentField = /* groq */ `(
+  coalesce(section1Content, []) +
+  coalesce(section2Content, []) +
+  coalesce(section3Content, []) +
+  coalesce(section4Content, [])
 )`
 
 const portableTextMediaExpansion = /* groq */ `
@@ -248,7 +255,7 @@ export const careersGridQuery = defineQuery(`
       contractType
     ),
     salary,
-    "excerpt": array::join(string::split(pt::text(content), "")[0...120], "")
+    "excerpt": array::join(string::split(pt::text(${careerContentField}[_type == "block"]), "")[0...120], "")
   }
 `)
 
@@ -271,8 +278,27 @@ export const careerBySlugQuery = defineQuery(`
       contractType
     ),
     salary,
-    content,
-    "description": ${seoDescriptionField},
+    section1Eyebrow,
+    section1Title,
+    section1Content[]{
+      ${portableTextMediaExpansion}
+    },
+    section2Eyebrow,
+    section2Title,
+    section2Content[]{
+      ${portableTextMediaExpansion}
+    },
+    section3Eyebrow,
+    section3Title,
+    section3Content[]{
+      ${portableTextMediaExpansion}
+    },
+    section4Eyebrow,
+    section4Title,
+    section4Content[]{
+      ${portableTextMediaExpansion}
+    },
+    "description": ${seoDescriptionField(careerContentField)},
     ${seoProjection}
   }
 `)
@@ -283,7 +309,7 @@ export const legalBySlugQuery = defineQuery(`
     title,
     "slug": slug.current,
     content,
-    "description": ${seoDescriptionField},
+    "description": ${seoDescriptionField()},
     ${seoProjection}
   }
 `)
