@@ -82,6 +82,7 @@ function escapeHtml(value) {
 }
 
 function CareerContentSection({
+    id,
     eyebrow,
     title,
     number,
@@ -94,33 +95,37 @@ function CareerContentSection({
 
     return (
 
-        <section className={styles.careerContentSection}>
+        <section id={id} className="row">
 
-            {title && (
+            <div className={`container condensed gapSm noPaddingTop noPaddingBottom`}>
 
-                <Text
-                    hasAnimation={hasAnimation}
-                    eyebrow={eyebrow ? { text: eyebrow, number: null } : undefined}
-                    title={`<span class="colorPrimary">${number}</span> ${escapeHtml(title)}`}
-                    titleClass="sectionTitle"
-                />
+                {title && (
 
-            )}
+                    <Text
+                        hasAnimation={hasAnimation}
+                        eyebrow={eyebrow ? { text: eyebrow, number: null } : undefined}
+                        title={`<span class="colorPrimary">${number}</span> ${escapeHtml(title)}`}
+                        titleClass="sectionTitle"
+                    />
 
-            <motion.div
-                ref={ref}
-                className={styles.careerContentInner}
-                animate={hasAnimation ? (isInView ? { opacity: 1, y: 0, filter: "blur(0)" } : { opacity: 0, y: 16, filter: "blur(0.25rem)" }) : { opacity: 1, y: 0, filter: "blur(0)" }}
-                initial={hasAnimation ? { opacity: 0, y: 16, filter: "blur(0.25rem)" } : { opacity: 1, y: 0, filter: "blur(0)" }}
-                transition={hasAnimation ? { duration: 0.5, delay: 0.33, ease: "easeOut" } : { duration: 0, delay: 0 }}
-            >
+                )}
 
-                <PortableText
-                    value={content}
-                    components={portableTextComponents}
-                />
+                <motion.div
+                    ref={ref}
+                    className={styles.careerContentInner}
+                    animate={hasAnimation ? (isInView ? { opacity: 1, y: 0, filter: "blur(0)" } : { opacity: 0, y: 16, filter: "blur(0.25rem)" }) : { opacity: 1, y: 0, filter: "blur(0)" }}
+                    initial={hasAnimation ? { opacity: 0, y: 16, filter: "blur(0.25rem)" } : { opacity: 1, y: 0, filter: "blur(0)" }}
+                    transition={hasAnimation ? { duration: 0.5, delay: 0.33, ease: "easeOut" } : { duration: 0, delay: 0 }}
+                >
 
-            </motion.div>
+                    <PortableText
+                        value={content}
+                        components={portableTextComponents}
+                    />
+
+                </motion.div>
+
+            </div>
 
         </section>
 
@@ -139,20 +144,21 @@ export default function CareerContent({
 
         <div className={styles.careerContent}>
 
+            {visibleSections.map((section) => (
+
+                <CareerContentSection
+                    key={section.key}
+                    id={`${section.key}Content`}
+                    eyebrow={section.eyebrow}
+                    title={section.title}
+                    number={section.number}
+                    content={section.content}
+                    hasAnimation={hasAnimation}
+                />
+
+            ))}
+
             <div className={`container noPaddingTop condensed`}>
-
-                {visibleSections.map((section) => (
-
-                    <CareerContentSection
-                        key={section.key}
-                        eyebrow={section.eyebrow}
-                        title={section.title}
-                        number={section.number}
-                        content={section.content}
-                        hasAnimation={hasAnimation}
-                    />
-
-                ))}
 
                 <div className={styles.careerContentFooter}>
 
