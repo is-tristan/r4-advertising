@@ -42,7 +42,8 @@ export default function TeamPage() {
                         number: "02",
                         title: "Radical transparency",
                         description: "No hidden fees, no obscure metrics. We believe our clients deserve complete visibility into their media investments.",
-                        href: "/contact"
+                        href: "/contact",
+                        hasLineHeight: true
                     },
                     {
                         number: "03",

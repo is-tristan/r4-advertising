@@ -8,8 +8,8 @@ export const officeLocationsData = [
     {
         title: "London",
         address: "The Engine Room, Battersea Power Station, SW11 8BZ",
-        phone: "+44 29 2233 7225",
-        href: "tel:+442922337225"
+        phone: "+44 204 524 3019",
+        href: "tel:+442045243019"
     },
     // {
     //     title: "Manchester",
