@@ -1,7 +1,3 @@
-/**
- * 📌 TODO: Add career contact form
-**/
-
 "use client";
 
 // Components
@@ -136,6 +132,9 @@ function CareerContentSection({
 export default function CareerContent({
     sections = [],
     hasAnimation = true,
+    jobTitle = undefined,
+    department = undefined,
+    location = undefined,
 }) {
 
     const visibleSections = sections.filter((section) => section.content?.length);
@@ -175,6 +174,12 @@ export default function CareerContent({
                         <HubspotForm
                             portalId="139805116"
                             formId="2850ce22-89ef-4773-84b2-f3dd57ca1f99"
+                            forwardJobApplication
+                            jobContext={{
+                                jobTitle,
+                                department,
+                                location,
+                            }}
                         />
 
                     </div>

@@ -6,10 +6,112 @@ import Script from "next/script";
 
 const hubspotScriptSrc = "https://js-eu1.hsforms.net/forms/embed/v2.js";
 
-export default function HubspotForm({ portalId, formId, region = "eu1" }) {
+function getFormElement(form) {
+    if (!form) {
+        return null;
+    }
+
+    if (form.jquery && typeof form.get === "function") {
+        return form.get(0) || null;
+    }
+
+    if (form.tagName === "FORM") {
+        return form;
+    }
+
+    return form.querySelector?.("form") || null;
+}
+
+function readHubspotFormFields(form, submissionData) {
+    const submissionValues = submissionData?.submissionValues;
+
+    if (submissionValues && typeof submissionValues === "object") {
+        return Object.fromEntries(
+            Object.entries(submissionValues).map(([key, value]) => [
+                key,
+                Array.isArray(value) ? value.join(", ") : value,
+            ])
+        );
+    }
+
+    const formElement = getFormElement(form);
+    const fields = {};
+
+    if (!formElement) {
+        return fields;
+    }
+
+    for (const element of formElement.querySelectorAll("input, select, textarea")) {
+        const name = element.name;
+
+        if (!name || element.type === "submit" || element.type === "button") {
+            continue;
+        }
+
+        if (element.type === "checkbox" || element.type === "radio") {
+            if (element.checked) {
+                fields[name] = element.value;
+            }
+            continue;
+        }
+
+        if (element.type === "file") {
+            if (element.files?.[0]?.name) {
+                fields[name] = element.files[0].name;
+            } else if (element.value) {
+                fields[name] = element.value;
+            }
+            continue;
+        }
+
+        fields[name] = element.value;
+    }
+
+    return fields;
+}
+
+async function forwardHubspotJobApplication(form, submissionData, jobContext) {
+    const fields = readHubspotFormFields(form, submissionData);
+
+    try {
+        const response = await fetch("/api/job-application", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                fields,
+                context: jobContext || {},
+            }),
+        });
+
+        const data = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+            console.error("[job-application] Forward failed", response.status, data);
+            return;
+        }
+
+        console.info("[job-application] Forwarded", data);
+    } catch (error) {
+        console.error("[job-application] Forward error", error);
+    }
+}
+
+export default function HubspotForm({
+    portalId,
+    formId,
+    region = "eu1",
+    forwardJobApplication = false,
+    jobContext = undefined,
+}) {
 
     const containerRef = useRef(null);
+    const jobContextRef = useRef(jobContext);
     const targetId = `hubspotForm${useId().replace(/:/g, "")}`;
+    const renderedRef = useRef(false);
+
+    jobContextRef.current = jobContext;
 
     useEffect(() => {
 
@@ -20,19 +122,36 @@ export default function HubspotForm({ portalId, formId, region = "eu1" }) {
         }
 
         let cancelled = false;
+        renderedRef.current = false;
 
         const renderForm = () => {
 
-            if (cancelled || !container.isConnected || !window.hbspt?.forms) {
-                return false;
+            if (
+                cancelled
+                || !container.isConnected
+                || !window.hbspt?.forms
+                || renderedRef.current
+            ) {
+                return Boolean(renderedRef.current);
             }
 
-            window.hbspt.forms.create({
+            container.replaceChildren();
+
+            const createOptions = {
                 portalId: portalId,
                 formId: formId,
                 region: region,
                 target: `#${container.id}`,
-            });
+            };
+
+            if (forwardJobApplication) {
+                createOptions.onFormSubmitted = (form, data) => {
+                    forwardHubspotJobApplication(form, data, jobContextRef.current);
+                };
+            }
+
+            window.hbspt.forms.create(createOptions);
+            renderedRef.current = true;
 
             return true;
 
@@ -66,7 +185,7 @@ export default function HubspotForm({ portalId, formId, region = "eu1" }) {
             existingScript?.removeEventListener("load", handleLoad);
         };
 
-    }, [portalId, formId, region]);
+    }, [portalId, formId, region, forwardJobApplication]);
 
     return (
 

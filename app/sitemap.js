@@ -11,6 +11,7 @@ const staticRoutes = [
   { path: "/company/about", changeFrequency: "monthly", priority: 0.8 },
   { path: "/company/team", changeFrequency: "monthly", priority: 0.7 },
   { path: "/company/careers", changeFrequency: "weekly", priority: 0.7 },
+  { path: "/company/careers/new-business-development-manager/apply", changeFrequency: "monthly", priority: 0.5 },
   { path: "/contact", changeFrequency: "yearly", priority: 0.7 },
   { path: "/calculator", changeFrequency: "monthly", priority: 0.7 },
   { path: "/annual-media-commitment", changeFrequency: "monthly", priority: 0.6 },
